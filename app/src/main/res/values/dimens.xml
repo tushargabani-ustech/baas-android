@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="normal_padding">10dp</dimen>
+    <dimen name="main_padding">24dp</dimen>
+    <dimen name="margin_top_apply_screen">126dp</dimen>
+    <dimen name="title_textsize_apply_screen">25dp</dimen>
+    <dimen name="message_textsize_apply_screen">40dp</dimen>
+    <dimen name="middle_margin_apply_screen">21dp</dimen>
+    <dimen name="button_apply_screen">15dp</dimen>
+
+
+</resources>

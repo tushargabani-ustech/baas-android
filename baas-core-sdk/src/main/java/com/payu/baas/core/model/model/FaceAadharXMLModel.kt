@@ -1,0 +1,15 @@
+package com.payu.baas.core.model.model
+
+import com.google.gson.annotations.SerializedName
+import com.payu.baas.core.model.responseModels.ApiResponse
+
+class FaceAadharXMLModel() {
+
+    @SerializedName("match")
+    var matchScore: Double? = null
+//    var agentStatus: String? = null
+
+    @SerializedName("matchMeta")
+    var matchMeta: String? = null
+//    var aadhaarBase64: String? = null
+}

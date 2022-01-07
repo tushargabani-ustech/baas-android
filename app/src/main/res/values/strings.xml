@@ -1,0 +1,10 @@
+<resources>
+    <!--    <string name="app_name">baas-sample-app-android</string>-->
+    <string name="app_name">AdvancePay</string>
+    <string name="powered_by_text">Powered By Pay<b>U</b></string>
+    <string name="message_text_apply_screen"><b>Salary ek hafte baad milegi? No problem, Hum hai na :)</b></string>
+    <string name="apke_fayede_text"><b>Apke fayede</b></string>
+    <string name="apply_button_text">Apply Karein</string>
+    //fonts
+    <string name="app_font_regular">fonts/avenir_regular.ttf</string>
+</resources>
