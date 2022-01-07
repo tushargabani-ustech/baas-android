@@ -45,7 +45,7 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
     implementation "androidx.security:security-crypto:1.1.0-alpha03"
     implementation 'com.google.code.gson:gson:2.8.6'
-//    implementation 'com.karza.okyc:ocycsdk:1.4.5'
+    implementation 'com.karza.okyc:ocycsdk:1.4.5'
 }
 
 afterEvaluate {
@@ -55,7 +55,7 @@ afterEvaluate {
                 from components.release
                 groupId = 'org.github.tushargabani-ustech'
                 artifactId = 'baas-android'
-                version = '1.0'
+                version = '1.1'
             }
         }
     }

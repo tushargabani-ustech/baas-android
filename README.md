@@ -1,3 +1,7 @@
-# baas-sample-app-android
-
-baas-sample-app-android
+repositories { 
+    jcenter()
+    maven { url "https://jitpack.io" }
+}
+dependencies {
+    implementation 'com.github.tushargabani-ustech:baas-android:Tag'
+}
