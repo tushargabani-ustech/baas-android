@@ -571,6 +571,19 @@ class MainActivity : AppCompatActivity() {
         callAPI(ApiName.SERVER_CALL, apiParams)
     }
 
+    fun getHelp(view: View) {
+        val apiParams = ApiParams()
+        callAPI(ApiName.HELP, apiParams)
+    }
+    fun getFAQs(view: View) {
+        val apiParams = ApiParams()
+        callAPI(ApiName.FAQS, apiParams)
+    }
+    fun getRatesCharges(view: View) {
+        val apiParams = ApiParams()
+        callAPI(ApiName.RATES_CHARGES, apiParams)
+    }
+
 }
 
 fun String.toEditable(): Editable =

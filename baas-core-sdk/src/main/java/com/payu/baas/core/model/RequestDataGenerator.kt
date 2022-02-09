@@ -53,11 +53,25 @@ class RequestDataGenerator(val apiDetails: ApiDetails) {
             ApiName.KYC_SELFIE -> validateKYCSelfie()
             ApiName.KYC_RESULTS ->validateAddKYCResults()
             ApiName.VERIFY_KYC_RESULTS -> validateVerifyKYCResults()
+            ApiName.HELP -> validateHelp()
+            ApiName.FAQS -> validateFAQs()
+            ApiName.RATES_CHARGES -> validateRatesCharges()
             else -> RequestData(null, false, INVALID_DATA)
         }
     }
 
     private fun validatePinStatus(): RequestData {
+        return RequestData(HashMap<String, Any>(), true)
+    }
+    private fun validateRatesCharges(): RequestData {
+        return RequestData(HashMap<String, Any>(), true)
+    }
+
+    private fun validateFAQs(): RequestData {
+        return RequestData(HashMap<String, Any>(), true)
+    }
+
+    private fun validateHelp(): RequestData {
         return RequestData(HashMap<String, Any>(), true)
     }
     private fun validatePrevalidateTransaction(): RequestData {

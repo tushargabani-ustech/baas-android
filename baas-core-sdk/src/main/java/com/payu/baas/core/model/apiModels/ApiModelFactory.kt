@@ -3,6 +3,9 @@ package com.payu.baas.core.model.apiModels
 import android.content.Context
 import com.payu.baas.core.interfaces.SdkCallback
 import com.payu.baas.core.model.ApiName
+import com.payu.baas.core.model.entities.apiModels.FAQsApiModel
+import com.payu.baas.core.model.entities.apiModels.HelpApiModel
+import com.payu.baas.core.model.entities.apiModels.RatesCharegesApiModel
 
 class ApiModelFactory(
     val context: Context,
@@ -143,6 +146,21 @@ class ApiModelFactory(
                 sdkCallback
             )
             ApiName.KARZA_GENERATE_CUSTOMER_TOKEN -> KarzaCustomerTokenApiModel(
+                context,
+                requestMap,
+                sdkCallback
+            )
+            ApiName.HELP -> HelpApiModel(
+                context,
+                requestMap,
+                sdkCallback
+            )
+            ApiName.FAQS -> FAQsApiModel(
+                context,
+                requestMap,
+                sdkCallback
+            )
+            ApiName.RATES_CHARGES -> RatesCharegesApiModel(
                 context,
                 requestMap,
                 sdkCallback

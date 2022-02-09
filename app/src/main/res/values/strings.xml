@@ -13,5 +13,8 @@
     <string name="clevertap_account_token_value">TEST-640-b33</string>
     <string name="clevertap_google_ad_id">CLEVERTAP_USE_GOOGLE_AD_ID</string>
     <string name="clevertap_google_ad_id_value">1</string>
+    <string name="get_rates_charges"><![CDATA[Get Rates & Charges]]></string>
+    <string name="get_help">Get Help</string>
+    <string name="get_faqs">Get FAQs</string>
 
 </resources>
