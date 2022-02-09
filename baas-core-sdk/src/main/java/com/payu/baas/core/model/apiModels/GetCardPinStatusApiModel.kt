@@ -16,7 +16,7 @@ class GetCardPinStatusApiModel(
 ) : ApiModel(
     context, requestMap, ApiName.GET_PIN_STATUS, sdkCallback
 ) {
-    override fun getRelativeUrl(): String = "card/get-pin-status"
+    override fun getRelativeUrl(): String = "card/pin/status"
     override fun getRequestMethod(): RequestMethod = RequestMethod.GET
     override fun getApiType(): ApiType = ApiType.POST_LOGIN
     override fun getTokenType(): TokenType = TokenType.ACCESS_TOKEN

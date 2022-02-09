@@ -2,7 +2,6 @@ package com.payu.baas.core.view
 
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.karza.okycmaster.ActionType
@@ -13,7 +12,6 @@ import com.payu.baas.core.R
 import com.payu.baas.core.model.responseModels.KarzaAadharResponse
 import com.payu.baas.core.model.responseModels.KarzaSelfieResponse
 import com.payu.baas.core.storage.SessionManager
-import com.payu.baas.core.util.BaaSConstants
 import com.payu.baas.core.util.JsonUtils
 import org.json.JSONObject
 
@@ -68,7 +66,6 @@ class KarzaActivity : AppCompatActivity(), KDataListener {
             "ActionType : " + actionType!!.type + " , " +
             "data : " + data != null
         ) data.toString() else "data is null"
-        Log.i(BaaSConstants.LOG_TAG, "onEvent : $builder")
         if (docType.equals("from_aadhaar_xml")) {
             var response: KarzaAadharResponse =
                 JsonUtils.toObject(builder, KarzaAadharResponse::class.java) as KarzaAadharResponse

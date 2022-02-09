@@ -1,11 +1,11 @@
 package com.payu.baas.core.network
 
-import android.util.Log
 import com.payu.baas.core.enums.ContentType
 import com.payu.baas.core.enums.TokenType
 import com.payu.baas.core.model.apiModels.ApiModel
 import com.payu.baas.core.storage.SessionManager
 import com.payu.baas.core.util.BaaSConstants
+import java.util.logging.Logger
 
 class NetworkHeaderFactory(val apiModel: ApiModel) {
     fun getHeader(): NetworkHeader {
@@ -22,7 +22,7 @@ class NetworkHeaderFactory(val apiModel: ApiModel) {
             put(BaaSConstants.BS_KEY_CONTENT_TYPE, ContentType.APPLICATION_JSON.getValue())
 //            put(BaaSConstants.BS_KEY_BRAND_TOKEN, BaaSConstants.BS_VALUE_BRAND_TOKEN)
             SessionManager.getInstance(apiModel.context).brandToken?.let {
-                Log.v("brand token: ", it)
+//                Logger.getLogger("brand token: ", it)
                 put(
                     BaaSConstants.BS_KEY_BRAND_TOKEN,
                     it
@@ -38,7 +38,7 @@ class NetworkHeaderFactory(val apiModel: ApiModel) {
         return NetworkHeader().apply {
             put(BaaSConstants.BS_KEY_CONTENT_TYPE, ContentType.APPLICATION_JSON.getValue())
             SessionManager.getInstance(apiModel.context).deviceBindingId?.let {
-                Log.v("device binding id: ", it)
+//                Logger.getLogger("device binding id: ", it)
                 put(
                     BaaSConstants.BS_KEY_DEVICE_BINDING_ID,
                     it
@@ -60,14 +60,14 @@ class NetworkHeaderFactory(val apiModel: ApiModel) {
                 )
             }
             SessionManager.getInstance(apiModel.context).deviceBindingId?.let {
-                Log.v("device binding id: ", it)
+//                Logger.getLogger("device binding id: ", it)
                 put(
                     BaaSConstants.BS_KEY_DEVICE_BINDING_ID,
                     it
                 )
             }
             SessionManager.getInstance(apiModel.context).brandToken?.let {
-                Log.v("brand token: ", it)
+//                Logger.getLogger("brand token: ", it)
                 put(
                     BaaSConstants.BS_KEY_BRAND_TOKEN,
                     it

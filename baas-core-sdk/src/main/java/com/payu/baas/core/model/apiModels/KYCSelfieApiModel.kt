@@ -18,7 +18,7 @@ class KYCSelfieApiModel(
     context, requestMap, ApiName.KYC_SELFIE, sdkCallback
 ) {
     override fun getContentType(): ContentType = ContentType.FORM_DATA
-    override fun getRelativeUrl(): String = "kyc/selfie"
+    override fun getRelativeUrl(): String = "user/kyc/selfie-url"
     override fun getRequestMethod(): RequestMethod = RequestMethod.POST
     override fun getApiType(): ApiType = ApiType.PRE_LOGIN
     override fun getTokenType(): TokenType = TokenType.ACCESS_TOKEN

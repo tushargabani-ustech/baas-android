@@ -10,7 +10,6 @@ import com.payu.baas.core.model.ErrorResponse
 import com.payu.baas.core.model.ResponseModelCreator
 import com.payu.baas.core.model.responseModels.ApiResponse
 import com.payu.baas.core.model.responseModels.GetClientTokenResponse
-import com.payu.baas.core.network.NetworkHeader
 import com.payu.baas.core.network.NetworkResponseHandler
 import com.payu.baas.core.storage.SessionManager
 

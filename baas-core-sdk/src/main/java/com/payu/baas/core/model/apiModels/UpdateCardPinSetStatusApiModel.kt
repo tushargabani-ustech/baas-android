@@ -14,10 +14,8 @@ class UpdateCardPinSetStatusApiModel(
     context: Context,
     requestMap: HashMap<String, Any>,
     sdkCallback: SdkCallback
-) : ApiModel(
-    context, requestMap, ApiName.UPDATE_PIN, sdkCallback
-) {
-    override fun getRelativeUrl(): String = "card/update-pin?${BaaSConstants.BS_KEY_PIN_STATUS}=${requestMap[BaaSConstants.BS_KEY_PIN_STATUS]}"
+) : ApiModel(context, requestMap, ApiName.UPDATE_PIN, sdkCallback ) {
+    override fun getRelativeUrl(): String = "card/pin?${BaaSConstants.BS_KEY_PIN_STATUS}=${requestMap[BaaSConstants.BS_KEY_PIN_STATUS]}"
     override fun getRequestMethod(): RequestMethod = RequestMethod.PUT
     override fun getApiType(): ApiType = ApiType.POST_LOGIN
     override fun getTokenType(): TokenType = TokenType.ACCESS_TOKEN

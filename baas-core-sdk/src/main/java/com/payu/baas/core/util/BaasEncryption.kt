@@ -1,7 +1,6 @@
 package com.payu.baas.core.util
 
 import android.util.Base64
-import android.util.Log
 import java.io.IOException
 import java.io.UnsupportedEncodingException
 import java.security.*
@@ -86,7 +85,7 @@ object BaasEncryption {
         val plainTextbytes = plainText.toByteArray(charset(characterEncoding))
         val keyBytes = getKeyBytes(key)
 
-        Log.i("encrypted: ", Base64.encodeToString(encrypt(plainTextbytes, keyBytes, keyBytes), Base64.DEFAULT))
+
 
         return Base64.encodeToString(encrypt(plainTextbytes, keyBytes, keyBytes), Base64.DEFAULT)
     }
@@ -110,7 +109,7 @@ object BaasEncryption {
         val cipheredBytes = Base64.decode(encryptedText, Base64.DEFAULT)
         val keyBytes = getKeyBytes(key)
 
-        Log.i("decrypted: ", String(decrypt(cipheredBytes, keyBytes, keyBytes)!!, charset(characterEncoding)))
+
 
         return String(decrypt(cipheredBytes, keyBytes, keyBytes)!!, charset(characterEncoding))
     }

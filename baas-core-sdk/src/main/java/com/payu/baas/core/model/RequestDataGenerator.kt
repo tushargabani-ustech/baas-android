@@ -1,13 +1,12 @@
 package com.payu.baas.core.model
 
-import android.util.Log
 import com.payu.baas.core.util.BaaSConstants
 import com.payu.baas.core.util.BaaSConstants.INVALID_DATA
-import com.payu.baas.core.util.JsonUtils
 
 class RequestDataGenerator(val apiDetails: ApiDetails) {
     fun getRequestData(): RequestData {
         return when (apiDetails.apiName) {
+            ApiName.SERVER_CALL -> validateServerAPICall()
             ApiName.SEND_OTP -> validateSendOtp()
             ApiName.VERIFY_OTP -> validateVerifyOtp()
             ApiName.SAVE_ADDRESS -> validateSaveAddress()
@@ -92,8 +91,11 @@ class RequestDataGenerator(val apiDetails: ApiDetails) {
                 val resultMap = HashMap<String, Any>()
                 resultMap[BaaSConstants.BS_KEY_MOBILE_NUMBER] = apiDetails.apiParams.mobileNumber!!
                 RequestData(resultMap, true)
+
             }
+
         }
+
     }
 
     private fun validateSetTransactionMode(): RequestData {
@@ -130,7 +132,9 @@ class RequestDataGenerator(val apiDetails: ApiDetails) {
     private fun validateUnblockCard(): RequestData {
         return RequestData(HashMap<String, Any>(), true)
     }
-
+    private fun validateServerAPICall(): RequestData {
+        return RequestData(HashMap<String, Any>(), true)
+    }
     private fun validateBlockCard(): RequestData {
         return when {
             apiDetails.apiParams.reason.isNullOrEmpty() ->
@@ -320,9 +324,11 @@ class RequestDataGenerator(val apiDetails: ApiDetails) {
                 BaaSConstants.PASSWORD_EMPTY_ERROR_MESSAGE,
                 BaaSConstants.PASSWORD_EMPTY_ERROR_CODE
             )
+
             else -> {
                 val resultMap = HashMap<String, Any>()
-                resultMap[BaaSConstants.BS_KEY_PASSWORD] = apiDetails.apiParams.password!!
+                resultMap[BaaSConstants.BS_KEY_OLD_PASSWORD] = ""
+                resultMap[BaaSConstants.BS_KEY_NEW_PASSWORD] = apiDetails.apiParams.password!!
                 RequestData(resultMap, true)
             }
         }
@@ -355,7 +361,7 @@ class RequestDataGenerator(val apiDetails: ApiDetails) {
             )
             else -> {
                 val resultMap = HashMap<String, Any>()
-                resultMap[BaaSConstants.BS_KEY_MOBILE_NUMBER] = apiDetails.apiParams.mobileNumber!!
+                resultMap[BaaSConstants.BS_KEY_MOBILE_NUMBER_FOR_USER_STATE] = apiDetails.apiParams.mobileNumber!!
                 RequestData(resultMap, true)
             }
         }
@@ -377,17 +383,17 @@ class RequestDataGenerator(val apiDetails: ApiDetails) {
 
     private fun validateUpdatePassword(): RequestData {
         return when {
-            apiDetails.apiParams.oldPassword.isNullOrEmpty() -> sendErrorResponse(
-                BaaSConstants.OLD_PASSWORD_EMPTY_ERROR_MESSAGE,
-                BaaSConstants.OLD_PASSWORD_EMPTY_ERROR_CODE
-            )
+//            apiDetails.apiParams.oldPassword.isNullOrEmpty() -> sendErrorResponse(
+//                BaaSConstants.OLD_PASSWORD_EMPTY_ERROR_MESSAGE,
+//                BaaSConstants.OLD_PASSWORD_EMPTY_ERROR_CODE
+//            )
             apiDetails.apiParams.newPassword.isNullOrEmpty() -> sendErrorResponse(
                 BaaSConstants.NEW_PASSWORD_EMPTY_ERROR_MESSAGE,
                 BaaSConstants.NEW_PASSWORD_EMPTY_ERROR_CODE
             )
             else -> {
                 val resultMap = HashMap<String, Any>()
-                resultMap[BaaSConstants.BS_KEY_OLD_PASSWORD] = apiDetails.apiParams.oldPassword!!
+//                resultMap[BaaSConstants.BS_KEY_OLD_PASSWORD] = apiDetails.apiParams.oldPassword!!
                 resultMap[BaaSConstants.BS_KEY_NEW_PASSWORD] = apiDetails.apiParams.newPassword!!
                 RequestData(resultMap, true)
             }
@@ -658,7 +664,7 @@ class RequestDataGenerator(val apiDetails: ApiDetails) {
             resultMap[BaaSConstants.BS_KEY_KARZA_APPLICATION_FORM_DATA] =
                 apiParams.applicantFormData!!
             resultMap[BaaSConstants.BS_KEY_KARZA_PAN_DATA] = apiParams.panData!!
-            Log.d(BaaSConstants.LOG_TAG, "applicantFormData : " + resultMap.toString())
+//            Logger.getLogger(BaaSConstants.LOG_TAG, "applicantFormData : " + resultMap.toString())
             RequestData(resultMap, true)
         }
     }
@@ -754,6 +760,7 @@ class RequestDataGenerator(val apiDetails: ApiDetails) {
             )
         else {
             val resultMap = HashMap<String, Any>()
+            resultMap[BaaSConstants.BS_KEY_PAN_NUMBER] = apiParams.panNumber!!
             resultMap[BaaSConstants.BS_KEY_MASKED_AADHAAR] = apiParams.maskedAadhaar!!
             resultMap[BaaSConstants.BS_KEY_REQUEST_ID] = apiParams.requestId!!
             resultMap[BaaSConstants.BS_KEY_APPLICATION_ID] = apiParams.applicationId!!
@@ -768,7 +775,7 @@ class RequestDataGenerator(val apiDetails: ApiDetails) {
             resultMap[BaaSConstants.BS_KEY_USER_NAME_DATA] = apiParams.userNameData!!
             resultMap[BaaSConstants.BS_KEY_DOB] = apiParams.dob!!
             resultMap[BaaSConstants.BS_KEY_GENDER] = apiParams.gender!!
-            Log.d("addKYC",JsonUtils.toString(resultMap))
+//            Logger.getLogger("addKYC",JsonUtils.toString(resultMap))
             RequestData(resultMap, true)
 
         }

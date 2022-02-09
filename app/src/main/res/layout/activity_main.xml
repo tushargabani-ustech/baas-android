@@ -17,6 +17,8 @@
 
             <EditText
                 android:id="@+id/etMobile"
+                android:maxLength="10"
+                android:inputType="number"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:hint="Mobile" />
@@ -61,7 +63,16 @@
                 android:layout_height="wrap_content"
                 android:onClick="getApplicationId"
                 android:text="Get Application Id" />
-
+            <EditText
+                android:id="@+id/etFirstName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Firstname" />
+            <EditText
+                android:id="@+id/etLastName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Lastname" />
             <EditText
                 android:id="@+id/etPancard"
                 android:layout_width="wrap_content"
@@ -633,6 +644,11 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:background="@android:color/darker_gray" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="serverCall"
+                android:text="Server Call" />
 
             <TextView
                 android:id="@+id/tvApiResponse"

@@ -3,6 +3,7 @@ package com.payu.baas.core.model
 enum class ApiName {
     GET_CLIENT_TOKEN,
     SEND_OTP,
+    SERVER_CALL,
     VERIFY_OTP,
     SET_PASSWORD,
     UPDATE_PASSWORD,

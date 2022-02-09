@@ -16,7 +16,7 @@ class SetLimitApiModel(
 ) : ApiModel(
     context, requestMap, ApiName.SET_LIMITS, sdkCallback
 ) {
-    override fun getRelativeUrl(): String = "card/limits"
+    override fun getRelativeUrl(): String = "card/channel/limits"
     override fun getRequestMethod(): RequestMethod = RequestMethod.POST
     override fun getApiType(): ApiType = ApiType.POST_LOGIN
     override fun getTokenType(): TokenType = TokenType.ACCESS_TOKEN

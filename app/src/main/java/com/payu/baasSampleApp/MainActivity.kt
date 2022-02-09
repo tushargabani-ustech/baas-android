@@ -40,12 +40,10 @@ class MainActivity : AppCompatActivity() {
         cleverTapDefaultInstance = CleverTapAPI.getDefaultInstance(applicationContext)
         Utils.identifyUsers()
         CleverTapAPI.getDefaultInstance(applicationContext)?.onUserLogin(Utils.profileUpdate)
-        //   Log.i("test: ", BaasEncryption.decrypt(BaasEncryption.encrypt("TusharGabani@123")).toString())
+//           java.util.logging.Logger.getLogger("test: ", BaasEncryption.decrypt(BaasEncryption.encrypt("TusharGabani@123")).toString())
     }
 
     fun sendOTP(view: View) {
-//        var dd = decodeBase64()
-//        Log.d("dd", dd!!)
         val apiParams = ApiParams().apply {
             mobileNumber = binding.etMobile.text.toString().trim()
         }
@@ -117,7 +115,6 @@ class MainActivity : AppCompatActivity() {
             mobileNumber = binding.etMobile.text.toString().trim()
         }
         callAPI(ApiName.GET_USER_STATE, apiParams)
-
     }
 
 
@@ -250,8 +247,7 @@ class MainActivity : AppCompatActivity() {
                 SessionManager.getInstance(applicationContext).beneficiaryId
             beneficiaryName = "Tushar Gabani"
             accountNumber = "098765432109"
-            ifsc =
-                SessionManager.getInstance(applicationContext).beneficiaryIFSCECode
+            ifsc = SessionManager.getInstance(applicationContext).beneficiaryIFSCECode
         }
         callAPI(ApiName.UPDATE_BENEFICIARY, apiParams)
     }
@@ -366,6 +362,7 @@ class MainActivity : AppCompatActivity() {
                 KarzaVerificationResponse::class.java
             ) as KarzaVerificationResponse
             val apiParams = ApiParams().apply {
+                panNumber = binding.etPancard.text.toString().trim()
                 maskedAadhaar = karzaVerificationResponse.maskedAadhaar
                 requestId = karzaVerificationResponse.requestId
                 applicationId = karzaVerificationResponse.applicationId
@@ -384,11 +381,11 @@ class MainActivity : AppCompatActivity() {
                 currentAddress = karzaVerificationResponse.currentAddress!!.address
                 permanentAddress = karzaVerificationResponse.permanentAddress!!.address
                 var userNameObject = JSONObject()
-                faceObject.put("match", karzaVerificationResponse.userNameDate!!.matchScore)
-                faceObject.put("matchMeta", karzaVerificationResponse.userNameDate!!.matchMeta)
-                faceObject.put("formData", karzaVerificationResponse.userNameDate!!.formData)
-                faceObject.put("panOCRData", karzaVerificationResponse.userNameDate!!.panOCRData)
-                faceObject.put(
+                userNameObject.put("match", karzaVerificationResponse.userNameDate!!.matchScore)
+                userNameObject.put("matchMeta", karzaVerificationResponse.userNameDate!!.matchMeta)
+                userNameObject.put("formData", karzaVerificationResponse.userNameDate!!.formData)
+                userNameObject.put("panOCRData", karzaVerificationResponse.userNameDate!!.panOCRData)
+                userNameObject.put(
                     "aadhaarXmlData",
                     karzaVerificationResponse.userNameDate!!.aadhaarXmlData
                 )
@@ -422,7 +419,8 @@ class MainActivity : AppCompatActivity() {
             xmlFileCode =
                 com.payu.baas.core.storage.SessionManager.getInstance(this@MainActivity).karzaAadhaarFileCode
             xmlFileString =
-                com.payu.baas.core.storage.SessionManager.getInstance(this@MainActivity).karzaAadhaarFileContent }
+                com.payu.baas.core.storage.SessionManager.getInstance(this@MainActivity).karzaAadhaarFileContent
+        }
         callAPI(ApiName.KYC_AADHAR, apiParams)
     }
 
@@ -431,7 +429,7 @@ class MainActivity : AppCompatActivity() {
         val apiParams = ApiParams().apply {
             live_photo =
                 com.payu.baas.core.storage.SessionManager.getInstance(this@MainActivity).karzaUserSelfie
-            karza_photo_name = "kyc_selfie_" + binding.etMobile.text.toString()
+            karza_photo_name = "kyc_selfie_" + binding.etMobile.text.toString()+".jpg"
         }
         callAPI(ApiName.KYC_SELFIE, apiParams)
     }
@@ -514,14 +512,14 @@ class MainActivity : AppCompatActivity() {
                     if (apiResponse is KarzaSessionResponse) {
                         var applicationId =
                             com.payu.baas.core.storage.SessionManager.getInstance(this@MainActivity).applicationId
-//                        applicationId = "85454"
+                      //  applicationId = "85454"
                         if (!applicationId.isNullOrEmpty()) {
                             val objectId = JSONObject()
                             objectId.put(
                                 "applicationId", applicationId
                             )
-                            objectId.put("firstName", "Manpreet Kaur")
-                            objectId.put("lastName", "Arora")
+                            objectId.put("firstName", binding.etFirstName.text.toString().trim())
+                            objectId.put("lastName", binding.etLastName.text.toString().trim())
                             val objectPan = JSONObject()
                             objectPan.put("panNo", binding.etPancard.text.toString().trim())
                             val apiParams = ApiParams().apply {
@@ -565,6 +563,12 @@ class MainActivity : AppCompatActivity() {
         // Set other dialog properties
         alertDialog.setCancelable(false)
         alertDialog.show()
+    }
+
+    fun serverCall(view: View) {
+        val apiParams = ApiParams().apply {
+        }
+        callAPI(ApiName.SERVER_CALL, apiParams)
     }
 
 }

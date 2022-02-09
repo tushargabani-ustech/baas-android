@@ -16,7 +16,7 @@ class KYCAadharApiModel(
 ) : ApiModel(
     context, requestMap, ApiName.KYC_AADHAR, sdkCallback
 ) {
-    override fun getRelativeUrl(): String = "kyc/aadhaar"
+    override fun getRelativeUrl(): String = "user/kyc/aadhaar"
     override fun getRequestMethod(): RequestMethod = RequestMethod.POST
     override fun getApiType(): ApiType = ApiType.PRE_LOGIN
     override fun getTokenType(): TokenType = TokenType.ACCESS_TOKEN

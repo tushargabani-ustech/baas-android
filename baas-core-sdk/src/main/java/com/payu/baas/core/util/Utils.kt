@@ -34,11 +34,11 @@ object Utils {
     }
 
     fun identifyUsers() {
-        profileUpdate["Name"] = "Manpreet" // String
-        profileUpdate["Identity"] = "Manpreet1994" // String or number
+        profileUpdate["Name"] = "Ramesh Thimmana" // String
+        profileUpdate["Identity"] = "Ramesh Thimmana" // String or number
         profileUpdate["Email"] = "advance_pay@gmail.com" // Email address of the user
         profileUpdate["Phone"] = "+91 7607881909" // Phone (with the country code, starting with +)
-        profileUpdate["Gender"] = "Female" // Can be either M or F
+        profileUpdate["Gender"] = "Male" // Can be either M or F
         profileUpdate["DOB"] =
             Date() // Date of Birth. Set the Date object to the appropriate value first
 // optional fields. controls whether the user will be sent email, push etc.

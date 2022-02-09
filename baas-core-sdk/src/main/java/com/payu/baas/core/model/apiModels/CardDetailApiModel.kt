@@ -16,7 +16,7 @@ class CardDetailApiModel(
 ) : ApiModel(
     context, requestMap, ApiName.CARD_DETAILS, sdkCallback
 ) {
-    override fun getRelativeUrl(): String = "card"
+    override fun getRelativeUrl(): String = "card/details"
     override fun getRequestMethod(): RequestMethod = RequestMethod.GET
     override fun getApiType(): ApiType = ApiType.POST_LOGIN
     override fun getTokenType(): TokenType = TokenType.ACCESS_TOKEN

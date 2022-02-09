@@ -1,6 +1,5 @@
 package com.payu.baas.core.model
 
-import com.payu.baas.core.R
 import com.payu.baas.core.model.apiModels.ApiModel
 import com.payu.baas.core.util.BaaSConstants
 
@@ -21,7 +20,8 @@ class ApiHandler(val apiModel: ApiModel) {
 
     fun handleErrorResponse(error: String?) {
         val errorResponse = ErrorResponse().apply {
-            errorMessage = apiModel.context.getString(R.string.baas_something_went_wrong)
+//            errorMessage = apiModel.context.getString(R.string.baas_something_went_wrong)
+            errorMessage = BaaSConstants.SOMETHING_WENT_WRONG_ERROR_MESSAGE
             error?.let { errorMessage = error }
         }
         apiModel.getResponseHandler().onError(errorResponse)

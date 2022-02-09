@@ -151,6 +151,18 @@ class SessionManager private constructor(val context: Context) {
             PreferenceUtils.getInstance(context, PREFS_FILE_NAME)
                 .putString(BaaSConstants.BS_SP_USER_BENIFICIARY_ID, value)
         }
+    var userPanDetails: String? = null
+        set(value) {
+            field = value
+            PreferenceUtils.getInstance(context, PREFS_FILE_NAME)
+                .putString(BaaSConstants.BS_KEY_USER_PAN_DETAILS, value)
+        }
+    var cardDeliveryAddress: String? = null
+        set(value) {
+            field = value
+            PreferenceUtils.getInstance(context, PREFS_FILE_NAME)
+                .putString(BaaSConstants.BS_KEY_CARD_DELIVERY_ADDRESS, value)
+        }
 //    var mockServerBaseUrl: String? = null
 //        set(value) {
 //            field = value

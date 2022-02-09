@@ -1,7 +1,6 @@
 package com.payu.baas.core.model.apiModels
 
 import android.content.Context
-import android.util.Log
 import com.payu.baas.core.enums.ApiType
 import com.payu.baas.core.enums.RequestMethod
 import com.payu.baas.core.enums.TokenType
@@ -13,7 +12,7 @@ import com.payu.baas.core.model.responseModels.*
 import com.payu.baas.core.network.NetworkHeader
 import com.payu.baas.core.network.NetworkResponseHandler
 import com.payu.baas.core.storage.SessionManager
-import com.payu.baas.core.util.BaaSConstants
+
 
 class KarzaSessionApiModel(
     context: Context,
@@ -41,10 +40,10 @@ class KarzaSessionApiModel(
                 if (apiResponse != null && (apiResponse as KarzaSessionResponse).result!=null) {
                     SessionManager.getInstance(context).karzaToken =
                         (apiResponse as KarzaSessionResponse)!!.result!!.token
-                    Log.d(
-                        "karzaToken",
-                        (apiResponse as KarzaSessionResponse)!!.result!!.token!!
-                    )
+//                    Logger.getLogger(
+//                        "karzaToken",
+//                        (apiResponse as KarzaSessionResponse)!!.result!!.token!!
+//                    )
                 }
                 this@KarzaSessionApiModel.sdkCallback.onSuccess(apiResponse)
             }

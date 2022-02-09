@@ -19,4 +19,5 @@ class BlockCardApiModel(
     override fun getApiType(): ApiType = ApiType.POST_LOGIN
     override fun getTokenType(): TokenType = TokenType.ACCESS_TOKEN
     override fun getResponseModel(): ApiResponse = BlockCardResponse()
+
 }

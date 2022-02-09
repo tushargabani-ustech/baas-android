@@ -14,15 +14,25 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import okio.IOException
 import java.io.File
+import javax.net.ssl.SSLException
+import okhttp3.RequestBody
+
+
+
 
 
 class ApiExecutor(val apiModel: ApiModel, val apiHandler: ApiHandler?) {
+
+    private val certPinner = CertificatePinner.Builder()
+        .add("baasdevtest.payu.in", "sha256/P0ofhtQPclFNzKB0I9pSAdfrMZtlIkHAg6NxQjDkd38=")
+        .build()
 
     fun call() {
 
         if (Utils.isInternetAvailable(apiModel.context)) {
 
-            val client = OkHttpClient()
+            val client = OkHttpClient().newBuilder().certificatePinner(certPinner).build()
+
             val requestBody: RequestBody
             if (apiModel.getContentType() == ContentType.APPLICATION_JSON) {
                 requestBody = apiModel.getRequestData()
@@ -34,25 +44,28 @@ class ApiExecutor(val apiModel: ApiModel, val apiHandler: ApiHandler?) {
                         .addFormDataPart(
                             BaaSConstants.BS_KEY_LIVE_PHOTO,
                             apiModel.requestMap[BaaSConstants.BS_KEY_KARZA_SELFIE_NAME].toString(),
-                            /*RequestBody.create(
-                                apiModel.getContentType().getValue().toMediaTypeOrNull(),
-                                file
-                            )*/
                             file
                                 .asRequestBody(
-                                    apiModel.getContentType().getValue().toMediaTypeOrNull()
+                                    "image/jpg".toMediaTypeOrNull()
                                 )
                         ).build()
             }
 
             val requestBuilder: Request.Builder =
-                if (apiModel.getTokenType() == TokenType.KARZA_TOKEN) {
-                    Request.Builder()
-                        .url(apiModel.getRelativeUrl())
-                } else {
-                    Request.Builder()
-                        .url(Utils.getAbsoluteUrl(apiModel.getRelativeUrl()))
+                when {
+                    apiModel.getTokenType() == TokenType.KARZA_TOKEN -> {
+                        Request.Builder()
+                            .url(apiModel.getRelativeUrl())
+                    }
+                    apiModel.getTokenType() == TokenType.SERVER_TOKEN -> {
+                        Request.Builder().url(apiModel.getRelativeUrl())
+                    }
+                    else -> {
+                        Request.Builder().url(Utils.getAbsoluteUrl(apiModel.getRelativeUrl()))
+                    }
                 }
+
+
             if (apiModel.getRequestMethod() != RequestMethod.GET)
                 requestBuilder.method(apiModel.getRequestMethod().name, requestBody)
 
@@ -64,13 +77,18 @@ class ApiExecutor(val apiModel: ApiModel, val apiHandler: ApiHandler?) {
             client.newCall(request).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
                     Handler(Looper.getMainLooper()).post {
-                        apiHandler?.handleErrorResponse(e.message)
+                        var message: String? = e.message
+                        if (e is SSLException) {
+                            message = BaaSConstants.SOMETHING_WENT_WRONG_ERROR_MESSAGE
+                        }
+                        apiHandler?.handleErrorResponse(message)
                     }
                 }
+
                 override fun onResponse(call: Call, response: Response) {
                     Handler(Looper.getMainLooper()).post {
-                        if(response!=null && response.code!=null && response.body!=null)
-                        apiHandler?.handleResponse(response.code, response.body?.string())
+                        if (response != null && response.code != null && response.body != null)
+                            apiHandler?.handleResponse(response.code, response.body?.string())
                     }
                 }
             })

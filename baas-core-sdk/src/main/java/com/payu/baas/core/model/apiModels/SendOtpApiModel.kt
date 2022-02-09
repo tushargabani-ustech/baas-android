@@ -8,7 +8,6 @@ import com.payu.baas.core.interfaces.SdkCallback
 import com.payu.baas.core.model.ApiName
 import com.payu.baas.core.model.responseModels.ApiResponse
 import com.payu.baas.core.model.responseModels.SendOtpResponse
-import com.payu.baas.core.util.BaaSConstants
 
 class SendOtpApiModel(
     context: Context,
@@ -17,12 +16,10 @@ class SendOtpApiModel(
 ) : ApiModel(
     context, requestMap, ApiName.SEND_OTP, sdkCallback
 ) {
-    override fun getRelativeUrl(): String =
-        "user/mobile/${requestMap[BaaSConstants.BS_KEY_MOBILE_NUMBER]}"
+    override fun getRelativeUrl(): String = "user/mobile"
 
     override fun getRequestMethod(): RequestMethod = RequestMethod.POST
     override fun getApiType(): ApiType = ApiType.PRE_LOGIN
     override fun getTokenType(): TokenType = TokenType.ACCESS_TOKEN
     override fun getResponseModel(): ApiResponse = SendOtpResponse()
-    override fun getRequestData(): String = ""
 }

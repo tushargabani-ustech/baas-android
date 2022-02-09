@@ -10,8 +10,8 @@ android {
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 4
-        versionName "1.4"
+        versionCode 5
+        versionName "1.5"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -45,7 +45,7 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
     implementation "androidx.security:security-crypto:1.1.0-alpha03"
     implementation 'com.google.code.gson:gson:2.8.6'
-    implementation 'com.karza.okyc:ocycsdk:1.4.5'
+    implementation 'com.karza.okyc:ocycsdk:1.4.8'
 }
 
 //afterEvaluate {

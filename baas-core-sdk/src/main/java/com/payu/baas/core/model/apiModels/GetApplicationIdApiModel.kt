@@ -1,7 +1,6 @@
 package com.payu.baas.core.model.apiModels
 
 import android.content.Context
-import android.util.Log
 import com.payu.baas.core.enums.ApiType
 import com.payu.baas.core.enums.RequestMethod
 import com.payu.baas.core.enums.TokenType
@@ -9,10 +8,8 @@ import com.payu.baas.core.interfaces.SdkCallback
 import com.payu.baas.core.model.ApiName
 import com.payu.baas.core.model.ErrorResponse
 import com.payu.baas.core.model.ResponseModelCreator
-import com.payu.baas.core.model.responseModels.AddKYCResultsResponse
 import com.payu.baas.core.model.responseModels.ApiResponse
 import com.payu.baas.core.model.responseModels.GetApplicationIdResultsResponse
-import com.payu.baas.core.model.responseModels.KarzaNewCustomerResponse
 import com.payu.baas.core.network.NetworkResponseHandler
 import com.payu.baas.core.storage.SessionManager
 
@@ -35,10 +32,6 @@ class GetApplicationIdApiModel(
                     ResponseModelCreator(this@GetApplicationIdApiModel, response).getResponse()
                 SessionManager.getInstance(context).applicationId =
                     (apiResponse as GetApplicationIdResultsResponse).applicationId
-                Log.d(
-                    "applicationId",
-                    (apiResponse as GetApplicationIdResultsResponse).applicationId!!
-                )
                 this@GetApplicationIdApiModel.sdkCallback.onSuccess(apiResponse)
             }
 

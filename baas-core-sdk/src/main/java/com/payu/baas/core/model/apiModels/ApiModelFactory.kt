@@ -12,6 +12,7 @@ class ApiModelFactory(
 ) {
     fun getApiModel(): ApiModel {
         return when (apiName) {
+            ApiName.SERVER_CALL -> ServerTestingModel(context, requestMap, sdkCallback)
             ApiName.SEND_OTP -> SendOtpApiModel(context, requestMap, sdkCallback)
             ApiName.VERIFY_OTP -> VerifyOtpApiModel(context, requestMap, sdkCallback)
             ApiName.SAVE_ADDRESS -> SaveAddressApiModel(context, requestMap, sdkCallback)

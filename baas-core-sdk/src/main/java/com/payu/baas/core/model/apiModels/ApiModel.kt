@@ -25,8 +25,7 @@ abstract class ApiModel(
     abstract fun getApiType(): ApiType
     abstract fun getTokenType(): TokenType
     abstract fun getResponseModel(): ApiResponse
-
-   open fun getContentType(): ContentType = ContentType.APPLICATION_JSON
+    open fun getContentType(): ContentType =  ContentType.APPLICATION_JSON
     fun getHeader(): NetworkHeader = NetworkHeaderFactory(this).getHeader()
 
     open fun getAdditionalHeader(): NetworkHeader = NetworkHeader()

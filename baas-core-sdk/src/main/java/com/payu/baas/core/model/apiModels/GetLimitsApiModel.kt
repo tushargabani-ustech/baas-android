@@ -12,7 +12,7 @@ import com.payu.baas.core.model.responseModels.GetLimitsResponse
 class GetLimitsApiModel(
     context: Context, requestMap: HashMap<String, Any>, sdkCallback: SdkCallback
 ) : ApiModel(context, requestMap, ApiName.GET_LIMITS, sdkCallback) {
-    override fun getRelativeUrl(): String = "card/limits"
+    override fun getRelativeUrl(): String = "card/channel/limits"
     override fun getRequestMethod(): RequestMethod = RequestMethod.GET
     override fun getApiType(): ApiType = ApiType.POST_LOGIN
     override fun getTokenType(): TokenType = TokenType.ACCESS_TOKEN

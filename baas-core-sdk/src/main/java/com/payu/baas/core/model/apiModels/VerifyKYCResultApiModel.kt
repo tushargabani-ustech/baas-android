@@ -16,7 +16,7 @@ class VerifyKYCResultApiModel(
 ) : ApiModel(
     context, requestMap, ApiName.VERIFY_KYC_RESULTS, sdkCallback
 ) {
-    override fun getRelativeUrl(): String = "kyc/results/verify"
+    override fun getRelativeUrl(): String = "user/kyc/results/verify"
     override fun getRequestMethod(): RequestMethod = RequestMethod.POST
     override fun getApiType(): ApiType = ApiType.PRE_LOGIN
     override fun getTokenType(): TokenType = TokenType.ACCESS_TOKEN

@@ -1,7 +1,6 @@
 package com.payu.baas.core.model.apiModels
 
 import android.content.Context
-import android.util.Log
 import com.payu.baas.core.enums.ApiType
 import com.payu.baas.core.enums.RequestMethod
 import com.payu.baas.core.enums.TokenType
@@ -49,10 +48,10 @@ class KarzaNewCustomerApiModel(
                     SessionManager.getInstance(context).karzaTransactionId =
                         (apiResponse as KarzaNewCustomerResponse).results!!.data!!.transactionId
 //                }
-                Log.d(
+              /*  Logger.getLogger(
                     "karza_transactionId",
                     (apiResponse as KarzaNewCustomerResponse).results!!.data!!.transactionId!!
-                )
+                )*/
                 this@KarzaNewCustomerApiModel.sdkCallback.onSuccess(apiResponse)
             }
 

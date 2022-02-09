@@ -14,7 +14,7 @@ class GetTransactionModeApiModel(
 ) : ApiModel(
     context, requestMap, ApiName.GET_TRANSACTION_MODE, sdkCallback
 ) {
-    override fun getRelativeUrl(): String = "transaction/modes"
+    override fun getRelativeUrl(): String = "card/transaction/modes"
     override fun getRequestMethod(): RequestMethod = RequestMethod.GET
     override fun getApiType(): ApiType = ApiType.POST_LOGIN
     override fun getTokenType(): TokenType = TokenType.ACCESS_TOKEN

@@ -7,7 +7,6 @@ import com.payu.baas.core.enums.TokenType
 import com.payu.baas.core.interfaces.SdkCallback
 import com.payu.baas.core.model.ApiName
 import com.payu.baas.core.model.responseModels.ApiResponse
-import com.payu.baas.core.model.responseModels.GetUserDetailsResponse
 import com.payu.baas.core.model.responseModels.PrevalidateTransactionResponse
 
 class PrevalidateTrasactionApiModel(

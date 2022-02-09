@@ -4,7 +4,7 @@ object BaaSConstants {
 
     // BASE URL
     const val BS_URL_PREFIX = "https://baasdevtest.payu.in/baas/v1/"
-
+    const val BS_URL_INITIAL_SERVER_CALL = "https://baasdevtest.payu.in/baas/"
     const val PREFS_FILE_NAME: String = "baasSdkFile"
     const val BS_SP_BRAND_TOKEN = "brand_token"
     const val LOG_TAG = "LOG_TAG"
@@ -26,7 +26,6 @@ object BaaSConstants {
     const val BS_SP_MOCK_BASE_URL = "mockServerBaseUrl"
     const val BS_SP_USER_STATE = "user_state"
     const val BS_SP_USER_BENIFICIARY_ID = "user_benificiary_id"
-
     const val BS_SP_OTP_LENGTH = 4
 
     // API Keys
@@ -42,9 +41,11 @@ object BaaSConstants {
     const val BS_KEY_USERNAME = "username"
     const val BS_KEY_PASSWORD = "password"
     const val BS_KEY_PAN_NUMBER = "panNumber"
-    const val BS_KEY_MOBILE_NUMBER = "mobileNumber"
+    const val BS_KEY_MOBILE_NUMBER = "mobile"
+    const val BS_KEY_MOBILE_NUMBER_FOR_USER_STATE = "mobileNumber"
     const val BS_KEY_PIN_STATUS = "pin_status"
-
+    const val BS_KEY_USER_PAN_DETAILS = "userPanDetails"
+    const val BS_KEY_CARD_DELIVERY_ADDRESS = "cardDeliveryAddress"
     const val BS_KEY_OLD_PASSWORD = "oldPasscode"
     const val BS_KEY_NEW_PASSWORD = "newPasscode"
     const val BS_KEY_PAN = "pan"
@@ -249,4 +250,5 @@ object BaaSConstants {
     const val START_DATE_EMPTY_ERROR_MESSAGE = "Start date shouldn't be null or empty"
     const val END_DATE_EMPTY_ERROR_MESSAGE = "End date shouldn't be null or empty"
     const val APPLICATION_ID_EMPTY_ERROR_MESSAGE = "Application id is null. Kindly generate it first."
+    const val SOMETHING_WENT_WRONG_ERROR_MESSAGE = "Something went wrong, could not complete the request now. Please try again later!"
 }

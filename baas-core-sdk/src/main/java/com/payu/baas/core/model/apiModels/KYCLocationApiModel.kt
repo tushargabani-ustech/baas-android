@@ -16,7 +16,7 @@ class KYCLocationApiModel(
 ) : ApiModel(
     context, requestMap, ApiName.KYC_LOCATION, sdkCallback
 ) {
-    override fun getRelativeUrl(): String = "kyc/location"
+    override fun getRelativeUrl(): String = "user/kyc/location"
     override fun getRequestMethod(): RequestMethod = RequestMethod.POST
     override fun getApiType(): ApiType = ApiType.PRE_LOGIN
     override fun getTokenType(): TokenType = TokenType.ACCESS_TOKEN

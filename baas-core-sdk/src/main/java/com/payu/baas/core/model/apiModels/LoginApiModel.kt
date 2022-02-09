@@ -2,7 +2,6 @@ package com.payu.baas.core.model.apiModels
 
 import android.content.Context
 import com.payu.baas.core.enums.ApiType
-import com.payu.baas.core.enums.ContentType
 import com.payu.baas.core.enums.RequestMethod
 import com.payu.baas.core.enums.TokenType
 import com.payu.baas.core.interfaces.SdkCallback
@@ -23,10 +22,10 @@ class LoginApiModel(
 ) : ApiModel(
     context, requestMap, ApiName.LOGIN, sdkCallback
 ) {
-    override fun getRelativeUrl(): String = "login"
+    override fun getRelativeUrl(): String = "user/login"
     override fun getRequestMethod(): RequestMethod = RequestMethod.POST
     override fun getApiType(): ApiType = ApiType.PRE_LOGIN
-    override fun getTokenType(): TokenType = TokenType.ACCESS_TOKEN
+    override fun getTokenType(): TokenType = TokenType.DEVICE_BINDING_ID
     override fun getResponseModel(): ApiResponse = LoginResponse()
     override fun getResponseHandler(): NetworkResponseHandler {
         return object : NetworkResponseHandler {
@@ -44,4 +43,15 @@ class LoginApiModel(
 
         }
     }
+    override fun getAdditionalHeader(): NetworkHeader {
+        return NetworkHeader().apply {
+            SessionManager.getInstance(context).brandToken?.let {
+                put(BaaSConstants.BS_KEY_BRAND_TOKEN, it)
+            }
+        }
+    }
+
+
+
+
 }

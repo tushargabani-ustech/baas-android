@@ -16,9 +16,10 @@ class AddKYCResultApiModel(
 ) : ApiModel(
     context, requestMap, ApiName.KYC_RESULTS, sdkCallback
 ) {
-    override fun getRelativeUrl(): String = "kyc/results"
+    override fun getRelativeUrl(): String = "user/kyc/results"
     override fun getRequestMethod(): RequestMethod = RequestMethod.POST
     override fun getApiType(): ApiType = ApiType.PRE_LOGIN
     override fun getTokenType(): TokenType = TokenType.ACCESS_TOKEN
     override fun getResponseModel(): ApiResponse = AddKYCResultsResponse()
+
 }
