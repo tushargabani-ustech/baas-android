@@ -3,9 +3,9 @@ package com.payu.baas.core.singleton
 import android.content.Context
 import com.payu.baas.core.enums.ApiType
 import com.payu.baas.core.interfaces.SdkCallback
-import com.payu.baas.core.model.ApiExecutor
+import com.payu.baas.core.network.ApiExecutor
 import com.payu.baas.core.model.ApiHandler
-import com.payu.baas.core.model.ApiName
+import com.payu.baas.core.enums.ApiName
 import com.payu.baas.core.model.ErrorResponse
 import com.payu.baas.core.model.apiModels.ApiModel
 import com.payu.baas.core.model.apiModels.ApiModelFactory

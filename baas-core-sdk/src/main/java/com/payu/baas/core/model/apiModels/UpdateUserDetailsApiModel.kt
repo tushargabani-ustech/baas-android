@@ -2,18 +2,11 @@ package com.payu.baas.core.model.apiModels
 
 import android.content.Context
 import com.payu.baas.core.enums.ApiType
-import com.payu.baas.core.enums.ContentType
 import com.payu.baas.core.enums.RequestMethod
 import com.payu.baas.core.enums.TokenType
 import com.payu.baas.core.interfaces.SdkCallback
-import com.payu.baas.core.model.ApiName
-import com.payu.baas.core.model.ErrorResponse
-import com.payu.baas.core.model.ResponseModelCreator
+import com.payu.baas.core.enums.ApiName
 import com.payu.baas.core.model.responseModels.*
-import com.payu.baas.core.network.NetworkHeader
-import com.payu.baas.core.network.NetworkResponseHandler
-import com.payu.baas.core.storage.SessionManager
-import com.payu.baas.core.util.BaaSConstants
 
 class UpdateUserDetailsApiModel(
     context: Context, apiName: ApiName,

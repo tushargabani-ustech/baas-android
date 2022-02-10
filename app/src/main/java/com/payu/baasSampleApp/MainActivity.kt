@@ -9,14 +9,13 @@ import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import com.bumptech.glide.Glide
 import com.clevertap.android.sdk.CleverTapAPI
 import com.payu.baas.core.BaaSSDK
+import com.payu.baas.core.enums.ApiName
 import com.payu.baas.core.interfaces.SdkCallback
 import com.payu.baas.core.model.ApiDetails
-import com.payu.baas.core.model.ApiName
-import com.payu.baas.core.model.ApiParams
 import com.payu.baas.core.model.ErrorResponse
+import com.payu.baas.core.model.params.ApiParams
 import com.payu.baas.core.model.responseModels.*
 import com.payu.baas.core.storage.SessionManager
 import com.payu.baas.core.util.BaaSConstants
@@ -384,9 +383,12 @@ class MainActivity : AppCompatActivity() {
                 userNameObject.put("match", karzaVerificationResponse.userNameDate!!.matchScore)
                 userNameObject.put("matchMeta", karzaVerificationResponse.userNameDate!!.matchMeta)
                 userNameObject.put("formData", karzaVerificationResponse.userNameDate!!.formData)
-                userNameObject.put("panOCRData", karzaVerificationResponse.userNameDate!!.panOCRData)
                 userNameObject.put(
-                    "aadhaarXmlData",
+                    "panOCRData",
+                    karzaVerificationResponse.userNameDate!!.panOCRData
+                )
+                userNameObject.put(
+                    "aadhaarXMLData",
                     karzaVerificationResponse.userNameDate!!.aadhaarXmlData
                 )
                 userNameData = userNameObject
@@ -420,6 +422,7 @@ class MainActivity : AppCompatActivity() {
                 com.payu.baas.core.storage.SessionManager.getInstance(this@MainActivity).karzaAadhaarFileCode
             xmlFileString =
                 com.payu.baas.core.storage.SessionManager.getInstance(this@MainActivity).karzaAadhaarFileContent
+            xmlFileString = xmlFileString?.replace("data:application/zip;base64,", "")
         }
         callAPI(ApiName.KYC_AADHAR, apiParams)
     }
@@ -429,7 +432,7 @@ class MainActivity : AppCompatActivity() {
         val apiParams = ApiParams().apply {
             live_photo =
                 com.payu.baas.core.storage.SessionManager.getInstance(this@MainActivity).karzaUserSelfie
-            karza_photo_name = "kyc_selfie_" + binding.etMobile.text.toString()+".jpg"
+            karza_photo_name = "kyc_selfie_" + binding.etMobile.text.toString() + ".jpg"
         }
         callAPI(ApiName.KYC_SELFIE, apiParams)
     }
@@ -437,6 +440,11 @@ class MainActivity : AppCompatActivity() {
     fun card_pin_status(view: View) {
         val apiParams = ApiParams()
         callAPI(ApiName.GET_PIN_STATUS, apiParams)
+    }
+
+    fun getAddress(view: View) {
+        val apiParams = ApiParams()
+        callAPI(ApiName.GET_ADDRESS, apiParams)
     }
 
     fun update_card_pin_status(view: View) {
@@ -485,10 +493,10 @@ class MainActivity : AppCompatActivity() {
                                     ).cardImage!!
                                 )
                             binding.tvApiResponse.text = decodedStringImage
-                            Glide.with(applicationContext)
-                                .load(decodedStringImage)
-                                .error(R.drawable.ic_launcher_background)
-                                .into(binding.imageId)
+                            /*  Glide.with(applicationContext)
+                                  .load(decodedStringImage)
+                                  .error(R.drawable.ic_launcher_background)
+                                  .into(binding.imageId)*/
                         }
                         ApiName.ADD_BENEFICIARY -> {
                             var beneficiaryId =
@@ -512,7 +520,7 @@ class MainActivity : AppCompatActivity() {
                     if (apiResponse is KarzaSessionResponse) {
                         var applicationId =
                             com.payu.baas.core.storage.SessionManager.getInstance(this@MainActivity).applicationId
-                      //  applicationId = "85454"
+                        //  applicationId = "85454"
                         if (!applicationId.isNullOrEmpty()) {
                             val objectId = JSONObject()
                             objectId.put(
@@ -538,8 +546,10 @@ class MainActivity : AppCompatActivity() {
                         }
                         callAPI(ApiName.KARZA_GENERATE_CUSTOMER_TOKEN, apiParams)
                     } else if (apiResponse is KarzaUserTokenResponse) {
-                        var intent: Intent = Intent(this@MainActivity,
-                            KarzaActivity::class.java)
+                        var intent: Intent = Intent(
+                            this@MainActivity,
+                            KarzaActivity::class.java
+                        )
                         startActivity(intent)
                     }
                 }
@@ -575,10 +585,12 @@ class MainActivity : AppCompatActivity() {
         val apiParams = ApiParams()
         callAPI(ApiName.HELP, apiParams)
     }
+
     fun getFAQs(view: View) {
         val apiParams = ApiParams()
         callAPI(ApiName.FAQS, apiParams)
     }
+
     fun getRatesCharges(view: View) {
         val apiParams = ApiParams()
         callAPI(ApiName.RATES_CHARGES, apiParams)

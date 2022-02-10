@@ -1,10 +1,11 @@
-package com.payu.baas.core.model
+package com.payu.baas.core.network
 
 import android.os.Handler
 import android.os.Looper
 import com.payu.baas.core.enums.ContentType
 import com.payu.baas.core.enums.RequestMethod
 import com.payu.baas.core.enums.TokenType
+import com.payu.baas.core.model.ApiHandler
 import com.payu.baas.core.model.apiModels.ApiModel
 import com.payu.baas.core.util.BaaSConstants
 import com.payu.baas.core.util.Utils

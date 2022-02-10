@@ -2,10 +2,7 @@ package com.payu.baas.core.model.apiModels
 
 import android.content.Context
 import com.payu.baas.core.interfaces.SdkCallback
-import com.payu.baas.core.model.ApiName
-import com.payu.baas.core.model.entities.apiModels.FAQsApiModel
-import com.payu.baas.core.model.entities.apiModels.HelpApiModel
-import com.payu.baas.core.model.entities.apiModels.RatesCharegesApiModel
+import com.payu.baas.core.enums.ApiName
 
 class ApiModelFactory(
     val context: Context,
@@ -19,6 +16,7 @@ class ApiModelFactory(
             ApiName.SEND_OTP -> SendOtpApiModel(context, requestMap, sdkCallback)
             ApiName.VERIFY_OTP -> VerifyOtpApiModel(context, requestMap, sdkCallback)
             ApiName.SAVE_ADDRESS -> SaveAddressApiModel(context, requestMap, sdkCallback)
+            ApiName.GET_ADDRESS -> GetAddressApiModel(context, requestMap, sdkCallback)
             ApiName.VERIFY_EMPLOYEE -> VerifyEmployeeApiModel(context, requestMap, sdkCallback)
             ApiName.SET_PASSWORD -> SetPasswordApiModel(context, requestMap, sdkCallback)
             ApiName.LOGIN -> LoginApiModel(context, requestMap, sdkCallback)

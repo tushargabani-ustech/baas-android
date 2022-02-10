@@ -25,5 +25,5 @@ class GetBeneficiaryResponse : ApiResponse() {
 
 
     @SerializedName("result")
-    var userBeneficiaryList: List<BeneficiaryModel>? = null
+    var userBeneficiaryList: ArrayList<BeneficiaryModel>? = null
 }

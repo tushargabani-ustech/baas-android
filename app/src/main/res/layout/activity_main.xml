@@ -137,7 +137,11 @@
                 android:layout_height="wrap_content"
                 android:onClick="saveAddress"
                 android:text="Save Address(Details) And Onboard user" />
-
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="getAddress"
+                android:text="Get Address" />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"

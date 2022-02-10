@@ -6,7 +6,7 @@ import com.payu.baas.core.enums.ContentType
 import com.payu.baas.core.enums.RequestMethod
 import com.payu.baas.core.enums.TokenType
 import com.payu.baas.core.interfaces.SdkCallback
-import com.payu.baas.core.model.ApiName
+import com.payu.baas.core.enums.ApiName
 import com.payu.baas.core.model.responseModels.ApiResponse
 import com.payu.baas.core.model.responseModels.BeneficiaryBankTransferResponse
 

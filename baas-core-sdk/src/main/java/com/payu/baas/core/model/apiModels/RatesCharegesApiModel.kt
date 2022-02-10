@@ -1,13 +1,12 @@
-package com.payu.baas.core.model.entities.apiModels
+package com.payu.baas.core.model.apiModels
 
 import android.content.Context
 import com.payu.baas.core.enums.ApiType
 import com.payu.baas.core.enums.RequestMethod
 import com.payu.baas.core.enums.TokenType
 import com.payu.baas.core.interfaces.SdkCallback
-import com.payu.baas.core.model.ApiName
-import com.payu.baas.core.model.apiModels.ApiModel
-import com.payu.baas.core.model.entities.responseModels.RatesChargesResponse
+import com.payu.baas.core.enums.ApiName
+import com.payu.baas.core.model.responseModels.RatesChargesResponse
 import com.payu.baas.core.model.responseModels.ApiResponse
 import com.payu.baas.core.network.NetworkHeader
 import com.payu.baas.core.storage.SessionManager

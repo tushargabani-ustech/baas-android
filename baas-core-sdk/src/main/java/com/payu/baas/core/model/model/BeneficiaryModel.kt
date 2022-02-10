@@ -26,4 +26,9 @@ class BeneficiaryModel() : ApiResponse() {
     @SerializedName("bankName")
     var bankName: String? = null
 
+    @SerializedName("icon")
+    var icon: String? = null
+
+    var selected: Boolean = false
+
 }

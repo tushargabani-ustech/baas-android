@@ -1,5 +1,6 @@
 package com.payu.baas.core.model
 
+import com.payu.baas.core.enums.ApiName
 import com.payu.baas.core.util.BaaSConstants
 import com.payu.baas.core.util.BaaSConstants.INVALID_DATA
 
@@ -10,6 +11,7 @@ class RequestDataGenerator(val apiDetails: ApiDetails) {
             ApiName.SEND_OTP -> validateSendOtp()
             ApiName.VERIFY_OTP -> validateVerifyOtp()
             ApiName.SAVE_ADDRESS -> validateSaveAddress()
+            ApiName.GET_ADDRESS -> validateGetAddress()
             ApiName.VERIFY_EMPLOYEE -> validateVerifyEmployee()
             ApiName.SET_PASSWORD -> validateSetPassword()
             ApiName.LOGIN -> validateLogin()
@@ -795,6 +797,9 @@ class RequestDataGenerator(val apiDetails: ApiDetails) {
         }
     }
     private fun validateVerifyKYCResults(): RequestData {
+        return RequestData(HashMap<String, Any>(), true)
+    }
+    private fun validateGetAddress(): RequestData {
         return RequestData(HashMap<String, Any>(), true)
     }
     private fun sendErrorResponse(errorMessage: String, errorCode: Int): RequestData {

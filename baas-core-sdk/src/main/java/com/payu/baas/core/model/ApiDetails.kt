@@ -1,3 +1,6 @@
 package com.payu.baas.core.model
 
-data class ApiDetails(val apiName: ApiName,val apiParams: ApiParams)
+import com.payu.baas.core.enums.ApiName
+import com.payu.baas.core.model.params.ApiParams
+
+data class ApiDetails(val apiName: ApiName, val apiParams: ApiParams)

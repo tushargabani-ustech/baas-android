@@ -1,4 +1,4 @@
-package com.payu.baas.core.model
+package com.payu.baas.core.model.params
 
 import com.google.gson.JsonArray
 import com.payu.baas.core.model.model.FaceAadharXMLModel
@@ -91,5 +91,8 @@ open class ApiParams {
     var currentAddress:String?=null
     var permanentAddress:String?=null
     var userNameData:JSONObject?=null
+    var limitConfigs:JSONArray?=null
+
+
 
 }

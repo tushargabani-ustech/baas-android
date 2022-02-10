@@ -1,4 +1,4 @@
-package com.payu.baas.core.model
+package com.payu.baas.core.enums
 
 enum class ApiName {
     GET_CLIENT_TOKEN,
@@ -20,6 +20,7 @@ enum class ApiName {
     UPDATE_USER_ADDRESS,
     GET_TRANSACTION_CHARGES,
     SAVE_ADDRESS,
+    GET_ADDRESS,
     ADD_BENEFICIARY,
     GET_BENEFICIARY,
     UPDATE_BENEFICIARY,
