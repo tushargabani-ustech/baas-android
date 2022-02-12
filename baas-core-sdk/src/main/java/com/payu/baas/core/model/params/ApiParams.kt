@@ -16,6 +16,7 @@ open class ApiParams {
     var password: String? = null
     var title: String? = null
     var panNumber: String? = null
+    var pan: String? = null
     var employeeId: String? = null
     var accountType: String? = null
     var debitIndicator: String? = null
