@@ -15,4 +15,10 @@ class GetAddressResponse : ApiResponse() {
 
     @SerializedName("message")
     var message: String? = null
+
+    var addressLine1: String? = null
+    var addressLine2: String? = null
+    var city: String? = null
+    var pinCode: String? = null
+    var stateId: String? = null
 }

@@ -1,6 +1,7 @@
 package com.payu.baas.core.model.responseModels
 
 import com.google.gson.annotations.SerializedName
+import com.payu.baas.core.model.model.BeneficiaryBankTransferLogModel
 import com.payu.baas.core.model.model.TargetAccountBalance
 import com.payu.baas.core.model.model.TxnLog
 
@@ -14,7 +15,10 @@ class BeneficiaryBankTransferResponse : ApiResponse() {
     @SerializedName("code")
     var code: String? = null
 
-    @SerializedName("status")
-    var status: String? = null
+    @SerializedName("message")
+    var message: String? = null
+
+    @SerializedName("txn_logs")
+    var transactionLogsList: ArrayList<BeneficiaryBankTransferLogModel>? = null
 
 }

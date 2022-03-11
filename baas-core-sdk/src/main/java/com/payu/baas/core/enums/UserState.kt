@@ -7,10 +7,10 @@ enum class UserState {
     MOBILE_VERIFIED {
         override fun getValue(): String = "1"
     },
-    LAT_LONG_IP_SAVED {
+    KARZA_APPLICATION_GENERATED {
         override fun getValue(): String = "2"
     },
-    KARZA_APPLICATION_GENERATED {
+    LAT_LONG_IP_SAVED {
         override fun getValue(): String = "3"
     },
     SELFIE_SAVED {

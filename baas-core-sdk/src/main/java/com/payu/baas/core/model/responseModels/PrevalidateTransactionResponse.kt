@@ -13,11 +13,11 @@ class PrevalidateTransactionResponse : ApiResponse() {
     var code: String? = null
 
     @SerializedName("maxAmountTransfer")
-    var maxAmountTransfer: Double? = null
+    var maxAmountTransfer: Double = 0.0
 
-    @SerializedName("charges")
-    var chargedAmount: Double? = null
+    @SerializedName("chargedAmount")
+    var chargedAmount: Double = 0.0
 
-    @SerializedName("advanceUseFees")
-    var advanceChargeAmount: Double? = null
+    @SerializedName("advanceChargeAmount")
+    var advanceChargeAmount: Double = 0.0
 }

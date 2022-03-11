@@ -13,6 +13,7 @@ class ApiModelFactory(
     fun getApiModel(): ApiModel {
         return when (apiName) {
             ApiName.SERVER_CALL -> ServerTestingModel(context, requestMap, sdkCallback)
+            ApiName.GET_CLIENT_TOKEN -> GetClientTokenApiModel(context, requestMap, sdkCallback)
             ApiName.SEND_OTP -> SendOtpApiModel(context, requestMap, sdkCallback)
             ApiName.VERIFY_OTP -> VerifyOtpApiModel(context, requestMap, sdkCallback)
             ApiName.SAVE_ADDRESS -> SaveAddressApiModel(context, requestMap, sdkCallback)
@@ -70,6 +71,11 @@ class ApiModelFactory(
                 requestMap,
                 sdkCallback
             )
+            ApiName.UNDO_DELETED_BENEFICIARY -> UndoDeletedBeneficiaryApiModel(
+                context,
+                requestMap,
+                sdkCallback
+            )
             ApiName.GET_TRANSACTION_CHARGES -> GetTransactionChargesApiModel(
                 context,
                 requestMap,
@@ -85,7 +91,12 @@ class ApiModelFactory(
                 requestMap,
                 sdkCallback
             )
-            ApiName.GET_TRANSACTION_DETAILS -> GetTransactionDetailsApiModel(
+            ApiName.GET_TRANSACTION_LIST -> GetTransactionListApiModel(
+                context,
+                requestMap,
+                sdkCallback
+            )
+            ApiName.GET_TRANSACTION_DETAIL -> GetTransactionDetailApiModel(
                 context,
                 requestMap,
                 sdkCallback
@@ -128,7 +139,9 @@ class ApiModelFactory(
                 requestMap,
                 sdkCallback
             )
-            ApiName.GET_APPLICATION_ID -> GetApplicationIdApiModel(
+            ApiName.GET_APPLICATION_ID ->
+
+                GetApplicationIdApiModel(
                 context,
                 requestMap,
                 sdkCallback
@@ -148,6 +161,16 @@ class ApiModelFactory(
                 requestMap,
                 sdkCallback
             )
+            ApiName.KARZA_KEY -> GetKarzaKeyApiModel(
+                context,
+                requestMap,
+                sdkCallback
+            )
+            ApiName.CARD_REORDER -> CardReorderApiModel(
+                context,
+                requestMap,
+                sdkCallback
+            )
             ApiName.HELP -> HelpApiModel(
                 context,
                 requestMap,
@@ -159,6 +182,46 @@ class ApiModelFactory(
                 sdkCallback
             )
             ApiName.RATES_CHARGES -> RatesCharegesApiModel(
+                context,
+                requestMap,
+                sdkCallback
+            )
+            ApiName.GET_S3_BUCKET_LINK -> GetS3BucketLinkApiModel(
+                context,
+                requestMap,
+                sdkCallback
+            )
+            ApiName.VALIDATE_CARD_KIT -> ValidateCardKitApiModel(
+                context,
+                requestMap,
+                sdkCallback
+            )
+            ApiName.GET_VALIDATE_CARD_KIT_STATUS -> GetValidateCardKitStatusApiModel(
+                context,
+                requestMap,
+                sdkCallback
+            )
+            ApiName.GET_TIPS -> GetTipsApiModel(
+                context,
+                requestMap,
+                sdkCallback
+            )
+            ApiName.GET_OFFER -> GetOfferApiModel(
+                context,
+                requestMap,
+                sdkCallback
+            )
+            ApiName.GET_NOTIFICATIONS -> GetNotificationApiModel(
+                context,
+                requestMap,
+                sdkCallback
+            )
+            ApiName.LOGOUT -> LogOutApiModel(
+                context,
+                requestMap,
+                sdkCallback
+            )
+            ApiName.IFSC_CODE -> IFSCApiModel(
                 context,
                 requestMap,
                 sdkCallback

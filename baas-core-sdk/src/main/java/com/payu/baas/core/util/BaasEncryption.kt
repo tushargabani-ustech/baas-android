@@ -4,10 +4,8 @@ import android.util.Base64
 import java.io.IOException
 import java.io.UnsupportedEncodingException
 import java.security.*
-import javax.crypto.BadPaddingException
-import javax.crypto.Cipher
-import javax.crypto.IllegalBlockSizeException
-import javax.crypto.NoSuchPaddingException
+import javax.crypto.*
+import javax.crypto.spec.GCMParameterSpec
 import javax.crypto.spec.IvParameterSpec
 import javax.crypto.spec.SecretKeySpec
 
@@ -114,7 +112,32 @@ object BaasEncryption {
         return String(decrypt(cipheredBytes, keyBytes, keyBytes)!!, charset(characterEncoding))
     }
 
-
-
-
+    /*
+    Separate decryption method for decrypting karza key
+    as encrypted in a different way at backend
+     */
+    @Throws(
+        KeyException::class,
+        GeneralSecurityException::class,
+        GeneralSecurityException::class,
+        InvalidAlgorithmParameterException::class,
+        IllegalBlockSizeException::class,
+        BadPaddingException::class,
+        IOException::class,
+        IllegalStateException::class
+    )
+    fun decryptUrl(url: String, secret: String, deviceBindingId: String): String? {
+        var decodedBase64: String? = null
+        val key = deviceBindingId + secret
+        var iv = ByteArray(16)
+        iv = secret.substring(32, 48).toByteArray()
+        val brandSecret =
+            SecretKeySpec(key.substring(0, 32).toByteArray(), aesEncryptionAlgorithm)
+        val cipherUrl = Cipher.getInstance("AES/GCM/NoPadding") // as in backend its GCM_NO_padding
+        cipherUrl.init(Cipher.DECRYPT_MODE, brandSecret, GCMParameterSpec(128, iv))
+        val encrypted: ByteArray =
+            cipherUrl.doFinal(Base64.decode(url.toByteArray(), Base64.DEFAULT))
+        decodedBase64 = String(Base64.decode(encrypted, Base64.DEFAULT))
+        return decodedBase64
+    }
 }

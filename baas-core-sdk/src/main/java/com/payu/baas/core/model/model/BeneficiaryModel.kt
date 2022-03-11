@@ -20,9 +20,6 @@ class BeneficiaryModel() : ApiResponse() {
     @SerializedName("addedOn")
     var addedOn: String? = null
 
-    @SerializedName("icon")
-    var iconUrl: String? = null
-
     @SerializedName("bankName")
     var bankName: String? = null
 

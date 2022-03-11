@@ -16,7 +16,7 @@ class GetSalaryAdvanceInfoApiModel(
 ) : ApiModel(
     context, requestMap, ApiName.GET_SALARY_ADVANCE_INFO, sdkCallback
 ) {
-    override fun getRelativeUrl(): String = "user/salaryAdvanceinfo"
+    override fun getRelativeUrl(): String = "user/salaryAdvance"
     override fun getRequestMethod(): RequestMethod = RequestMethod.GET
     override fun getApiType(): ApiType = ApiType.POST_LOGIN
     override fun getTokenType(): TokenType = TokenType.ACCESS_TOKEN

@@ -79,6 +79,12 @@
                 android:layout_height="wrap_content"
                 android:hint="Pan number (Required for karza token too)" />
             <Button
+                android:id="@+id/btGetKarzaKey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="getKarzaKey"
+                android:text="Get Karza key" />
+            <Button
                 android:id="@+id/btKarza"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -291,6 +297,20 @@
                 android:layout_marginBottom="10dp"
                 android:background="@android:color/darker_gray" />
 
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="cardReOrder"
+                android:text="Card Re-Order" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@android:color/darker_gray" />
+
 
             <Button
                 android:layout_width="wrap_content"
@@ -339,6 +359,19 @@
                 android:layout_height="wrap_content"
                 android:onClick="unblock_card"
                 android:text="Unblock Card" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@android:color/darker_gray" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="cardReorder"
+                android:text="Card Reorder" />
 
             <View
                 android:layout_width="match_parent"
@@ -425,6 +458,12 @@
                 android:layout_height="wrap_content"
                 android:onClick="getAccountBalanceDetails"
                 android:text="Get Account Balance" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="getTransactionList"
+                android:text="Get Transaction List" />
 
             <Button
                 android:layout_width="wrap_content"
@@ -614,6 +653,20 @@
 
             <View
                 android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@android:color/darker_gray" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="undoDeletedBeneficiary"
+                android:text="Undo Deleted Beneficiary" />
+
+            <View
+                android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
@@ -690,6 +743,112 @@
                 android:onClick="getRatesCharges"
                 android:text="@string/get_rates_charges" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@android:color/darker_gray" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="getS3BucketLink"
+                android:text="@string/get_s3_bucket_link" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@android:color/darker_gray" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/scIsCardReceived"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="validateCardKit"
+                android:text="Is Card Received" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@android:color/darker_gray" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="getValidateCardKitStatus"
+                android:text="Check Card Received Status" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@android:color/darker_gray" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="getOffers"
+                android:text="Get Offers" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@android:color/darker_gray" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="getNotifications"
+                android:text="Get Notifications" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@android:color/darker_gray" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="getTips"
+                android:text="Get Tips" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@android:color/darker_gray" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="logout"
+                android:text="Logout" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@android:color/darker_gray" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="getIFSCode"
+                android:text="Validate IFSC Code" />
             <TextView
                 android:id="@+id/tvApiResponse"
                 android:layout_width="wrap_content"

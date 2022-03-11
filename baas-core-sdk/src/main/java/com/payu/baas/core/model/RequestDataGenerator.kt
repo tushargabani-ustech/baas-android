@@ -8,6 +8,7 @@ class RequestDataGenerator(val apiDetails: ApiDetails) {
     fun getRequestData(): RequestData {
         return when (apiDetails.apiName) {
             ApiName.SERVER_CALL -> validateServerAPICall()
+            ApiName.GET_CLIENT_TOKEN -> validateGetAccessTokenData()
             ApiName.SEND_OTP -> validateSendOtp()
             ApiName.VERIFY_OTP -> validateVerifyOtp()
             ApiName.SAVE_ADDRESS -> validateSaveAddress()
@@ -37,12 +38,16 @@ class RequestDataGenerator(val apiDetails: ApiDetails) {
             ApiName.BENEFICIARY_BANK_TRANSFER -> validateBeneficiaryBankTransfer()
             ApiName.GET_RECENT_BENEFICIARY -> validateGetRecentBeneficiary()
             ApiName.DELETE_BENEFICIARY -> validateDeleteBeneficiary()
+            ApiName.UNDO_DELETED_BENEFICIARY -> validateUndoDeletedBeneficiary()
             ApiName.GET_SALARY_ADVANCE_INFO -> validateGetSalaryAdvanceInfo()
             ApiName.GET_ACCOUNT_BALANCE_DETAILS -> validateGetAccountBalance()
             ApiName.GET_ACCOUNT_DETAILS -> validateGetAccountData()
             ApiName.GET_USER_DETAILS -> validateGetUserData()
-            ApiName.GET_TRANSACTION_DETAILS -> validateGetTransactionData()
+            ApiName.GET_TRANSACTION_LIST -> validateGetTransactionListData()
+            ApiName.GET_TRANSACTION_DETAIL -> validateGetTransactionDetailData()
             ApiName.GET_TRANSACTION_CHARGES -> validateGetTransferChargesData()
+            ApiName.KARZA_KEY -> validateGetKarzaKeyData()
+            ApiName.CARD_REORDER -> validateGetCardReorderData()
             ApiName.UPDATE_USER_EMAIL -> validateUpdateUserEmail()
             ApiName.UPDATE_USER_ADDRESS -> validateUpdateUserAddress()
             ApiName.UPDATE_MOBILE_NUMBER -> validateUpdateUserMobileNumber()
@@ -53,18 +58,44 @@ class RequestDataGenerator(val apiDetails: ApiDetails) {
             ApiName.KYC_AADHAR -> validateKYCAadhar()
             ApiName.KYC_LOCATION -> validateKYCLocation()
             ApiName.KYC_SELFIE -> validateKYCSelfie()
-            ApiName.KYC_RESULTS ->validateAddKYCResults()
+            ApiName.KYC_RESULTS -> validateAddKYCResults()
             ApiName.VERIFY_KYC_RESULTS -> validateVerifyKYCResults()
             ApiName.HELP -> validateHelp()
             ApiName.FAQS -> validateFAQs()
             ApiName.RATES_CHARGES -> validateRatesCharges()
+            ApiName.GET_S3_BUCKET_LINK -> validateS3BucketLink()
+            ApiName.VALIDATE_CARD_KIT -> validateCardKit()
+            ApiName.GET_VALIDATE_CARD_KIT_STATUS -> validateGetCardKitStatus()
+            ApiName.GET_NOTIFICATIONS -> validateNotifications()
+            ApiName.GET_OFFER -> validateOffer()
+            ApiName.GET_TIPS -> validateTips()
+            ApiName.LOGOUT -> validateLogout()
+            ApiName.IFSC_CODE -> validateIfsCode()
+
             else -> RequestData(null, false, INVALID_DATA)
         }
+    }
+
+    private fun validateNotifications(): RequestData {
+        return RequestData(HashMap<String, Any>(), true)
+    }
+
+    private fun validateOffer(): RequestData {
+        return RequestData(HashMap<String, Any>(), true)
+    }
+
+    private fun validateTips(): RequestData {
+        return RequestData(HashMap<String, Any>(), true)
+    }
+
+    private fun validateLogout(): RequestData {
+        return RequestData(HashMap<String, Any>(), true)
     }
 
     private fun validatePinStatus(): RequestData {
         return RequestData(HashMap<String, Any>(), true)
     }
+
     private fun validateRatesCharges(): RequestData {
         return RequestData(HashMap<String, Any>(), true)
     }
@@ -76,6 +107,29 @@ class RequestDataGenerator(val apiDetails: ApiDetails) {
     private fun validateHelp(): RequestData {
         return RequestData(HashMap<String, Any>(), true)
     }
+
+    private fun validateS3BucketLink(): RequestData {
+        return RequestData(HashMap<String, Any>(), true)
+    }
+
+    private fun validateCardKit(): RequestData {
+        val resultMap = HashMap<String, Any>()
+        resultMap[BaaSConstants.BS_KEY_IS_CARD_RECEIVED] =
+            apiDetails.apiParams.isCardReceived!!
+        return RequestData(resultMap, true)
+    }
+
+    private fun validateIfsCode(): RequestData {
+        val resultMap = HashMap<String, Any>()
+        resultMap[BaaSConstants.BS_KEY_IFSC] =
+            apiDetails.apiParams.ifsc!!.toString()
+        return RequestData(resultMap, true)
+    }
+
+    private fun validateGetCardKitStatus(): RequestData {
+        return RequestData(HashMap<String, Any>(), true)
+    }
+
     private fun validatePrevalidateTransaction(): RequestData {
         return when {
             apiDetails.apiParams.txnAmount.isNullOrEmpty() ->
@@ -85,7 +139,8 @@ class RequestDataGenerator(val apiDetails: ApiDetails) {
                 )
             else -> {
                 val resultMap = HashMap<String, Any>()
-                resultMap[BaaSConstants.BS_KEY_TRANSACTION_AMOUNT] = apiDetails.apiParams.txnAmount!!
+                resultMap[BaaSConstants.BS_KEY_TRANSACTION_AMOUNT] =
+                    apiDetails.apiParams.txnAmount!!
                 RequestData(resultMap, true)
             }
         }
@@ -95,6 +150,10 @@ class RequestDataGenerator(val apiDetails: ApiDetails) {
         val resultMap = HashMap<String, Any>()
         resultMap[BaaSConstants.BS_KEY_PIN_STATUS] = apiDetails.apiParams.pin_status!!
         return RequestData(resultMap, true)
+    }
+
+    private fun validateGetAccessTokenData(): RequestData {
+        return RequestData(HashMap<String, Any>(), true)
     }
 
     private fun validateSendOtp(): RequestData {
@@ -139,7 +198,8 @@ class RequestDataGenerator(val apiDetails: ApiDetails) {
                 )
             else -> {
                 val resultMap = HashMap<String, Any>()
-                resultMap[BaaSConstants.BS_KEY_TRANSACTION_LIMITS] = apiDetails.apiParams.transactionLimits!!
+                resultMap[BaaSConstants.BS_KEY_TRANSACTION_LIMITS] =
+                    apiDetails.apiParams.transactionLimits!!
                 RequestData(resultMap, true)
             }
         }
@@ -148,9 +208,11 @@ class RequestDataGenerator(val apiDetails: ApiDetails) {
     private fun validateUnblockCard(): RequestData {
         return RequestData(HashMap<String, Any>(), true)
     }
+
     private fun validateServerAPICall(): RequestData {
         return RequestData(HashMap<String, Any>(), true)
     }
+
     private fun validateBlockCard(): RequestData {
         return when {
             apiDetails.apiParams.reason.isNullOrEmpty() ->
@@ -223,7 +285,7 @@ class RequestDataGenerator(val apiDetails: ApiDetails) {
 
     private fun validateSaveAddress(): RequestData {
         return when {
-            apiDetails.apiParams.panNumber.isNullOrEmpty() -> sendErrorResponse(
+            apiDetails.apiParams.pan.isNullOrEmpty() -> sendErrorResponse(
                 BaaSConstants.PAN_NUMBER_EMPTY_ERROR_MESSAGE,
                 BaaSConstants.PAN_NUMBER_EMPTY_ERROR_CODE
             )
@@ -246,10 +308,6 @@ class RequestDataGenerator(val apiDetails: ApiDetails) {
             apiDetails.apiParams.dob.isNullOrEmpty() -> sendErrorResponse(
                 BaaSConstants.DOB_EMPTY_ERROR_MESSAGE,
                 BaaSConstants.DOB_EMPTY_ERROR_CODE
-            )
-            apiDetails.apiParams.email.isNullOrEmpty() -> sendErrorResponse(
-                BaaSConstants.EMAIL_EMPTY_ERROR_MESSAGE,
-                BaaSConstants.EMAIL_EMPTY_ERROR_CODE
             )
             apiDetails.apiParams.country.isNullOrEmpty() -> sendErrorResponse(
                 BaaSConstants.COUNTRY_EMPTY_ERROR_MESSAGE,
@@ -289,7 +347,7 @@ class RequestDataGenerator(val apiDetails: ApiDetails) {
             )
             else -> {
                 val resultMap = HashMap<String, Any>()
-                resultMap[BaaSConstants.BS_KEY_PAN] = apiDetails.apiParams.panNumber!!
+                resultMap[BaaSConstants.BS_KEY_PAN] = apiDetails.apiParams.pan!!
                 resultMap[BaaSConstants.BS_KEY_TITLE] = apiDetails.apiParams.title!!
                 resultMap[BaaSConstants.BS_KEY_FIRST_NAME] = apiDetails.apiParams.firstName!!
                 resultMap[BaaSConstants.BS_KEY_LAST_NAME] = apiDetails.apiParams.lastName!!
@@ -377,7 +435,8 @@ class RequestDataGenerator(val apiDetails: ApiDetails) {
             )
             else -> {
                 val resultMap = HashMap<String, Any>()
-                resultMap[BaaSConstants.BS_KEY_MOBILE_NUMBER_FOR_USER_STATE] = apiDetails.apiParams.mobileNumber!!
+                resultMap[BaaSConstants.BS_KEY_MOBILE_NUMBER_FOR_USER_STATE] =
+                    apiDetails.apiParams.mobileNumber!!
                 RequestData(resultMap, true)
             }
         }
@@ -484,10 +543,10 @@ class RequestDataGenerator(val apiDetails: ApiDetails) {
 
     private fun validateBeneficiaryBankTransfer(): RequestData {
         return when {
-            apiDetails.apiParams.remarks.isNullOrEmpty() -> sendErrorResponse(
+            /*apiDetails.apiParams.remarks.isNullOrEmpty() -> sendErrorResponse(
                 BaaSConstants.REMARKS_EMPTY_ERROR_MESSAGE,
                 BaaSConstants.REMARKS_EMPTY_ERROR_CODE
-            )
+            )*/
             apiDetails.apiParams.amount == 0 -> sendErrorResponse(
                 BaaSConstants.AMOUNT_EMPTY_ERROR_MESSAGE,
                 BaaSConstants.AMOUNT_EMPTY_ERROR_CODE
@@ -501,7 +560,8 @@ class RequestDataGenerator(val apiDetails: ApiDetails) {
                 val resultMap = HashMap<String, Any>()
                 resultMap[BaaSConstants.BS_KEY_REMARKS] =
                     apiDetails.apiParams.remarks!!
-                resultMap[BaaSConstants.BS_KEY_USER_BANK_TRANSFER_BENEFICIARY_ID] = apiDetails.apiParams.beneficiaryId!!
+                resultMap[BaaSConstants.BS_KEY_USER_BANK_TRANSFER_BENEFICIARY_ID] =
+                    apiDetails.apiParams.beneficiaryId!!
                 resultMap[BaaSConstants.BS_KEY_AMOUNT] = apiDetails.apiParams.amount!!
                 RequestData(resultMap, true)
             }
@@ -518,14 +578,29 @@ class RequestDataGenerator(val apiDetails: ApiDetails) {
 
     private fun validateDeleteBeneficiary(): RequestData {
         return when {
-            apiDetails.apiParams.userBeneficiaryIds.toString().isNullOrEmpty() -> sendErrorResponse(
+            apiDetails.apiParams.userBeneFiciaryIds.toString().isNullOrEmpty() -> sendErrorResponse(
                 BaaSConstants.BENEFICIARY_ID_EMPTY_ERROR_MESSAGE,
                 BaaSConstants.BENEFICIARY_ID_EMPTY_ERROR_CODE
             )
             else -> {
                 val resultMap = HashMap<String, Any>()
                 resultMap[BaaSConstants.BS_KEY_USER_BENEFICIARY_IDS] =
-                    apiDetails.apiParams.userBeneficiaryIds!!
+                    apiDetails.apiParams.userBeneFiciaryIds!!
+                RequestData(resultMap, true)
+            }
+        }
+    }
+
+    private fun validateUndoDeletedBeneficiary(): RequestData {
+        return when {
+            apiDetails.apiParams.userBeneFiciaryIds.toString().isNullOrEmpty() -> sendErrorResponse(
+                BaaSConstants.BENEFICIARY_ID_EMPTY_ERROR_MESSAGE,
+                BaaSConstants.BENEFICIARY_ID_EMPTY_ERROR_CODE
+            )
+            else -> {
+                val resultMap = HashMap<String, Any>()
+                resultMap[BaaSConstants.BS_KEY_USER_BENEFICIARY_IDS] =
+                    apiDetails.apiParams.userBeneFiciaryIds!!
                 RequestData(resultMap, true)
             }
         }
@@ -548,6 +623,14 @@ class RequestDataGenerator(val apiDetails: ApiDetails) {
     }
 
     private fun validateGetTransferChargesData(): RequestData {
+        return RequestData(HashMap<String, Any>(), true)
+    }
+
+    private fun validateGetKarzaKeyData(): RequestData {
+        return RequestData(HashMap<String, Any>(), true)
+    }
+
+    private fun validateGetCardReorderData(): RequestData {
         return RequestData(HashMap<String, Any>(), true)
     }
 
@@ -613,9 +696,9 @@ class RequestDataGenerator(val apiDetails: ApiDetails) {
         }
     }
 
-    private fun validateGetTransactionData(): RequestData {
+    private fun validateGetTransactionListData(): RequestData {
         return when {
-            apiDetails.apiParams.accountType.isNullOrEmpty() -> sendErrorResponse(
+            /*apiDetails.apiParams.accountType.isNullOrEmpty() -> sendErrorResponse(
                 BaaSConstants.NEW_ACCOUNT_TYPE_EMPTY_ERROR_MESSAGE,
                 BaaSConstants.NEW_ACCOUNT_TYPE_EMPTY_ERROR_CODE
             )
@@ -630,7 +713,7 @@ class RequestDataGenerator(val apiDetails: ApiDetails) {
             apiDetails.apiParams.endDate.isNullOrEmpty() -> sendErrorResponse(
                 BaaSConstants.END_DATE_EMPTY_ERROR_MESSAGE,
                 BaaSConstants.END_DATE_EMPTY_ERROR_CODE
-            )
+            )*/
             else -> {
                 val resultMap = HashMap<String, Any>()
                 resultMap[BaaSConstants.BS_KEY_START_DATE] = apiDetails.apiParams.startDate!!
@@ -638,6 +721,22 @@ class RequestDataGenerator(val apiDetails: ApiDetails) {
                 resultMap[BaaSConstants.BS_KEY_ACCOUNT_TYPE] = apiDetails.apiParams.accountType!!
                 resultMap[BaaSConstants.BS_KEY_DEBIT_INDICATOR] =
                     apiDetails.apiParams.debitIndicator!!
+                resultMap[BaaSConstants.BS_KEY_PAGE] =
+                    apiDetails.apiParams.page
+                RequestData(resultMap, true)
+            }
+        }
+    }
+
+    private fun validateGetTransactionDetailData(): RequestData {
+        return when {
+            apiDetails.apiParams.id.isNullOrEmpty() -> sendErrorResponse(
+                BaaSConstants.TRANSACTION_ID_EMPTY_ERROR_MESSAGE,
+                BaaSConstants.TRANSACTION_ID_ERROR_CODE
+            )
+            else -> {
+                val resultMap = HashMap<String, Any>()
+                resultMap[BaaSConstants.BS_KEY_ID] = apiDetails.apiParams.id!!
                 RequestData(resultMap, true)
             }
         }
@@ -647,7 +746,8 @@ class RequestDataGenerator(val apiDetails: ApiDetails) {
         val apiParams = apiDetails.apiParams
         return if (apiParams.latitude.isNullOrEmpty() || apiParams.longitude.isNullOrEmpty()
             || apiParams.ipAddress.isNullOrEmpty() || apiParams.state.isNullOrEmpty()
-        || apiParams.country.isNullOrEmpty())
+            || apiParams.country.isNullOrEmpty()
+        )
             sendErrorResponse(
                 BaaSConstants.ADDRESS_EMPTY_ERROR_MESSAGE,
                 BaaSConstants.ADDRESS_EMPTY_ERROR_CODE
@@ -662,12 +762,14 @@ class RequestDataGenerator(val apiDetails: ApiDetails) {
             RequestData(resultMap, true)
         }
     }
+
     private fun validateKarzaSessionData(): RequestData {
         val apiParams = apiDetails.apiParams
         val resultMap = HashMap<String, Any>()
         resultMap[BaaSConstants.BS_KEY_PRODUCT_ID] = apiParams.productId!!
         return RequestData(resultMap, true)
     }
+
     private fun validateKarzaNewCustomerData(): RequestData {
         val apiParams = apiDetails.apiParams
         return if (apiParams.applicantFormData?.get("applicationId").toString().isNullOrEmpty())
@@ -684,16 +786,19 @@ class RequestDataGenerator(val apiDetails: ApiDetails) {
             RequestData(resultMap, true)
         }
     }
+
     private fun validateKarzaGenerateUserTokenData(): RequestData {
         val apiParams = apiDetails.apiParams
         val resultMap = HashMap<String, Any>()
         resultMap[BaaSConstants.BS_KEY_KARZA_TRANSACTION_ID] = apiParams.transactionId!!
         return RequestData(resultMap, true)
     }
+
     private fun validateApplicationId(): RequestData {
         val resultMap = HashMap<String, Any>()
         return RequestData(resultMap, true)
     }
+
     private fun validateKYCAadhar(): RequestData {
         val apiParams = apiDetails.apiParams
         return if (apiParams.xmlFileString.isNullOrEmpty())
@@ -716,7 +821,7 @@ class RequestDataGenerator(val apiDetails: ApiDetails) {
 
     private fun validateKYCSelfie(): RequestData {
         val apiParams = apiDetails.apiParams
-        return if (apiParams.live_photo==null)
+        return if (apiParams.live_photo == null)
             sendErrorResponse(
                 BaaSConstants.PHOTO_EMPTY_ERROR_MESSAGE,
                 BaaSConstants.PHOTO_EMPTY_ERROR_CODE
@@ -727,6 +832,7 @@ class RequestDataGenerator(val apiDetails: ApiDetails) {
             RequestData(resultMap, true)
         }
     }
+
     private fun validateAddKYCResults(): RequestData {
         val apiParams = apiDetails.apiParams
         return if (apiParams.maskedAadhaar.isNullOrEmpty())
@@ -764,12 +870,12 @@ class RequestDataGenerator(val apiDetails: ApiDetails) {
                 BaaSConstants.GENDER_EMPTY_ERROR_MESSAGE,
                 BaaSConstants.AADHAR_EMPTY_ERROR_CODE
             )
-        else if (apiParams.faceAadhaarXml==null)
+        else if (apiParams.faceAadhaarXml == null)
             sendErrorResponse(
                 BaaSConstants.FACE_AADHAR_EMPTY_ERROR_MESSAGE,
                 BaaSConstants.AADHAR_EMPTY_ERROR_CODE
             )
-        else if (apiParams.userNameData==null)
+        else if (apiParams.userNameData == null)
             sendErrorResponse(
                 BaaSConstants.USER_DATA_AADHAR_EMPTY_ERROR_MESSAGE,
                 BaaSConstants.AADHAR_EMPTY_ERROR_CODE
@@ -796,12 +902,15 @@ class RequestDataGenerator(val apiDetails: ApiDetails) {
 
         }
     }
+
     private fun validateVerifyKYCResults(): RequestData {
         return RequestData(HashMap<String, Any>(), true)
     }
+
     private fun validateGetAddress(): RequestData {
         return RequestData(HashMap<String, Any>(), true)
     }
+
     private fun sendErrorResponse(errorMessage: String, errorCode: Int): RequestData {
         return RequestData(null, false, errorMessage, errorCode)
     }

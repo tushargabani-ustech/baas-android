@@ -2,7 +2,7 @@ package com.payu.baas.core.model.responseModels
 
 import com.google.gson.annotations.SerializedName
 
- class GetUserDetailsResponse: ApiResponse() {
+class GetUserDetailsResponse : ApiResponse() {
     @SerializedName("userMessage")
     var userMessage: String? = null
 
@@ -29,4 +29,7 @@ import com.google.gson.annotations.SerializedName
 
     @SerializedName("maskedAadhaar")
     var maskedAadhaar: String? = null
+
+    @SerializedName("selfieLink")
+    var selfieLink: String? = null
 }

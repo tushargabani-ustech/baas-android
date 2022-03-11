@@ -19,7 +19,7 @@ class CardFulfilmentResponse : ApiResponse() {
     var time: String? = null
 
     @SerializedName("cardFulfilment")
-    var cardFulfilmentList: List<CardFulfilmentModel>? = null
+    var cardFulfilmentList: List<CardFulfilmentModel> = arrayListOf()
 
 
 }

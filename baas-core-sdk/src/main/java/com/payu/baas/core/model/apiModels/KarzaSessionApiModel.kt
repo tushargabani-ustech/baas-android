@@ -27,7 +27,7 @@ class KarzaSessionApiModel(
     override fun getTokenType(): TokenType = TokenType.KARZA_TOKEN
     override fun getAdditionalHeader(): NetworkHeader {
         return NetworkHeader().apply {
-            put("x-karza-key", "7vf6CVNNZSX70oP3")
+            SessionManager.getInstance(context).karzaKey?.let { put("x-karza-key", it) }
         }
     }
 
@@ -40,10 +40,6 @@ class KarzaSessionApiModel(
                 if (apiResponse != null && (apiResponse as KarzaSessionResponse).result!=null) {
                     SessionManager.getInstance(context).karzaToken =
                         (apiResponse as KarzaSessionResponse)!!.result!!.token
-//                    Logger.getLogger(
-//                        "karzaToken",
-//                        (apiResponse as KarzaSessionResponse)!!.result!!.token!!
-//                    )
                 }
                 this@KarzaSessionApiModel.sdkCallback.onSuccess(apiResponse)
             }

@@ -11,6 +11,8 @@ object BaaSConstants {
     const val BS_SP_ACCESS_TOKEN = "access_token"
     const val BS_SP_DEVICE_BINDING_ID = "dbid"
     const val BS_SP_CARD_IMAGE = "card_image"
+    const val BS_SP_S3_BUCKET_URL = "s3BucketUrl"
+
 
     // API values
     const val BS_VALUE_BRAND_TOKEN = "uev77qu9d4ttw259"
@@ -22,10 +24,12 @@ object BaaSConstants {
     const val BS_SP_KARZA_AADHAAR_CONTENT = "karza_aadhaar_content"
     const val BS_SP_KARZA_AADHAAR_CODE = "karza_aadhaar_code"
     const val BS_SP_KARZA_TRANSACTION_ID = "karza_transaction_id"
+    const val BS_SP_KARZA_KEY = "karza_key"
     const val BS_SP_APPLICATION_ID = "application_id"
     const val BS_SP_MOCK_BASE_URL = "mockServerBaseUrl"
     const val BS_SP_USER_STATE = "user_state"
     const val BS_SP_USER_BENIFICIARY_ID = "user_benificiary_id"
+    const val BS_SP_USER_BENIFICIARY_IFSC = "user_benificiary_ifsc"
     const val BS_SP_OTP_LENGTH = 4
 
     // API Keys
@@ -49,6 +53,7 @@ object BaaSConstants {
     const val BS_KEY_OLD_PASSWORD = "oldPasscode"
     const val BS_KEY_NEW_PASSWORD = "newPasscode"
     const val BS_KEY_PAN = "pan"
+    const val BS_KEY_ID = "id"
     const val BS_KEY_BRAND_EMP_ID = "brandEmpId"
     const val BS_KEY_ACCOUNT_TYPE = "accountType"
     const val BS_KEY_DEBIT_INDICATOR = "debitIndicator"
@@ -62,8 +67,8 @@ object BaaSConstants {
     const val BS_KEY_EMAIL = "email"
     const val BS_KEY_COUNTRY = "country"
     const val BS_KEY_COUNTRY_CODE = "countryCode"
-    const val BS_KEY_ADDRESS_LINE_1 = "addressLine1"
-    const val BS_KEY_ADDRESS_LINE_2 = "addressLine2"
+    const val BS_KEY_ADDRESS_LINE_1 = "address1"
+    const val BS_KEY_ADDRESS_LINE_2 = "address2"
     const val BS_KEY_CITY = "city"
     const val BS_KEY_PIN_CODE = "pinCode"
     const val BS_KEY_STATE = "state"
@@ -130,6 +135,9 @@ object BaaSConstants {
     const val BS_KEY_TRANSACTION_LIMITS = "transactionLimits"
     const val BS_KEY_THRESHOLDS = "thresholds"
     const val BS_KEY_TRANSACTION_AMOUNT = "txnAmount"
+
+    const val BS_KEY_IS_CARD_RECEIVED = "isCardReceived"
+
     // error codes
     const val INVALID_DATA = "Invalid data"
     const val NO_INTERNET_ERROR_CODE = 1000
@@ -184,6 +192,7 @@ object BaaSConstants {
     const val START_DATE_EMPTY_ERROR_CODE = 2012
     const val END_DATE_EMPTY_ERROR_CODE = 2013
     const val APPLICATION_ID_EMPTY_ERROR_CODE = 2014
+    const val TRANSACTION_ID_ERROR_CODE = 2015
 
     // error messages
     const val NO_INTERNET_ERROR_MESSAGE = "No internet available"
@@ -251,4 +260,5 @@ object BaaSConstants {
     const val END_DATE_EMPTY_ERROR_MESSAGE = "End date shouldn't be null or empty"
     const val APPLICATION_ID_EMPTY_ERROR_MESSAGE = "Application id is null. Kindly generate it first."
     const val SOMETHING_WENT_WRONG_ERROR_MESSAGE = "Something went wrong, could not complete the request now. Please try again later!"
+    const val TRANSACTION_ID_EMPTY_ERROR_MESSAGE = "Transaction id shouldn't be null or empty"
 }

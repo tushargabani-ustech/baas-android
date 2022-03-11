@@ -27,6 +27,6 @@ import com.google.gson.annotations.SerializedName
     var error: String? = null
 
     @SerializedName("charges")
-    var charges: Double? = null
+    var charges: Double = 0.0
 
 }

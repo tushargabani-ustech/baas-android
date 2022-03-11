@@ -1,6 +1,7 @@
 package com.payu.baas.core.model.responseModels
 
 import com.google.gson.annotations.SerializedName
+import com.payu.baas.core.model.model.AdvanceUsageHistory
 import com.payu.baas.core.model.model.CurrentUsage
 
 
@@ -23,7 +24,7 @@ class GetSalaryAdvanceInfoResponse : ApiResponse() {
     var currentUsage: CurrentUsage? = null
 
     @SerializedName("usageHistory")
-    var usageHistory: List<Any>? = null
+    var usageHistory: List<AdvanceUsageHistory>? = null
 
     @SerializedName("blocked")
     var blocked: Boolean? = null

@@ -5,7 +5,7 @@ import com.payu.baas.core.model.responseModels.ApiResponse
 
 class FaceAadharXMLModel() {
 
-    @SerializedName("match")
+    @SerializedName("matchScore")
     var matchScore: Double? = 0.0
 //    var agentStatus: String? = null
 

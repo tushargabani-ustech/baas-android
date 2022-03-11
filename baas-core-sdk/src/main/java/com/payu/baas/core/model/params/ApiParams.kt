@@ -18,6 +18,7 @@ open class ApiParams {
     var panNumber: String? = null
     var pan: String? = null
     var employeeId: String? = null
+    var id: String? = null
     var accountType: String? = null
     var debitIndicator: String? = null
     var startDate: String? = null
@@ -46,7 +47,7 @@ open class ApiParams {
     var verified: String? = null
     var status: String? = null
     var beneficiaryId: String? = null
-    var userBeneficiaryIds: JSONArray? = null
+    var userBeneFiciaryIds: JSONArray? = null
     var currency: String? = null
     var paymentType: String? = null
     var remarks: String? = null
@@ -93,6 +94,7 @@ open class ApiParams {
     var permanentAddress:String?=null
     var userNameData:JSONObject?=null
     var limitConfigs:JSONArray?=null
+    var isCardReceived:Boolean?=null
 
 
 

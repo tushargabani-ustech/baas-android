@@ -7,7 +7,12 @@ class CardFulfilmentModel() : ApiResponse() {
     @SerializedName("status")
     var status: String? = null
 
-    @SerializedName("created_at")
-    var createdAt: String? = null
+    @SerializedName("time")
+    var time: String? = null
 
+    @SerializedName("description")
+    var description: String? = null
+
+    @SerializedName("location")
+    var location: String? = null
 }

@@ -183,11 +183,11 @@ class CardApisUnitTests {
     fun testForUpdateCardPinSetStatusApi() {
         var call : Response<UpdateCardPinSetStatusResponse> = mockApiCaller!!.callForUpdateCardPinSetStatusDataApi().execute()
         TestCase.assertNotNull(
-            call.body()!!.status
+            call.body()!!.message
         )
         //if  url not null then check is success message retreived
         TestCase.assertEquals("Limit-Block config set successful",
-            call.body()!!.status
+            call.body()!!.message
         )
 
         // test for correct request passed

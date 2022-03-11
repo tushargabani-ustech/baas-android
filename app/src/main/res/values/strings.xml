@@ -7,14 +7,15 @@
     <string name="apply_button_text">Apply Karein</string>
     //fonts
     <string name="app_font_regular">fonts/avenir_regular.ttf</string>
-    <string name="clevertap_account_id">CLEVERTAP_ACCOUNT_ID</string>
+  <!--  <string name="clevertap_account_id">CLEVERTAP_ACCOUNT_ID</string>
     <string name="clevertap_account_id_value">TEST-KK8-W46-7K6Z</string>
     <string name="clevertap_account_token">CLEVERTAP_TOKEN</string>
     <string name="clevertap_account_token_value">TEST-640-b33</string>
     <string name="clevertap_google_ad_id">CLEVERTAP_USE_GOOGLE_AD_ID</string>
-    <string name="clevertap_google_ad_id_value">1</string>
+    <string name="clevertap_google_ad_id_value">1</string>-->
     <string name="get_rates_charges"><![CDATA[Get Rates & Charges]]></string>
     <string name="get_help">Get Help</string>
     <string name="get_faqs">Get FAQs</string>
+    <string name="get_s3_bucket_link">Get S3 Bucket link</string>
 
 </resources>

@@ -1,11 +1,12 @@
 package com.payu.baas.core.network
 
+import android.util.Log
 import com.payu.baas.core.enums.ContentType
 import com.payu.baas.core.enums.TokenType
 import com.payu.baas.core.model.apiModels.ApiModel
 import com.payu.baas.core.storage.SessionManager
 import com.payu.baas.core.util.BaaSConstants
-import java.util.logging.Logger
+import java.util.*
 
 class NetworkHeaderFactory(val apiModel: ApiModel) {
     fun getHeader(): NetworkHeader {
@@ -23,10 +24,7 @@ class NetworkHeaderFactory(val apiModel: ApiModel) {
 //            put(BaaSConstants.BS_KEY_BRAND_TOKEN, BaaSConstants.BS_VALUE_BRAND_TOKEN)
             SessionManager.getInstance(apiModel.context).brandToken?.let {
 //                Logger.getLogger("brand token: ", it)
-                put(
-                    BaaSConstants.BS_KEY_BRAND_TOKEN,
-                    it
-                )
+                put(BaaSConstants.BS_KEY_BRAND_TOKEN, it)
             }
 
             if (!apiModel.getAdditionalHeader().isNullOrEmpty())
@@ -37,6 +35,10 @@ class NetworkHeaderFactory(val apiModel: ApiModel) {
     private fun getNetworkHeaderWithDeviceBindingId(): NetworkHeader {
         return NetworkHeader().apply {
             put(BaaSConstants.BS_KEY_CONTENT_TYPE, ContentType.APPLICATION_JSON.getValue())
+//            var dbId = SessionManager.getInstance(apiModel.context).deviceBindingId
+//            if (dbId.isNullOrEmpty())
+//                SessionManager.getInstance(apiModel.context).deviceBindingId =
+//                    UUID.randomUUID().toString()
             SessionManager.getInstance(apiModel.context).deviceBindingId?.let {
 //                Logger.getLogger("device binding id: ", it)
                 put(
@@ -50,7 +52,6 @@ class NetworkHeaderFactory(val apiModel: ApiModel) {
     }
 
 
-
     private fun getNetworkHeaderWithAccessToken(): NetworkHeader {
         return NetworkHeader().apply {
             SessionManager.getInstance(apiModel.context).accessToken?.let {
@@ -59,8 +60,13 @@ class NetworkHeaderFactory(val apiModel: ApiModel) {
                     it
                 )
             }
+//            var dbId = SessionManager.getInstance(apiModel.context).deviceBindingId
+//            if (dbId.isNullOrEmpty())
+//                SessionManager.getInstance(apiModel.context).deviceBindingId =
+//                    UUID.randomUUID().toString()
             SessionManager.getInstance(apiModel.context).deviceBindingId?.let {
 //                Logger.getLogger("device binding id: ", it)
+                Log.v("deviceBindingId", it)
                 put(
                     BaaSConstants.BS_KEY_DEVICE_BINDING_ID,
                     it

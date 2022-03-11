@@ -17,9 +17,7 @@ import okio.IOException
 import java.io.File
 import javax.net.ssl.SSLException
 import okhttp3.RequestBody
-
-
-
+import java.util.concurrent.TimeUnit
 
 
 class ApiExecutor(val apiModel: ApiModel, val apiHandler: ApiHandler?) {
@@ -32,7 +30,8 @@ class ApiExecutor(val apiModel: ApiModel, val apiHandler: ApiHandler?) {
 
         if (Utils.isInternetAvailable(apiModel.context)) {
 
-            val client = OkHttpClient().newBuilder().certificatePinner(certPinner).build()
+            val client = OkHttpClient().newBuilder().certificatePinner(certPinner).
+            connectTimeout(120, TimeUnit.MILLISECONDS).build()
 
             val requestBody: RequestBody
             if (apiModel.getContentType() == ContentType.APPLICATION_JSON) {

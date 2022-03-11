@@ -22,12 +22,13 @@ object Utils {
     }
 
     fun decodeString(encoded: String): String {
-        val dataDec = Base64.decode(encoded, Base64.DEFAULT)
         var decodedString = ""
-        try {
-            decodedString = String(dataDec, charset("UTF-8"))
+        decodedString = try {
+            val dataDec = Base64.decode(encoded, Base64.DEFAULT)
+            String(dataDec, charset("UTF-8"))
         } catch (e: UnsupportedEncodingException) {
             e.printStackTrace()
+            ""
         } finally {
             return decodedString
         }

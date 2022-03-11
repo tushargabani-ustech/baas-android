@@ -9,7 +9,7 @@ import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import com.clevertap.android.sdk.CleverTapAPI
+//import com.clevertap.android.sdk.CleverTapAPI
 import com.payu.baas.core.BaaSSDK
 import com.payu.baas.core.enums.ApiName
 import com.payu.baas.core.interfaces.SdkCallback
@@ -31,14 +31,14 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
-    var cleverTapDefaultInstance: CleverTapAPI? = null
+//    private var cleverTapDefaultInstance: CleverTapAPI? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        cleverTapDefaultInstance = CleverTapAPI.getDefaultInstance(applicationContext)
+//        cleverTapDefaultInstance = CleverTapAPI.getDefaultInstance(applicationContext)
         Utils.identifyUsers()
-        CleverTapAPI.getDefaultInstance(applicationContext)?.onUserLogin(Utils.profileUpdate)
+//        CleverTapAPI.getDefaultInstance(applicationContext)?.onUserLogin(Utils.profileUpdate)
 //           java.util.logging.Logger.getLogger("test: ", BaasEncryption.decrypt(BaasEncryption.encrypt("TusharGabani@123")).toString())
     }
 
@@ -54,7 +54,6 @@ class MainActivity : AppCompatActivity() {
             mobile = binding.etMobile.text.toString().trim()
             code = binding.etOTP.text.toString().trim()
         }
-
         callAPI(ApiName.VERIFY_OTP, apiParams)
     }
 
@@ -69,22 +68,23 @@ class MainActivity : AppCompatActivity() {
 
     fun saveAddress(view: View) {
         val apiParams = ApiParams().apply {
-            panNumber = binding.etPancard.text.toString().trim()
+//            panNumber = binding.etPancard.text.toString().trim()
+            pan = binding.etPancard.text.toString().trim()
             employeeId = binding.etEmpId.text.toString().trim()
             mobile = binding.etMobile.text.toString().trim()
-            title = "Mr"
-            firstName = "Tushar"
-            lastName = "Gabani"
-            gender = "male"
-            dob = "1986-08-06"
-            email = "Tushar.Gabhan@ustechsolutions.com"
+            title = "Mrs"
+            firstName = "Manpreet"
+            lastName = "Kaur"
+            gender = "female"
+            dob = "1991-05-07"
+            email = "mann@gmail.com"
             country = "India"
             countryCode = "+91"
-            addressLine1 = "Royal square"
-            addressLine2 = "Utran"
-            city = "Surat"
-            pinCode = "394105"
-            state = "Gujarat"
+            addressLine1 = "C/O Amandeep Singh, Village Bangian"
+            addressLine2 = "Chamkaur Sahib"
+            city = "Morinda"
+            pinCode = "140101"
+            state = "Punjab"
         }
         callAPI(ApiName.SAVE_ADDRESS, apiParams)
     }
@@ -126,7 +126,7 @@ class MainActivity : AppCompatActivity() {
 
     fun updatePasscode(view: View) {
         val apiParams = ApiParams().apply {
-            oldPassword = binding.etPasscode.text.toString().trim()
+//            oldPassword = binding.etPasscode.text.toString().trim()
             newPassword = binding.etNewPasscode.text.toString().trim()
         }
         callAPI(ApiName.UPDATE_PASSWORD, apiParams)
@@ -145,6 +145,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun card_fulfilment(view: View) {
+        val apiParams = ApiParams()
+        callAPI(ApiName.CARD_FULFILMENT, apiParams)
+
+    }
+
+    fun cardReOrder(view: View) {
+        val apiParams = ApiParams()
+        callAPI(ApiName.CARD_REORDER, apiParams)
+
+    }
+
+    fun cardReorder(view: View) {
         val apiParams = ApiParams()
         callAPI(ApiName.CARD_FULFILMENT, apiParams)
 
@@ -277,10 +289,21 @@ class MainActivity : AppCompatActivity() {
 
 
         val apiParams = ApiParams().apply {
-            userBeneficiaryIds = beneficiaryIds
+            userBeneFiciaryIds = beneficiaryIds
         }
 
         callAPI(ApiName.DELETE_BENEFICIARY, apiParams)
+    }
+
+    fun undoDeletedBeneficiary(view: View) {
+        val beneficiaryIds = JSONArray()
+        beneficiaryIds.put(SessionManager.getInstance(applicationContext).beneficiaryId)
+
+        val apiParams = ApiParams().apply {
+            userBeneFiciaryIds = beneficiaryIds
+        }
+
+        callAPI(ApiName.UNDO_DELETED_BENEFICIARY, apiParams)
     }
 
     fun getSalaryAdvanceInfo(view: View) {
@@ -295,14 +318,22 @@ class MainActivity : AppCompatActivity() {
         callAPI(ApiName.GET_ACCOUNT_BALANCE_DETAILS, apiParams)
     }
 
-    fun getTransactionDetail(view: View) {
+    fun getTransactionList(view: View) {
         val apiParams = ApiParams().apply {
             accountType = "Saving" // will get from cardDetails api
             debitIndicator = "Debit"
             startDate = "2020-07-05"
             endDate = "2020-07-06"
+            page = 0
         }
-        callAPI(ApiName.GET_TRANSACTION_DETAILS, apiParams)
+        callAPI(ApiName.GET_TRANSACTION_LIST, apiParams)
+    }
+
+    fun getTransactionDetail(view: View) {
+        val apiParams = ApiParams().apply {
+            id = "txn_b4036e571e14406cbe73a1c3511cd9fe" // will get from transaction list api
+        }
+        callAPI(ApiName.GET_TRANSACTION_DETAIL, apiParams)
     }
 
     fun getAccountDetail(view: View) {
@@ -334,7 +365,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun updateUserAddress(view: View) {
-
         val apiParams = ApiParams().apply {
             addressLine1 = binding.etAddress1.text.toString().trim()
             addressLine2 = binding.etAddress2.text.toString().trim()
@@ -342,7 +372,6 @@ class MainActivity : AppCompatActivity() {
             pinCode = "394105"
             stateId = "Gujarat"
         }
-
         callAPI(ApiName.UPDATE_USER_ADDRESS, apiParams)
     }
 
@@ -354,7 +383,7 @@ class MainActivity : AppCompatActivity() {
 
     fun addKYCResults(view: View) {
         val karzaVerificationString =
-            com.payu.baas.core.storage.SessionManager.getInstance(this).karzaVerificationResponse
+            SessionManager.getInstance(this).karzaVerificationResponse
         if (!karzaVerificationString.isNullOrEmpty()) {
             val karzaVerificationResponse = JsonUtils.toObject(
                 karzaVerificationString,
@@ -455,9 +484,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun getApplicationId(view: View) {
-        val apiParams = ApiParams().apply {
-        }
+        val apiParams = ApiParams()
         callAPI(ApiName.GET_APPLICATION_ID, apiParams)
+    }
+
+    fun getKarzaKey(view: View) {
+        val apiParams = ApiParams()
+        callAPI(ApiName.KARZA_KEY, apiParams)
     }
 
     fun generateKarzaToken(view: View) {
@@ -498,6 +531,11 @@ class MainActivity : AppCompatActivity() {
                                   .error(R.drawable.ic_launcher_background)
                                   .into(binding.imageId)*/
                         }
+                        ApiName.KARZA_KEY -> {
+                            var key = SessionManager.getInstance(this@MainActivity).karzaKey
+                            key?.let { showDialog(it) }
+                        }
+
                         ApiName.ADD_BENEFICIARY -> {
                             var beneficiaryId =
                                 SessionManager.getInstance(
@@ -594,6 +632,50 @@ class MainActivity : AppCompatActivity() {
     fun getRatesCharges(view: View) {
         val apiParams = ApiParams()
         callAPI(ApiName.RATES_CHARGES, apiParams)
+    }
+
+    fun getS3BucketLink(view: View) {
+        val apiParams = ApiParams()
+        callAPI(ApiName.GET_S3_BUCKET_LINK, apiParams)
+    }
+
+    fun validateCardKit(view: View) {
+        val apiParams = ApiParams().apply {
+            isCardReceived = binding.scIsCardReceived.isChecked
+        }
+        callAPI(ApiName.VALIDATE_CARD_KIT, apiParams)
+    }
+
+    fun getValidateCardKitStatus(view: View) {
+        val apiParams = ApiParams().apply {}
+        callAPI(ApiName.GET_VALIDATE_CARD_KIT_STATUS, apiParams)
+    }
+
+    fun getOffers(view: View) {
+        val apiParams = ApiParams()
+        callAPI(ApiName.GET_OFFER, apiParams)
+    }
+
+    fun getNotifications(view: View) {
+        val apiParams = ApiParams()
+        callAPI(ApiName.GET_NOTIFICATIONS, apiParams)
+    }
+
+    fun getTips(view: View) {
+        val apiParams = ApiParams()
+        callAPI(ApiName.GET_TIPS, apiParams)
+    }
+
+    fun logout(view: View) {
+        val apiParams = ApiParams()
+        callAPI(ApiName.LOGOUT, apiParams)
+    }
+
+    fun getIFSCode(view: View) {
+        val apiParams = ApiParams().apply {
+            ifsc = "HDFC0004000"
+        }
+        callAPI(ApiName.IFSC_CODE, apiParams)
     }
 
 }
