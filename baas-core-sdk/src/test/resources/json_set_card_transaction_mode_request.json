@@ -1,0 +1,10 @@
+{
+  "transactionModes": [
+    {
+      "txn_mode": null,
+      "allow": true,
+      "channel": "ECOM",
+      "location": "DOM"
+    }
+  ]
+}

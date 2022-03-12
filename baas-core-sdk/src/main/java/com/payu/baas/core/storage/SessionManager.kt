@@ -2,6 +2,7 @@ package com.payu.baas.core.storage
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import com.payu.baas.core.util.BaaSConstants
 import com.payu.baas.core.util.BaaSConstants.PREFS_FILE_NAME
 import com.payu.baas.core.util.BaasEncryption

@@ -13,7 +13,6 @@ class GetBeneficiaryResponse : ApiResponse() {
     @SerializedName("code")
     var code: String? = null
 
-
     @SerializedName("size")
     var size: Int? = null
 

@@ -186,7 +186,7 @@ class MainActivity : AppCompatActivity() {
 
     fun card_setPin(view: View) {
         val apiParams = ApiParams().apply {
-            redirect_link = "http://www.google.com"
+            redirect_link = "https://localhost:8081"
         }
         callAPI(ApiName.CARD_SET_PIN, apiParams)
     }
@@ -286,7 +286,6 @@ class MainActivity : AppCompatActivity() {
     fun deleteBeneficiary(view: View) {
         val beneficiaryIds = JSONArray()
         beneficiaryIds.put(SessionManager.getInstance(applicationContext).beneficiaryId)
-
 
         val apiParams = ApiParams().apply {
             userBeneFiciaryIds = beneficiaryIds
@@ -579,7 +578,7 @@ class MainActivity : AppCompatActivity() {
                     } else if (apiResponse is KarzaNewCustomerResponse) {
                         val apiParams = ApiParams().apply {
                             transactionId =
-                                com.payu.baas.core.storage.SessionManager.getInstance(this@MainActivity).karzaTransactionId
+                                SessionManager.getInstance(this@MainActivity).karzaTransactionId
 
                         }
                         callAPI(ApiName.KARZA_GENERATE_CUSTOMER_TOKEN, apiParams)

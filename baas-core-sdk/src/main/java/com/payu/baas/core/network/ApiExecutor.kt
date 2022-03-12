@@ -30,8 +30,10 @@ class ApiExecutor(val apiModel: ApiModel, val apiHandler: ApiHandler?) {
 
         if (Utils.isInternetAvailable(apiModel.context)) {
 
-            val client = OkHttpClient().newBuilder().certificatePinner(certPinner).
-            connectTimeout(120, TimeUnit.MILLISECONDS).build()
+            val client = OkHttpClient().newBuilder().certificatePinner(certPinner)
+                .connectTimeout(120000, TimeUnit.MILLISECONDS)
+                .readTimeout(120000, TimeUnit.MILLISECONDS)
+                .writeTimeout(120000, TimeUnit.MILLISECONDS).build()
 
             val requestBody: RequestBody
             if (apiModel.getContentType() == ContentType.APPLICATION_JSON) {

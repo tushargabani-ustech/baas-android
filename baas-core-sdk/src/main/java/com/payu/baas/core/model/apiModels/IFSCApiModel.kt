@@ -9,6 +9,7 @@ import com.payu.baas.core.interfaces.SdkCallback
 import com.payu.baas.core.model.responseModels.ApiResponse
 import com.payu.baas.core.model.responseModels.VerifyIFSCResponse
 import com.payu.baas.core.network.NetworkHeader
+import com.payu.baas.core.storage.SessionManager
 
 
 class IFSCApiModel (
@@ -24,7 +25,7 @@ class IFSCApiModel (
     override fun getTokenType(): TokenType = TokenType.KARZA_TOKEN
     override fun getAdditionalHeader(): NetworkHeader {
         return NetworkHeader().apply {
-            put("x-karza-key", "7vf6CVNNZSX70oP3")
+            SessionManager.getInstance(context).karzaKey?.let { put("x-karza-key", it) }
         }
     }
 
