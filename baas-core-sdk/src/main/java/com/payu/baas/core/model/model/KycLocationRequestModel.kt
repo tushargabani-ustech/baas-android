@@ -9,4 +9,6 @@ class KycLocationRequestModel {
     var longitude: String? = null
     @SerializedName("ipAddress")
     var ipAddress: String? = null
+    var state: String? = null
+    var countrys: String? = null
 }

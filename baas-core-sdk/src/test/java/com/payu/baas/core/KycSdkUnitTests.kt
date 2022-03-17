@@ -1,42 +1,31 @@
 package com.payu.baas.core
 
-import android.telephony.PhoneNumberUtils
-import android.view.View
-import android.widget.EditText
-import com.karza.okycmaster.MainActivity
-import com.payu.baas.core.model.apiModels.GetAccountBalanceApiModel
-import com.payu.baas.core.model.model.*
-import com.payu.baas.core.model.responseModels.ApiResponse
-import com.payu.baas.core.model.responseModels.SaveAddressResponse
-import com.payu.baas.core.model.responseModels.VerifyOtpResponse
-import com.payu.baas.core.util.BaaSConstants
-import com.payu.baas.core.util.JsonUtils
+import androidx.core.content.ContextCompat
+import androidx.test.platform.app.InstrumentationRegistry
 import junit.framework.TestCase
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import java.io.IOException
-import java.lang.Exception
 import okhttp3.mockwebserver.RecordedRequest
 import org.robolectric.annotation.Config
-import retrofit2.Call
 import java.util.concurrent.TimeUnit
 
 @Config(manifest= Config.NONE)
 @RunWith(RobolectricTestRunner::class)
 class KycSdkUnitTests {
-    private var activity: MainActivity? = null
+//    private var activity: MainActivity? = null
+    var context = InstrumentationRegistry.getInstrumentation().targetContext
     var mockApiCaller: MockApiCallManger? = null
 
     @Before
     fun setUp() {
-        activity = Robolectric.buildActivity(MainActivity::class.java)
-            .create()
-            .resume()
-            .get()
+//        activity = Robolectric.buildActivity(MainActivity::class.java)
+//            .create()
+//            .resume()
+//            .get()
         mockApiCaller = MockApiCallManger()
         mockApiCaller!!.initialize()
     }
@@ -50,7 +39,7 @@ class KycSdkUnitTests {
     @Throws(IOException::class)
     fun testForKycSelfiApi() {
         TestCase.assertNotNull(
-            mockApiCaller!!.callForKycSelfieApi(activity!!.applicationContext.getDrawable(R.mipmap.ic_launcher)!!).execute()
+            mockApiCaller!!.callForKycSelfieApi(ContextCompat.getDrawable(context,R.mipmap.advance)!!).execute()
                 .body()!!
         )
         // test for correct request passed
@@ -65,6 +54,7 @@ class KycSdkUnitTests {
             mockApiCaller!!.callForKycAadharApi().execute()
                 .body()!!
         )
+
         // test for correct request passed
         val recordedRequest: RecordedRequest? =
             mockApiCaller!!.mockWebServer.takeRequest(1, TimeUnit.SECONDS)
