@@ -146,6 +146,11 @@ class ApiModelFactory(
                 requestMap,
                 sdkCallback
             )
+            ApiName.GET_ONBOARD_STATUS -> GetOnBoardStatusApiModel(
+                context,
+                requestMap,
+                sdkCallback
+            )
             ApiName.KARZA_TOKEN -> KarzaSessionApiModel(
                 context,
                 requestMap,
@@ -222,6 +227,11 @@ class ApiModelFactory(
                 sdkCallback
             )
             ApiName.IFSC_CODE -> IFSCApiModel(
+                context,
+                requestMap,
+                sdkCallback
+            )
+            ApiName.ZENDESK_CREDENTIALS -> GetZendeskCredentialsApiModel(
                 context,
                 requestMap,
                 sdkCallback

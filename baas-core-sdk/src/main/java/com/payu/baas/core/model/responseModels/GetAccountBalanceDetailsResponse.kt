@@ -12,13 +12,13 @@ import com.google.gson.annotations.SerializedName
     @SerializedName("code")
     var code: String? = null
     @SerializedName("prepaidBalance")
-    var prepaidBalance: Double? = null
+    var prepaidBalance: String? = null
 
     @SerializedName("advanceBalance")
-    var advanceBalance: Double? = null
+    var advanceBalance: String? = null
 
     @SerializedName("totalAvailableBalance")
-    var totalAvailableBalance: Double? = null
+    var totalAvailableBalance: String? = null
 
     @SerializedName("error")
     var error: String? = null

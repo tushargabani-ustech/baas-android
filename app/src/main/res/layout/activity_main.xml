@@ -137,11 +137,16 @@
                 android:layout_height="wrap_content"
                 android:onClick="verifyEmployee"
                 android:text="Verify Employee(Details)" />
-
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="getOnBoardStatus"
+                android:text="Get Onboard Status" />
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="saveAddress"
+                android:visibility="gone"
                 android:text="Save Address(Details) And Onboard user" />
             <Button
                 android:layout_width="wrap_content"
@@ -182,6 +187,18 @@
                 android:layout_height="wrap_content"
                 android:onClick="login"
                 android:text="Login" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@android:color/darker_gray" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="getZendeskCredentials"
+                android:text="Get Zendesk Credentials" />
 
             <View
                 android:layout_width="match_parent"
@@ -844,6 +861,12 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:background="@android:color/darker_gray" />
+
+            <EditText
+                android:id="@+id/etIFSCCode"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:hint="IFSC Code" />
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

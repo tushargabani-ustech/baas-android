@@ -9,17 +9,20 @@ class CardDetailResponse : ApiResponse() {
     @SerializedName("systemMessage")
     var systemMessage: String? = null
 
-    @SerializedName("code")
     var code: String? = null
-    @SerializedName("status")
-    var status: String? = null
+
+    var status: String? = "INACTIVE"
 
     @SerializedName("lastFourDigits")
     var lastFourDigits: String? = null
 
     @SerializedName("allowAtmTransaction")
-    var allowAtmTransaction: Boolean? = null
+    var allowAtmTransaction: Boolean? = false
 
     @SerializedName("allowPOSTransaction")
-    var allowPOSTransaction: Boolean? = null
+    var allowCardSwipe: Boolean? = false
+
+    @SerializedName("allowECOMTransaction")
+    var allowOnlineTransaction: Boolean? = false
+    var cardReceived: Boolean? = false
 }

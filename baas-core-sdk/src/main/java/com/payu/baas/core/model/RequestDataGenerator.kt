@@ -11,6 +11,7 @@ class RequestDataGenerator(val apiDetails: ApiDetails) {
             ApiName.GET_CLIENT_TOKEN -> validateGetAccessTokenData()
             ApiName.SEND_OTP -> validateSendOtp()
             ApiName.VERIFY_OTP -> validateVerifyOtp()
+            ApiName.GET_ONBOARD_STATUS -> validateOnBoardUserStatus()
             ApiName.SAVE_ADDRESS -> validateSaveAddress()
             ApiName.GET_ADDRESS -> validateGetAddress()
             ApiName.VERIFY_EMPLOYEE -> validateVerifyEmployee()
@@ -71,6 +72,7 @@ class RequestDataGenerator(val apiDetails: ApiDetails) {
             ApiName.GET_TIPS -> validateTips()
             ApiName.LOGOUT -> validateLogout()
             ApiName.IFSC_CODE -> validateIfsCode()
+            ApiName.ZENDESK_CREDENTIALS -> validateZendeskCredentials()
 
             else -> RequestData(null, false, INVALID_DATA)
         }
@@ -367,7 +369,90 @@ class RequestDataGenerator(val apiDetails: ApiDetails) {
             }
         }
     }
-
+    private fun validateOnBoardUserStatus(): RequestData {
+        return when {
+            apiDetails.apiParams.mobile.isNullOrEmpty() -> sendErrorResponse(
+                BaaSConstants.MOBILE_EMPTY_ERROR_MESSAGE,
+                BaaSConstants.MOBILE_EMPTY_ERROR_CODE
+            )
+//            apiDetails.apiParams.pan.isNullOrEmpty() -> sendErrorResponse(
+//                BaaSConstants.PAN_NUMBER_EMPTY_ERROR_MESSAGE,
+//                BaaSConstants.PAN_NUMBER_EMPTY_ERROR_CODE
+//            )
+//            apiDetails.apiParams.title.isNullOrEmpty() -> sendErrorResponse(
+//                BaaSConstants.TITLE_EMPTY_ERROR_MESSAGE,
+//                BaaSConstants.TITLE_EMPTY_ERROR_CODE
+//            )
+//            apiDetails.apiParams.firstName.isNullOrEmpty() -> sendErrorResponse(
+//                BaaSConstants.FIRST_NAME_EMPTY_ERROR_MESSAGE,
+//                BaaSConstants.FIRST_NAME_EMPTY_ERROR_CODE
+//            )
+//            apiDetails.apiParams.lastName.isNullOrEmpty() -> sendErrorResponse(
+//                BaaSConstants.LAST_NAME_EMPTY_ERROR_MESSAGE,
+//                BaaSConstants.LAST_NAME_EMPTY_ERROR_CODE
+//            )
+//            apiDetails.apiParams.gender.isNullOrEmpty() -> sendErrorResponse(
+//                BaaSConstants.GENDER_EMPTY_ERROR_MESSAGE,
+//                BaaSConstants.GENDER_EMPTY_ERROR_CODE
+//            )
+//            apiDetails.apiParams.dob.isNullOrEmpty() -> sendErrorResponse(
+//                BaaSConstants.DOB_EMPTY_ERROR_MESSAGE,
+//                BaaSConstants.DOB_EMPTY_ERROR_CODE
+//            )
+//            apiDetails.apiParams.country.isNullOrEmpty() -> sendErrorResponse(
+//                BaaSConstants.COUNTRY_EMPTY_ERROR_MESSAGE,
+//                BaaSConstants.COUNTRY_EMPTY_ERROR_CODE
+//            )
+//            apiDetails.apiParams.countryCode.isNullOrEmpty() -> sendErrorResponse(
+//                BaaSConstants.COUNTRY_CODE_EMPTY_ERROR_MESSAGE,
+//                BaaSConstants.COUNTRY_CODE_EMPTY_ERROR_CODE
+//            )
+//            apiDetails.apiParams.addressLine1.isNullOrEmpty() -> sendErrorResponse(
+//                BaaSConstants.ADDRESS_1_EMPTY_ERROR_MESSAGE,
+//                BaaSConstants.ADDRESS_1_CODE_EMPTY_ERROR_CODE
+//            )
+//            apiDetails.apiParams.addressLine2.isNullOrEmpty() -> sendErrorResponse(
+//                BaaSConstants.ADDRESS_2_EMPTY_ERROR_MESSAGE,
+//                BaaSConstants.ADDRESS_2_CODE_EMPTY_ERROR_CODE
+//            )
+//            apiDetails.apiParams.city.isNullOrEmpty() -> sendErrorResponse(
+//                BaaSConstants.CITY_EMPTY_ERROR_MESSAGE,
+//                BaaSConstants.CITY_EMPTY_ERROR_CODE
+//            )
+//            apiDetails.apiParams.pinCode.isNullOrEmpty() -> sendErrorResponse(
+//                BaaSConstants.PIN_CODE_EMPTY_ERROR_MESSAGE,
+//                BaaSConstants.PIN_CODE_EMPTY_ERROR_CODE
+//            )
+//            apiDetails.apiParams.state.isNullOrEmpty() -> sendErrorResponse(
+//                BaaSConstants.STATE_EMPTY_ERROR_MESSAGE,
+//                BaaSConstants.STATE_EMPTY_ERROR_CODE
+//            )
+//            apiDetails.apiParams.employeeId.isNullOrEmpty() -> sendErrorResponse(
+//                BaaSConstants.EMPLOYEE_ID_EMPTY_ERROR_MESSAGE,
+//                BaaSConstants.EMPLOYEE_ID_EMPTY_ERROR_CODE
+//            )
+            else -> {
+                val resultMap = HashMap<String, Any>()
+                resultMap[BaaSConstants.BS_KEY_MOBILE] = apiDetails.apiParams.mobile!!
+//                resultMap[BaaSConstants.BS_KEY_PAN] = apiDetails.apiParams.pan!!
+//                resultMap[BaaSConstants.BS_KEY_TITLE] = apiDetails.apiParams.title!!
+//                resultMap[BaaSConstants.BS_KEY_FIRST_NAME] = apiDetails.apiParams.firstName!!
+//                resultMap[BaaSConstants.BS_KEY_LAST_NAME] = apiDetails.apiParams.lastName!!
+//                resultMap[BaaSConstants.BS_KEY_GENDER] = apiDetails.apiParams.gender!!
+//                resultMap[BaaSConstants.BS_KEY_DOB] = apiDetails.apiParams.dob!!
+//                resultMap[BaaSConstants.BS_KEY_EMAIL] = apiDetails.apiParams.email!!
+//                resultMap[BaaSConstants.BS_KEY_COUNTRY] = apiDetails.apiParams.country!!
+//                resultMap[BaaSConstants.BS_KEY_COUNTRY_CODE] = apiDetails.apiParams.countryCode!!
+//                resultMap[BaaSConstants.BS_KEY_ADDRESS_LINE_1] = apiDetails.apiParams.addressLine1!!
+//                resultMap[BaaSConstants.BS_KEY_ADDRESS_LINE_2] = apiDetails.apiParams.addressLine2!!
+//                resultMap[BaaSConstants.BS_KEY_CITY] = apiDetails.apiParams.city!!
+//                resultMap[BaaSConstants.BS_KEY_PIN_CODE] = apiDetails.apiParams.pinCode!!
+//                resultMap[BaaSConstants.BS_KEY_STATE] = apiDetails.apiParams.state!!
+//                resultMap[BaaSConstants.BS_KEY_EMPLOYEE_ID] = apiDetails.apiParams.employeeId!!
+                RequestData(resultMap, true)
+            }
+        }
+    }
     private fun validateVerifyEmployee(): RequestData {
         return when {
             apiDetails.apiParams.mobile.isNullOrEmpty() -> sendErrorResponse(
@@ -547,7 +632,7 @@ class RequestDataGenerator(val apiDetails: ApiDetails) {
                 BaaSConstants.REMARKS_EMPTY_ERROR_MESSAGE,
                 BaaSConstants.REMARKS_EMPTY_ERROR_CODE
             )*/
-            apiDetails.apiParams.amount == 0 -> sendErrorResponse(
+            apiDetails.apiParams.amount == 0.0 -> sendErrorResponse(
                 BaaSConstants.AMOUNT_EMPTY_ERROR_MESSAGE,
                 BaaSConstants.AMOUNT_EMPTY_ERROR_CODE
             )
@@ -913,5 +998,9 @@ class RequestDataGenerator(val apiDetails: ApiDetails) {
 
     private fun sendErrorResponse(errorMessage: String, errorCode: Int): RequestData {
         return RequestData(null, false, errorMessage, errorCode)
+    }
+    private fun validateZendeskCredentials(): RequestData {
+        val resultMap = HashMap<String, Any>()
+        return RequestData(resultMap, true)
     }
 }

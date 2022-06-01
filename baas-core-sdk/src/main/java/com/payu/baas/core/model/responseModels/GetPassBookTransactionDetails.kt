@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 class GetPassBookTransactionDetails {
     @SerializedName("amount")
-    var amount: String? = 0.0.toString()
+    var amount: String? = null
 
     @SerializedName("status")
     var status: String? = null
@@ -26,4 +26,13 @@ class GetPassBookTransactionDetails {
 
     @SerializedName("description")
     var label: String? = null
+
+    @SerializedName("displayDate")
+    var displayDate: String? = null
+
+    @SerializedName("accountTypeIcon")
+    var accountTypeIcon: String? = null
+
+    @SerializedName("transactionTypeIcon")
+    var transactionTypeIcon: String? = null
 }

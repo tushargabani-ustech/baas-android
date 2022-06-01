@@ -5,13 +5,13 @@ import com.payu.baas.core.model.responseModels.ApiResponse
 
 
 class LimitConfig: ApiResponse()  {
-    @SerializedName("channel")
-    var channel: String? = null
+    @SerializedName("posChannel")
+    var swipeChannel: CardLimitsChannel? = null
 
-    @SerializedName("perTransaction")
-    var perTransaction: Long? = null
+    @SerializedName("atmChannel")
+    var atmChannel: CardLimitsChannel? = null
 
-    @SerializedName("daily")
-    var daily: Long? = null
+    @SerializedName("ecomChannel")
+    var ecomChannel: CardLimitsChannel? = null
 
 }

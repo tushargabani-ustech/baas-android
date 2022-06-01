@@ -9,7 +9,6 @@ import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-//import com.clevertap.android.sdk.CleverTapAPI
 import com.payu.baas.core.BaaSSDK
 import com.payu.baas.core.enums.ApiName
 import com.payu.baas.core.interfaces.SdkCallback
@@ -25,21 +24,14 @@ import com.payu.baas.core.view.KarzaActivity
 import com.payu.baasSampleApp.databinding.ActivityMainBinding
 import org.json.JSONArray
 import org.json.JSONObject
-import java.io.*
-import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
-//    private var cleverTapDefaultInstance: CleverTapAPI? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-//        cleverTapDefaultInstance = CleverTapAPI.getDefaultInstance(applicationContext)
-        Utils.identifyUsers()
-//        CleverTapAPI.getDefaultInstance(applicationContext)?.onUserLogin(Utils.profileUpdate)
-//           java.util.logging.Logger.getLogger("test: ", BaasEncryption.decrypt(BaasEncryption.encrypt("TusharGabani@123")).toString())
     }
 
     fun sendOTP(view: View) {
@@ -89,6 +81,27 @@ class MainActivity : AppCompatActivity() {
         callAPI(ApiName.SAVE_ADDRESS, apiParams)
     }
 
+    fun getOnBoardStatus(view: View) {
+        val apiParams = ApiParams().apply {
+            mobile = binding.etMobile.text.toString().trim()
+//            pan = binding.etPancard.text.toString().trim()
+//            employeeId = binding.etEmpId.text.toString().trim()
+//            title = "Mrs"
+//            firstName = "Manpreet"
+//            lastName = "Kaur"
+//            gender = "female"
+//            dob = "1991-05-07"
+//            email = "mann@gmail.com"
+//            country = "India"
+//            countryCode = "+91"
+//            addressLine1 = "C/O Amandeep Singh, Village Bangian"
+//            addressLine2 = "Chamkaur Sahib"
+//            city = "Morinda"
+//            pinCode = "140101"
+//            state = "Punjab"
+        }
+        callAPI(ApiName.GET_ONBOARD_STATUS, apiParams)
+    }
 
     fun setPasscode(view: View) {
         val apiParams = ApiParams().apply {
@@ -105,6 +118,13 @@ class MainActivity : AppCompatActivity() {
             password = binding.etPasscode.text.toString().trim()
         }
         callAPI(ApiName.LOGIN, apiParams)
+
+    }
+    fun getZendeskCredentials(view: View) {
+
+        val apiParams = ApiParams().apply {
+        }
+        callAPI(ApiName.ZENDESK_CREDENTIALS, apiParams)
 
     }
 
@@ -266,7 +286,7 @@ class MainActivity : AppCompatActivity() {
     fun doBeneficiaryBankTransfer(view: View) {
         val apiParams = ApiParams().apply {
             remarks = "Bank Transfer to my savings account"
-            amount = 10
+            amount = 10.0
             beneficiaryId =
                 SessionManager.getInstance(applicationContext).beneficiaryId
         }
@@ -671,10 +691,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun getIFSCode(view: View) {
-        val apiParams = ApiParams().apply {
-            ifsc = "HDFC0004000"
+
+        binding.etIFSCCode.text?.toString()?.let {
+            if (it.trim().isNotEmpty()) {
+                val apiParams = ApiParams().apply {
+                    ifsc = it.trim()
+                }
+                callAPI(ApiName.IFSC_CODE, apiParams)
+            }
         }
-        callAPI(ApiName.IFSC_CODE, apiParams)
     }
 
 }

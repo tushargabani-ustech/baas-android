@@ -73,7 +73,5 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
-    //    implementation 'in.payu:payu-crash-logger:[1.0.4,1.1.0]'
-//    implementation 'com.clevertap.android:clevertap-android-sdk:4.3.0'
-    implementation 'com.karza.okyc:ocycsdk:1.4.8'
+    implementation 'com.karza.okyc:ocycsdk:1.4.11'
 }

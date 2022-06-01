@@ -1,16 +1,19 @@
 {
-  "limitConfigs": [
+  "transactionLimits": [
+    {
+      "channel": "ATM",
+      "perTransaction": 500000,
+      "daily": 1500000
+    },
     {
       "channel": "POS",
-      "location": "DOM",
-      "thresholds": [
-        {
-          "amount_limit": 5000,
-          "target_duration": "DAY",
-          "usage_limit": 10
-        }
-      ],
-      "txn_mode": "CONTACTLESS"
+      "perTransaction": 500000,
+      "daily": 1500000
+    },
+    {
+      "channel": "ECOM",
+      "perTransaction": 500000,
+      "daily": 1500000
     }
   ]
 }

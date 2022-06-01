@@ -32,8 +32,8 @@ interface MockService {
     @POST("user/pan-validate")
     fun getValidatePanData(@Body verification: ValidatePanRequestModel): Call<PanValidateResponse>
 
-    @POST("passcode?newPasscode=1111&oldPasscode=8989")
-    fun getSetPasscodeData(): Call<SetPasswordResponse>
+    @POST("user/passcode")
+    fun getSetPasscodeData(@Body requestModel: SetPasscodeRequestModel): Call<SetPasswordResponse>
 
     @POST("login")
     fun getLoginData(@Body requestModel: LoginRequestModel): Call<LoginResponse>
@@ -42,7 +42,7 @@ interface MockService {
     @GET("account/balance")
     fun getAccountBalanceData(): Call<GetAccountBalanceDetailsResponse>
 
-    @GET("ransactions?startDate=2020-05-06&endDate=2020-07-06&accountType=saving&debitIndicator=Debit")
+    @GET("transactions?startDate=2020-05-06&endDate=2020-07-06&accountType=saving&debitIndicator=Debit")
     fun getTransactionDetailsData(): Call<GetTransactionDetailsResponse>
 
     @GET("account/details")
@@ -59,6 +59,18 @@ interface MockService {
 
     @PUT("user/details")
     fun getUpdateUserAddressData(@Body requestModel: UpdateUserAddressRequestModel): Call<UpdateUserDetailsResponse>
+
+    @PUT("user/passcode")
+    fun changePasscode(@Body requestModel:SetPasscodeRequestModel ): Call<SetPasswordResponse>
+
+    @PUT("user/passcode/reset")
+    fun resetPasscodeData(@Body requestModel:ResetPasscodeRequestModel ): Call<SetPasswordResponse>
+
+    @GET("user/state")
+    fun getUserStateData(@Body requestModel:GetUserStateModel ): Call<GetUserStateResponse>
+
+    @GET("user/address")
+    fun getUserAddressData(): Call<GetAddressResponse>
 
     //Benificiary Apis
     @GET("transaction/charges")
@@ -83,7 +95,7 @@ interface MockService {
     fun getDeleteUserBenificiaryData(): Call<DeleteBeneficiaryResponse>
 
     // salary advance info
-    @GET("user/salaryAdvanceinfo")
+    @GET("user/salaryAdvance")
     fun getSalaryAdvanceinfoData(): Call<GetSalaryAdvanceInfoResponse>
 
     //KYC SDK
@@ -97,25 +109,25 @@ interface MockService {
     fun getKycLocationData(@Body requestModel: KycLocationRequestModel): Call<KYCLocationResponse>
 
     // Card apis
-    @GET("card/image")
+    @GET("card/image-url")
     fun getCardImageData(): Call<CardImageResponse>
 
-    @GET("card")
+    @GET("card/details")
     fun getCardDetailsData(): Call<CardDetailResponse>
 
     @GET("card/fulfillment")
     fun getCardFulfillmentData(): Call<CardFulfilmentResponse>
 
-    @POST("card/transaction-modes")
+    @POST("card/transaction/modes")
     fun setCardTransactionModeData(@Body requestModel: GetTransactionModeResponse): Call<SetTransactionModeResponse>
 
-    @GET("transaction/modes")
+    @GET("card/transaction/modes")
     fun getCardTransactionModeData(): Call<GetTransactionModeResponse>
 
-    @POST("card/limits")
+    @POST("card/channel/limits")
     fun setCardLimitsData(@Body requestModel: GetLimitsResponse): Call<SetLimitResponse>
 
-    @GET("card/limits")
+    @GET("card/channel/limits")
     fun getCardLimitsData(): Call<GetLimitsResponse>
 
     @PUT("card/block")
@@ -124,12 +136,21 @@ interface MockService {
     @PUT("card/unblock")
     fun setUnBlockCardData(): Call<UnblockCardResponse>
 
-    @PUT("card/set-pin")
+    @PUT("card/pin/url")
     fun setCardPinData(@Body requestModel: SetPinRequestModel): Call<CardSetPinResponse>
 
-    @PUT("card/update-pin?pin_status=true")
+    @PUT("card/pin?pin_status=true")
     fun updateCardPinStatusData(): Call<UpdateCardPinSetStatusResponse>
 
-    @PUT("card/get-pin-status")
+    @GET("card/pin/status")
     fun getCardPinData(): Call<GetCardPinStatusResponse>
+
+    @PUT("card/reorder")
+    fun cardReOrder(): Call<CardReorderResponse>
+
+    @PUT("card/validate-kit")
+    fun validateCardKit(@Body requestModel: ValidateCardKitModel): Call<ValidateCardKitResponse>
+
+    @PUT("card/status")
+    fun getValidateCardKitStatus(): Call<GetValidateCardKitStatusResponse>
 }

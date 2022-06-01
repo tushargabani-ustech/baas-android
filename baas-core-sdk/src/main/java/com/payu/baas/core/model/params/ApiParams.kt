@@ -52,7 +52,7 @@ open class ApiParams {
     var paymentType: String? = null
     var remarks: String? = null
     var accountId: String? = null
-    var amount: Int? = null
+    var amount: Double? = null
     var creditorDetails: Any? = null
     var name: String? = null
     var latitude: String? = null

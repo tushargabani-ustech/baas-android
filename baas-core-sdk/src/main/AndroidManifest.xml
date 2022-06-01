@@ -18,17 +18,17 @@
         android:networkSecurityConfig="@xml/network_security_config">
         <activity
             android:name="com.payu.baas.core.view.KarzaActivity"
-            android:exported="true" />
+             />
 
-        <meta-data
-            android:name="@string/clevertap_account_id"
-            android:value="@string/clevertap_account_id_value" />
-        <meta-data
-            android:name="@string/clevertap_account_token"
-            android:value="@string/clevertap_account_token_value" /> <!-- IMPORTANT: To force use Google AD ID to uniquely identify  users, use the following meta tag. GDPR mandates that if you are using this tag, there is prominent disclousure to your end customer in their application. Read more about GDPR here - https://clevertap.com/blog/in-preparation-of-gdpr-compliance/ -->
-        <meta-data
-            android:name="@string/clevertap_google_ad_id"
-            android:value="@string/clevertap_google_ad_id_value" />
+<!--        <meta-data-->
+<!--            android:name="@string/clevertap_account_id"-->
+<!--            android:value="@string/clevertap_account_id_value" />-->
+<!--        <meta-data-->
+<!--            android:name="@string/clevertap_account_token"-->
+<!--            android:value="@string/clevertap_account_token_value" /> &lt;!&ndash; IMPORTANT: To force use Google AD ID to uniquely identify  users, use the following meta tag. GDPR mandates that if you are using this tag, there is prominent disclousure to your end customer in their application. Read more about GDPR here - https://clevertap.com/blog/in-preparation-of-gdpr-compliance/ &ndash;&gt;-->
+<!--        <meta-data-->
+<!--            android:name="@string/clevertap_google_ad_id"-->
+<!--            android:value="@string/clevertap_google_ad_id_value" />-->
 
     </application>
 </manifest>

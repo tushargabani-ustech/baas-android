@@ -1,12 +1,10 @@
 package com.payu.baas.core.network
 
-import android.util.Log
 import com.payu.baas.core.enums.ContentType
 import com.payu.baas.core.enums.TokenType
 import com.payu.baas.core.model.apiModels.ApiModel
 import com.payu.baas.core.storage.SessionManager
 import com.payu.baas.core.util.BaaSConstants
-import java.util.*
 
 class NetworkHeaderFactory(val apiModel: ApiModel) {
     fun getHeader(): NetworkHeader {
@@ -66,7 +64,6 @@ class NetworkHeaderFactory(val apiModel: ApiModel) {
 //                    UUID.randomUUID().toString()
             SessionManager.getInstance(apiModel.context).deviceBindingId?.let {
 //                Logger.getLogger("device binding id: ", it)
-                Log.v("deviceBindingId", it)
                 put(
                     BaaSConstants.BS_KEY_DEVICE_BINDING_ID,
                     it

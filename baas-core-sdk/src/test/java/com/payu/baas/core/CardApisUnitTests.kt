@@ -21,7 +21,7 @@ import org.robolectric.annotation.Config
 import retrofit2.Response
 import java.util.concurrent.TimeUnit
 
-@Config(manifest= Config.NONE)
+@Config(manifest = Config.NONE)
 @RunWith(RobolectricTestRunner::class)
 class CardApisUnitTests {
     var mockApiCaller: MockApiCallManger? = null
@@ -49,10 +49,12 @@ class CardApisUnitTests {
             mockApiCaller!!.mockWebServer.takeRequest(1, TimeUnit.SECONDS)
         TestCase.assertEquals("GET", recordedRequest!!.method)
     }
+
     @Test
     @Throws(IOException::class)
     fun testForGetCardDetailsDataApi() {
-        TestCase.assertEquals("ACTIVE",
+        TestCase.assertEquals(
+            "ACTIVE",
             mockApiCaller!!.callForGetCardDetailsDataApi().execute()
                 .body()!!.status
         )
@@ -61,21 +63,25 @@ class CardApisUnitTests {
             mockApiCaller!!.mockWebServer.takeRequest(1, TimeUnit.SECONDS)
         TestCase.assertEquals("GET", recordedRequest!!.method)
     }
+
     @Test
     @Throws(IOException::class)
     fun testForGetCardTransactionModeDataApi() {
         // will return true as allow field is false at position 0
-        TestCase.assertEquals(false,
+        TestCase.assertEquals(
+            false,
             mockApiCaller!!.callForGetCardTransactionModeDataApi().execute()
                 .body()!!.transactionModes!!.get(0).allow
         )
         // will return false(failure) as allow field is false at position 0
-        TestCase.assertEquals("CONTACTLESS",
+        TestCase.assertEquals(
+            "CONTACTLESS",
             mockApiCaller!!.callForGetCardTransactionModeDataApi().execute()
                 .body()!!.transactionModes!!.get(0).allow
         )
         // will return true
-        TestCase.assertEquals("ECOM",
+        TestCase.assertEquals(
+            "ECOM",
             mockApiCaller!!.callForGetCardTransactionModeDataApi().execute()
                 .body()!!.transactionModes!!.get(0).channel
         )
@@ -84,24 +90,29 @@ class CardApisUnitTests {
             mockApiCaller!!.mockWebServer.takeRequest(1, TimeUnit.SECONDS)
         TestCase.assertEquals("GET", recordedRequest!!.method)
     }
+
     @Test
     @Throws(IOException::class)
     fun testForSetCardTransactionModeDataApi() {
-        TestCase.assertEquals("Limit-Block config set successful",
+        TestCase.assertEquals(
+            "Limit-Block config set successful",
             mockApiCaller!!.callForSetCardTransactionModeDataApi().execute()
                 .body()!!.message
         )
     }
+
     @Test
     @Throws(IOException::class)
     fun testForSetBlockCardDataApi() {
         //returns true
-        TestCase.assertEquals("ACTIVE",
+        TestCase.assertEquals(
+            "ACTIVE",
             mockApiCaller!!.callForSetBlockCardDataApi().execute()
                 .body()!!.status
         )
         //returns false
-        TestCase.assertEquals("INACTIVE",
+        TestCase.assertEquals(
+            "INACTIVE",
             mockApiCaller!!.callForSetBlockCardDataApi().execute()
                 .body()!!.status
         )
@@ -114,10 +125,12 @@ class CardApisUnitTests {
         TestCase.assertEquals("POST", recordedRequest!!.method)
 
     }
+
     @Test
     @Throws(IOException::class)
     fun testForSetUnBlockCardDataApi() {
-        TestCase.assertEquals("INACTIVE",
+        TestCase.assertEquals(
+            "INACTIVE",
             mockApiCaller!!.callForSetUnBlockCardDataApi().execute()
                 .body()!!.status
         )
@@ -126,15 +139,17 @@ class CardApisUnitTests {
             mockApiCaller!!.mockWebServer.takeRequest(1, TimeUnit.SECONDS)
         TestCase.assertEquals("PUT", recordedRequest!!.method)
     }
+
     @Test
     @Throws(IOException::class)
     fun testForSetPinDataApi() {
-        var call : Response<CardSetPinResponse> = mockApiCaller!!.callForSetPinDataApi().execute()
+        var call: Response<CardSetPinResponse> = mockApiCaller!!.callForSetPinDataApi().execute()
         TestCase.assertNotNull(
             call.body()!!.redirectUrl
         )
         //if  url not null then check is correct url retreived
-        TestCase.assertEquals("https://secure.uat.happay.in/pinset/cpin_77b63715dcfc4b949e3a902a9d133276",
+        TestCase.assertEquals(
+            "https://secure.uat.happay.in/pinset/cpin_77b63715dcfc4b949e3a902a9d133276",
             call.body()!!.redirectUrl
         )
 
@@ -147,12 +162,14 @@ class CardApisUnitTests {
     @Test
     @Throws(IOException::class)
     fun testForSetCardLimitApi() {
-        var call : Response<SetLimitResponse> = mockApiCaller!!.callForSetCardLimitDataApi().execute()
+        var call: Response<SetLimitResponse> =
+            mockApiCaller!!.callForSetCardLimitDataApi().execute()
         TestCase.assertNotNull(
             call.body()!!.message
         )
         //if  message not null then check is success message retreived
-        TestCase.assertEquals("Limit-Block config set successful",
+        TestCase.assertEquals(
+            "Limit-Block config set successful",
             call.body()!!.message
         )
 
@@ -161,16 +178,19 @@ class CardApisUnitTests {
             mockApiCaller!!.mockWebServer.takeRequest(1, TimeUnit.SECONDS)
         TestCase.assertEquals("POST", recordedRequest!!.method)
     }
+
     @Test
     @Throws(IOException::class)
     fun testForGetCardLimitApi() {
-        var call : Response<GetLimitsResponse> = mockApiCaller!!.callForGetCardLimitDataApi().execute()
+        var call: Response<GetLimitsResponse> =
+            mockApiCaller!!.callForGetCardLimitDataApi().execute()
         TestCase.assertNotNull(
-            call.body()!!.limitConfigs!!.get(0).channel
+            call.body()!!.limitConfigs!!
         )
         //if  url not null then check is success message retreived
-        TestCase.assertEquals("POS",
-            call.body()!!.limitConfigs!!.get(0).channel
+        TestCase.assertEquals(
+            "POS",
+            call.body()!!.limitConfigs!!.swipeChannel
         )
 
         // test for correct request passed
@@ -179,15 +199,18 @@ class CardApisUnitTests {
         TestCase.assertEquals("GET", recordedRequest!!.method)
         TestCase.assertEquals("PUT", recordedRequest!!.method)
     }
+
     @Test
     @Throws(IOException::class)
     fun testForUpdateCardPinSetStatusApi() {
-        var call : Response<UpdateCardPinSetStatusResponse> = mockApiCaller!!.callForUpdateCardPinSetStatusDataApi().execute()
+        var call: Response<UpdateCardPinSetStatusResponse> =
+            mockApiCaller!!.callForUpdateCardPinSetStatusDataApi().execute()
         TestCase.assertNotNull(
             call.body()!!.message
         )
         //if  url not null then check is success message retreived
-        TestCase.assertEquals("Limit-Block config set successful",
+        TestCase.assertEquals(
+            "Limit-Block config set successful",
             call.body()!!.message
         )
 
@@ -200,12 +223,14 @@ class CardApisUnitTests {
     @Test
     @Throws(IOException::class)
     fun testForGetCardPinApi() {
-        var call : Response<GetCardPinStatusResponse> = mockApiCaller!!.callForGetCardPinDataApi().execute()
+        var call: Response<GetCardPinStatusResponse> =
+            mockApiCaller!!.callForGetCardPinDataApi().execute()
         TestCase.assertNotNull(
             call.body()!!.status
         )
         //if  url not null then check is success message retreived
-        TestCase.assertEquals("Limit-Block config set successful",
+        TestCase.assertEquals(
+            "Limit-Block config set successful",
             call.body()!!.status
         )
 
@@ -214,6 +239,41 @@ class CardApisUnitTests {
             mockApiCaller!!.mockWebServer.takeRequest(1, TimeUnit.SECONDS)
         TestCase.assertEquals("GET", recordedRequest!!.method)
     }
+
+    @Test
+    @Throws(IOException::class)
+    fun testForValidateCardKitApi() {
+        TestCase.assertTrue(
+            mockApiCaller!!.callForValidateCardKitDataApi().execute().body()!!.validated == true
+        )
+        // when not validated and test will fail as we passing false and receiving false
+        TestCase.assertTrue(
+            mockApiCaller!!.callForValidateFalseCardKitApi().execute().body()!!.validated == true
+        )
+    }
+
+    @Test
+    @Throws(IOException::class)
+    fun testForCardReorderApi() {
+        TestCase.assertTrue(
+            mockApiCaller!!.callForCardReorderApi().execute().body()!!.message.equals("Re-ordered")
+        )
+
+    }
+
+    @Test
+    @Throws(IOException::class)
+    fun testForValidateCardKitStatusApi() {
+        TestCase.assertTrue(
+            mockApiCaller!!.callForValidateCardKitStatusApi().execute().body()!!.
+            message.equals("Delivered")
+        )
+        TestCase.assertTrue(
+            mockApiCaller!!.callForValidateCardKitStatusApi().execute().body()!!.
+            message.equals("Intransit")
+        )
+    }
+
     @After
     fun shutDown() {
         mockApiCaller!!.tearDownServer()

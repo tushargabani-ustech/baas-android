@@ -14,7 +14,7 @@ class TransactionDetailsResponse : ApiResponse() {
     var code: String? = null
 
 
-    val amount: Double = 0.0
+    val amount: String? = null
     val bottomIcon: String? = null
     val bottomSalutation: String? = null
     val bottomTitle: String? = null

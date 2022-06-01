@@ -23,7 +23,7 @@ import org.robolectric.annotation.Config
 import retrofit2.Call
 import java.util.concurrent.TimeUnit
 
-@Config(manifest= Config.NONE)
+@Config(manifest = Config.NONE)
 @RunWith(RobolectricTestRunner::class)
 class OnBoardingUnitTests {
     var mockApiCaller: MockApiCallManger? = null
@@ -50,7 +50,7 @@ class OnBoardingUnitTests {
 
         // test for correct request body passed
         val recordedRequest: RecordedRequest? =
-            mockApiCaller!!.mockWebServer.takeRequest(1, TimeUnit.SECONDS)
+            mockApiCaller!!.mockWebServer.takeRequest(20, TimeUnit.SECONDS)
         TestCase.assertEquals("POST", recordedRequest!!.method)
         val reqBody: SaveAddressRequestModel =
             JsonUtils.toObject(
@@ -69,7 +69,7 @@ class OnBoardingUnitTests {
         call.execute()
         // test for correct request body passed
         val recordedRequest: RecordedRequest? =
-            mockApiCaller!!.mockWebServer.takeRequest(1, TimeUnit.SECONDS)
+            mockApiCaller!!.mockWebServer.takeRequest(20, TimeUnit.SECONDS)
         TestCase.assertEquals("POST", recordedRequest!!.method)
         TestCase.assertEquals("GET", recordedRequest!!.method) // check method type
         val reqBody: SaveAddressRequestModel =
@@ -101,7 +101,7 @@ class OnBoardingUnitTests {
     @Throws(IOException::class)
     fun testForEmployementVerificationApi() {
         TestCase.assertEquals(
-            "Employee verified and user onBoarded",
+            "EMPLOYEMENT_VERIFIED",
             mockApiCaller!!.callForEmploymentVerificationApi("json_employee_verification_success.json")
                 .execute()
                 .body()!!.userMessage
@@ -123,9 +123,37 @@ class OnBoardingUnitTests {
     fun testForEmployementVerificationApi_WrongFieldType() {
         // wronng fields
         TestCase.assertEquals(
-            "Employee verified and user onBoarded",
+            "EMPLOYEMENT_VERIFIED",
             mockApiCaller!!.callForEmploymentVerificationApi_WrongFieldType(
-                "json_employee_verification_success.json"
+                "json_employee_verification_error_response.json"
+            ).execute()
+                .body()!!.userMessage
+        )
+    }
+
+    // PAN doesn't match with backend
+    @Test
+    @Throws(IOException::class)
+    fun testForPanMismatchInEmployementVerificationApi_WrongFieldType() {
+        // wronng fields
+        TestCase.assertEquals(
+            "Sorry, Please enter correct PAN number ",
+            mockApiCaller!!.callForEmploymentVerificationApi_WrongFieldType(
+                "json_employee_verification_pan_error_response.json"
+            ).execute()
+                .body()!!.userMessage
+        )
+    }
+
+    // user logged in with wrong mobile number an dtries to verify
+    @Test
+    @Throws(IOException::class)
+    fun testForMobileMismatchInEmployementVerificationApi_WrongFieldType() {
+        // wronng fields
+        TestCase.assertEquals(
+            "Sorry, Please enter your employer registered mobile number.s",
+            mockApiCaller!!.callForEmploymentVerificationApi_WrongFieldType(
+                "json_employee_verification_mobile_error_response.json"
             ).execute()
                 .body()!!.userMessage
         )
@@ -172,8 +200,8 @@ class OnBoardingUnitTests {
         newPasscode = newPasscode.replace("&oldPasscode=8989", "")
         TestCase.assertTrue(isValidPasscode(newPasscode))
         // for testing failure case when passcode is more than 4 digit
-        newPasscode = newPasscode+"5"
-        TestCase.assertEquals(true,isValidPasscode(newPasscode))
+        newPasscode = newPasscode + "5"
+        TestCase.assertEquals(true, isValidPasscode(newPasscode))
     }
 
     /*
@@ -203,8 +231,8 @@ class OnBoardingUnitTests {
                 LoginRequestModel::class.java
             ) as LoginRequestModel
         TestCase.assertNotNull(JsonUtils.toString(reqBody))
-        TestCase.assertEquals(reqBody.passcode,"1111")
-        TestCase.assertEquals(reqBody.passcode,"111") //wrong passcode
+        TestCase.assertEquals(reqBody.passcode, "1111")
+        TestCase.assertEquals(reqBody.passcode, "111") //wrong passcode
     }
 
     @After

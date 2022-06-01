@@ -49,7 +49,7 @@ class SalaryAdvanceUnitTests {
         )
         // test for correct request passed
         val recordedRequest: RecordedRequest? =
-            mockApiCaller!!.mockWebServer.takeRequest(1, TimeUnit.SECONDS)
+            mockApiCaller!!.mockWebServer.takeRequest(10, TimeUnit.SECONDS)
         TestCase.assertEquals("GET", recordedRequest!!.method)
     }
     @After

@@ -19,15 +19,15 @@ class IFSCApiModel (
 ) : ApiModel(
     context, requestMap, ApiName.IFSC_CODE, sdkCallback
 ) {
-    override fun getRelativeUrl(): String = "https://testapi.karza.in/v2/ifsc"
+    override fun getRelativeUrl(): String = "user/beneficiary/ifsc"
     override fun getRequestMethod(): RequestMethod = RequestMethod.POST
     override fun getApiType(): ApiType = ApiType.POST_LOGIN
-    override fun getTokenType(): TokenType = TokenType.KARZA_TOKEN
-    override fun getAdditionalHeader(): NetworkHeader {
+    override fun getTokenType(): TokenType = TokenType.ACCESS_TOKEN
+    /*override fun getAdditionalHeader(): NetworkHeader {
         return NetworkHeader().apply {
             SessionManager.getInstance(context).karzaKey?.let { put("x-karza-key", it) }
         }
-    }
+    }*/
 
     override fun getResponseModel(): ApiResponse = VerifyIFSCResponse()
 

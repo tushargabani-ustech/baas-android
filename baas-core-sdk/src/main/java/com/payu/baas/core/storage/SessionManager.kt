@@ -2,7 +2,6 @@ package com.payu.baas.core.storage
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.util.Log
 import com.payu.baas.core.util.BaaSConstants
 import com.payu.baas.core.util.BaaSConstants.PREFS_FILE_NAME
 import com.payu.baas.core.util.BaasEncryption
@@ -173,7 +172,7 @@ class SessionManager private constructor(val context: Context) {
             null
         else
 //            BaasEncryption.decrypt(field)
-                    BaasEncryption.decryptUrl(field!!,accessToken!!,  deviceBindingId!!)
+            BaasEncryption.decryptUrl(field!!, accessToken!!, deviceBindingId!!)
         set(value) {
             field = value
 //            field = BaasEncryption.encrypt(value!!)
@@ -196,5 +195,38 @@ class SessionManager private constructor(val context: Context) {
             field = BaasEncryption.encrypt("$value?key=")
             PreferenceUtils.getInstance(context, PREFS_FILE_NAME)
                 .putString(BaaSConstants.BS_SP_S3_BUCKET_URL, field)
+        }
+    var zdUrl: String? = PreferenceUtils.getInstance(context, PREFS_FILE_NAME)
+        .getString(BaaSConstants.BS_SP_ZD_URL)
+        get() = if (field.isNullOrEmpty())
+            null
+        else
+            BaasEncryption.decrypt(field)
+        set(value) {
+            field = BaasEncryption.encrypt(value!!)
+            PreferenceUtils.getInstance(context, PREFS_FILE_NAME)
+                .putString(BaaSConstants.BS_SP_ZD_URL, field)
+        }
+    var zdAppId: String? = PreferenceUtils.getInstance(context, PREFS_FILE_NAME)
+        .getString(BaaSConstants.BS_SP_ZD_APP_ID)
+        get() = if (field.isNullOrEmpty())
+            null
+        else
+            BaasEncryption.decrypt(field)
+        set(value) {
+            field = BaasEncryption.encrypt(value!!)
+            PreferenceUtils.getInstance(context, PREFS_FILE_NAME)
+                .putString(BaaSConstants.BS_SP_ZD_APP_ID, field)
+        }
+    var zdClientId: String? = PreferenceUtils.getInstance(context, PREFS_FILE_NAME)
+        .getString(BaaSConstants.BS_SP_ZD_CLIENT_ID)
+        get() = if (field.isNullOrEmpty())
+            null
+        else
+            BaasEncryption.decrypt(field)
+        set(value) {
+            field = BaasEncryption.encrypt(value!!)
+            PreferenceUtils.getInstance(context, PREFS_FILE_NAME)
+                .putString(BaaSConstants.BS_SP_ZD_CLIENT_ID, field)
         }
 }

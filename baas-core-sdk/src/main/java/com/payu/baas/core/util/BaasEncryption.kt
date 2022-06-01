@@ -4,18 +4,20 @@ import android.util.Base64
 import java.io.IOException
 import java.io.UnsupportedEncodingException
 import java.security.*
-import javax.crypto.*
+import javax.crypto.BadPaddingException
+import javax.crypto.Cipher
+import javax.crypto.IllegalBlockSizeException
+import javax.crypto.NoSuchPaddingException
 import javax.crypto.spec.GCMParameterSpec
 import javax.crypto.spec.IvParameterSpec
 import javax.crypto.spec.SecretKeySpec
 
 object BaasEncryption {
 
-
     private const val characterEncoding = "UTF-8"
-    private const val cipherTransformation = "AES/CBC/PKCS5Padding"
+    private const val cipherTransformation =
+        "AES/GCM/NoPadding"  // as in backend its GCM_NO_padding
     private const val aesEncryptionAlgorithm = "AES"
-    const val key = "8080808080808080"
 
     @Throws(
         NoSuchAlgorithmException::class,
@@ -81,9 +83,7 @@ object BaasEncryption {
     )
     fun encrypt(plainText: String): String? {
         val plainTextbytes = plainText.toByteArray(charset(characterEncoding))
-        val keyBytes = getKeyBytes(key)
-
-
+        val keyBytes = getKeyBytes("8080808080808080")
 
         return Base64.encodeToString(encrypt(plainTextbytes, keyBytes, keyBytes), Base64.DEFAULT)
     }
@@ -105,9 +105,7 @@ object BaasEncryption {
     )
     fun decrypt(encryptedText: String?): String? {
         val cipheredBytes = Base64.decode(encryptedText, Base64.DEFAULT)
-        val keyBytes = getKeyBytes(key)
-
-
+        val keyBytes = getKeyBytes("8080808080808080")
 
         return String(decrypt(cipheredBytes, keyBytes, keyBytes)!!, charset(characterEncoding))
     }
@@ -133,7 +131,7 @@ object BaasEncryption {
         iv = secret.substring(32, 48).toByteArray()
         val brandSecret =
             SecretKeySpec(key.substring(0, 32).toByteArray(), aesEncryptionAlgorithm)
-        val cipherUrl = Cipher.getInstance("AES/GCM/NoPadding") // as in backend its GCM_NO_padding
+        val cipherUrl = Cipher.getInstance(cipherTransformation)
         cipherUrl.init(Cipher.DECRYPT_MODE, brandSecret, GCMParameterSpec(128, iv))
         val encrypted: ByteArray =
             cipherUrl.doFinal(Base64.decode(url.toByteArray(), Base64.DEFAULT))

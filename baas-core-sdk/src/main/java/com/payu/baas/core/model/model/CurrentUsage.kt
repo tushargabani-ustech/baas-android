@@ -5,27 +5,27 @@ import com.payu.baas.core.model.responseModels.ApiResponse
 
 class CurrentUsage: ApiResponse() {
 
-    @SerializedName("advanceAvailable")
-    var advanceAvailable: Int? = null
-
     @SerializedName("advanceUsed")
-    var advanceUsed: Int? = null
+    var advanceUsed: String? = null
 
     @SerializedName("feesCharged")
-    var feesCharged: Int? = null
+    var feesCharged: String? = null
 
-    @SerializedName("startDateTime")
-    var startDateTime: String? = null
+    var displayStartDate: String? = null
+    var displayEndDate: String? = null
 
-    @SerializedName("endDateTime")
-    var endDateTime: String? = null
-
+    var cycleStartDate: String? = null
+    var cycleEndDate: String? = null
     @SerializedName("paidBack")
-    var paidBack: Int? = null
+    var paidBack: String? = null
 
     @SerializedName("dueDate")
     var dueDate: String? = null
 
     @SerializedName("latePaymentFees")
-    var latePaymentFees: Int? = null
+    var latePaymentFees: String? = null
+    var overdueBalance: String? = null
+    var earnings: String? = null
+    var providerId: Int? = null
+    var creditEarningRatio: Int? = null
 }

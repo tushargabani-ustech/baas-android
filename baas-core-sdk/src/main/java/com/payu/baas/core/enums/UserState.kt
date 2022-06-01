@@ -25,11 +25,11 @@ enum class UserState {
     KYC_CHECKS_PASSED {
         override fun getValue(): String = "7"
     },
-    ONBOARD {
+    KYC_CHECKS_FAILED {
         override fun getValue(): String = "8"
     },
     PASSCODE_SET {
-        override fun getValue(): String = "9"
+        override fun getValue(): String = "16"
     };
 
     abstract fun getValue(): String

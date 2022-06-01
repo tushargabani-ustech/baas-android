@@ -15,6 +15,7 @@ class GetLimitsResponse : ApiResponse() {
     var code: String? = null
 
     @SerializedName("transactionLimits")
-    var limitConfigs: List<LimitConfig>? = null
+    var limitConfigs: LimitConfig? = null
+//    var limitConfigs: List<LimitConfig>? = null
 
 }

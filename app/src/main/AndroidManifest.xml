@@ -6,38 +6,39 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <uses-feature android:name="android.hardware.camera.any" />
+
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
 
-<!--    android:name="com.clevertap.android.sdk.Application"-->
+    <!--    android:name="com.clevertap.android.sdk.Application"-->
+<!--    android:allowBackup="true"-->
     <application
-        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true">
         <activity
             android:name=".MainActivity"
-            android:exported="true"
-           >
+            android:exported="true"> // for launcher activity exported needs to be true
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-       <!-- <meta-data
-            android:name="@string/clevertap_account_id"
-            android:value="@string/clevertap_account_id_value" />
-        <meta-data
-            android:name="@string/clevertap_account_token"
-            android:value="@string/clevertap_account_token_value" /> &lt;!&ndash; IMPORTANT: To force use Google AD ID to uniquely identify  users, use the following meta tag. GDPR mandates that if you are using this tag, there is prominent disclousure to your end customer in their application. Read more about GDPR here - https://clevertap.com/blog/in-preparation-of-gdpr-compliance/ &ndash;&gt;
-        <meta-data
-            android:name="@string/clevertap_google_ad_id"
-            android:value="@string/clevertap_google_ad_id_value" />-->
+        <!-- <meta-data
+             android:name="@string/clevertap_account_id"
+             android:value="@string/clevertap_account_id_value" />
+         <meta-data
+             android:name="@string/clevertap_account_token"
+             android:value="@string/clevertap_account_token_value" /> &lt;!&ndash; IMPORTANT: To force use Google AD ID to uniquely identify  users, use the following meta tag. GDPR mandates that if you are using this tag, there is prominent disclousure to your end customer in their application. Read more about GDPR here - https://clevertap.com/blog/in-preparation-of-gdpr-compliance/ &ndash;&gt;
+         <meta-data
+             android:name="@string/clevertap_google_ad_id"
+             android:value="@string/clevertap_google_ad_id_value" />-->
     </application>
 
 </manifest>

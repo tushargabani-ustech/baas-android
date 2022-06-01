@@ -158,7 +158,11 @@ class MockApiCallManger {
             MockResponse().setResponseCode(200)
                 .setBody(MockResponseFileReader(mockResponseJson).content)
         )
-        return service.getSetPasscodeData()
+        val request = JsonUtils.toObject(
+            MockResponseFileReader
+                ("json_set_passcode_request.json").content, SetPasscodeRequestModel::class.java
+        ) as SetPasscodeRequestModel
+        return service.getSetPasscodeData(request)
     }
 
     fun callForLoginApi(mockResponseJson: String): Call<LoginResponse> {
@@ -251,6 +255,54 @@ class MockApiCallManger {
         return service.getUpdateUserAddressData(requestModel)
     }
 
+    fun callForChangePasscodeApi(mockResponseJson: String): Call<SetPasswordResponse> {
+        mockWebServer.enqueue(
+            MockResponse().setResponseCode(200)
+                .setBody(MockResponseFileReader(mockResponseJson).content)
+        )
+        val request = JsonUtils.toObject(
+            MockResponseFileReader
+                ("json_change_passcode_request.json").content, SetPasscodeRequestModel::class.java
+        ) as SetPasscodeRequestModel
+        return service.changePasscode(request)
+    }
+
+    fun callForResetPasscodeApi(mockResponseJson: String): Call<SetPasswordResponse> {
+        mockWebServer.enqueue(
+            MockResponse().setResponseCode(200)
+                .setBody(MockResponseFileReader(mockResponseJson).content)
+        )
+        val request = JsonUtils.toObject(
+            MockResponseFileReader
+                ("json_reset_passcode_request.json").content, SetPasscodeRequestModel::class.java
+        ) as ResetPasscodeRequestModel
+        return service.resetPasscodeData(request)
+    }
+
+    fun callForGetUserStateApi(): Call<GetUserStateResponse> {
+        mockWebServer.enqueue(
+            MockResponse().setResponseCode(200)
+                .setBody(MockResponseFileReader("json_get_user_state_success_response.json").content)
+        )
+        val requestModel = JsonUtils.toObject(
+            MockResponseFileReader
+                ("json_get_user_state_request.json").content,
+            GetUserStateModel::class.java
+        )
+                as GetUserStateModel
+
+        return service.getUserStateData(requestModel)
+    }
+
+    fun callForGetUserAddressApi(path : String): Call<GetAddressResponse> {
+        mockWebServer.enqueue(
+            MockResponse().setResponseCode(200)
+                .setBody(MockResponseFileReader(path).content)
+        )
+        return service.getUserAddressData()
+    }
+
+    // Beneficiary apis
     fun callForGetUserBenificiaryApi(): Call<GetTransactionChargesResponse> {
         mockWebServer.enqueue(
             MockResponse().setResponseCode(200)
@@ -309,7 +361,20 @@ class MockApiCallManger {
                 as UserBenificiaryBankTransferRequestModel
         return service.getUpdateUserBenificiaryBankTransferData(requestModel)
     }
+    fun callForUserBenificiaryBankTransferApi_FailureCase(): Call<BeneficiaryBankTransferResponse> {
+        mockWebServer.enqueue(
+            MockResponse().setResponseCode(200)
+                .setBody(MockResponseFileReader("json_user_benificiary_bank_transfer_error.json").content)
+        )
 
+        val requestModel = JsonUtils.toObject(
+            MockResponseFileReader
+                ("json_user_benificiary_bank_transfer_missing_fields_request.json").content,
+            UserBenificiaryBankTransferRequestModel::class.java
+        )
+                as UserBenificiaryBankTransferRequestModel
+        return service.getUpdateUserBenificiaryBankTransferData(requestModel)
+    }
     fun callForDeleteUserBenificiary(): Call<DeleteBeneficiaryResponse> {
         mockWebServer.enqueue(
             MockResponse().setResponseCode(200)
@@ -336,22 +401,23 @@ class MockApiCallManger {
     }
 
     // KYC SDK
-    fun callForKycSelfieApi(myDrawable : Drawable): Call<KYCSelfieResponse> {
+    fun callForKycSelfieApi(myDrawable: Drawable): Call<KYCSelfieResponse> {
         mockWebServer.enqueue(
             MockResponse().setResponseCode(200)
                 .setBody(MockResponseFileReader("json_kyc_selfie_success.json").content)
 //                .setBody(MockResponseFileReader("json_kyc_selfie_response.json").content)
         )
 
-        var file : File
+        var file: File
 //        val bitmap = convertToBitmap(myDrawable)
 //        if (bitmap != null) {
 //            file= bitmapToFile(bitmap, "8544941607_kyc_selfie.png")
 //        }
         file = File(myDrawable.toString())
-       var filePart :  MultipartBody.Part = MultipartBody.Part.
-       createFormData("file", "8544941607_kyc_selfie.png",
-           RequestBody.create(MultipartBody.FORM, file))
+        var filePart: MultipartBody.Part = MultipartBody.Part.createFormData(
+            "file", "8544941607_kyc_selfie.png",
+            RequestBody.create(MultipartBody.FORM, file)
+        )
 //        var filePart=   MultipartBody.Builder().setType(MultipartBody.FORM)
 //            .addFormDataPart(
 //                BaaSConstants.BS_KEY_LIVE_PHOTO,
@@ -505,6 +571,49 @@ class MockApiCallManger {
         )
         return service.getCardPinData()
     }
+    fun callForCardReorderApi(): Call<CardReorderResponse> {
+        mockWebServer.enqueue(
+            MockResponse().setResponseCode(200)
+                .setBody(MockResponseFileReader("json_card_reorder_success_responset.json").content)
+        )
+        return service.cardReOrder()
+    }
+    fun callForValidateCardKitDataApi(): Call<ValidateCardKitResponse> {
+        mockWebServer.enqueue(
+            MockResponse().setResponseCode(200)
+                .setBody(MockResponseFileReader("json_validate_card_kit_success_response.json").content)
+        )
+        val requestModel = JsonUtils.toObject(
+            MockResponseFileReader
+                ("json_validate_card_kit_request.json").content,
+            ValidateCardKitModel::class.java
+        )
+                as ValidateCardKitModel
+        return service.validateCardKit(requestModel)
+    }
+    // for validated false
+    fun callForValidateFalseCardKitApi(): Call<ValidateCardKitResponse> {
+        mockWebServer.enqueue(
+            MockResponse().setResponseCode(200)
+                .setBody(MockResponseFileReader("json_validate_card_kit_error_response.json").content)
+        )
+        val requestModel = JsonUtils.toObject(
+            MockResponseFileReader
+                ("json_validate_card_kit_error_request.json").content,
+            ValidateCardKitModel::class.java
+        )
+                as ValidateCardKitModel
+        return service.validateCardKit(requestModel)
+    }
+
+    fun callForValidateCardKitStatusApi(): Call<GetValidateCardKitStatusResponse> {
+        mockWebServer.enqueue(
+            MockResponse().setResponseCode(200)
+                .setBody(MockResponseFileReader("json_validate_card_kit_status_success_response.json").content)
+        )
+        return service.getValidateCardKitStatus()
+    }
+
     fun convertToBitmap(drawable: Drawable): Bitmap? {
         val mutableBitmap = Bitmap.createBitmap(300, 300, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(mutableBitmap)
@@ -535,7 +644,6 @@ class MockApiCallManger {
             fos.close()
             file
         } catch (e: Exception) {
-            e.printStackTrace()
             file // it will return null
         }
     }

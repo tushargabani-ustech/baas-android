@@ -1,15 +1,5 @@
 package com.payu.baas.core
 
-import android.telephony.PhoneNumberUtils
-import android.view.View
-import android.widget.EditText
-import com.payu.baas.core.model.apiModels.GetAccountBalanceApiModel
-import com.payu.baas.core.model.model.*
-import com.payu.baas.core.model.responseModels.ApiResponse
-import com.payu.baas.core.model.responseModels.SaveAddressResponse
-import com.payu.baas.core.model.responseModels.VerifyOtpResponse
-import com.payu.baas.core.util.BaaSConstants
-import com.payu.baas.core.util.JsonUtils
 import junit.framework.TestCase
 import org.junit.After
 import org.junit.Before
@@ -127,6 +117,87 @@ class HomeScreenUnitTests {
         // test for correct request method
         TestCase.assertEquals("POST", recordedRequest!!.method)
     }
+
+    @Test
+    @Throws(IOException::class)
+    fun testForChangePasscode() {
+        TestCase.assertEquals(
+            "Password Updated Sucessfully",
+            mockApiCaller!!.callForChangePasscodeApi(
+                "json_set_passcode_success.json"
+            ).execute()
+                .body()!!.msg
+        )
+        //for getting request path and then checking the passcode
+        val recordedRequest: RecordedRequest? =
+            mockApiCaller!!.mockWebServer.takeRequest(10, TimeUnit.SECONDS)
+        TestCase.assertEquals("POST", recordedRequest!!.method)
+    }
+
+    @Test
+    @Throws(IOException::class)
+    fun testForResetPasscode() {
+        TestCase.assertEquals(
+            "Password Updated Sucessfully",
+            mockApiCaller!!.callForResetPasscodeApi(
+                "json_set_passcode_success.json"
+            ).execute()
+                .body()!!.msg
+        )
+        //for getting request path and then checking the passcode
+        val recordedRequest: RecordedRequest? =
+            mockApiCaller!!.mockWebServer.takeRequest(10, TimeUnit.SECONDS)
+        TestCase.assertEquals("POST", recordedRequest!!.method)
+    }
+
+    @Test
+    @Throws(IOException::class)
+    fun testForGetUserState() {
+        TestCase.assertEquals(
+            "2",  // in mockresponse we are passing 2 under message , so it will pass
+            mockApiCaller!!.callForGetUserStateApi().execute()
+                .body()!!.message
+        )
+        // below test will fail as we set mock response value 2
+        TestCase.assertEquals(
+            "3",  // in mockresponse we are passing 2 under message , so it will fail
+            mockApiCaller!!.callForGetUserStateApi().execute()
+                .body()!!.message
+        )
+        //for getting request path and then checking the passcode
+        val recordedRequest: RecordedRequest? =
+            mockApiCaller!!.mockWebServer.takeRequest(10, TimeUnit.SECONDS)
+        //TEST WILL FAIL
+        TestCase.assertEquals("POST", recordedRequest!!.method)
+        //PASS CASE
+        TestCase.assertEquals("GET", recordedRequest!!.method)
+    }
+
+    @Test
+    @Throws(IOException::class)
+    fun testForGetAddressApi() {
+        TestCase.assertEquals(
+            "321, model towns",
+            mockApiCaller!!.callForGetUserAddressApi(
+                "json_get_user_address_success_response.json"
+            ).execute()
+                .body()!!.addressLine1
+        )
+        //error case true
+        TestCase.assertEquals(
+            "401",
+            mockApiCaller!!.callForGetUserAddressApi(
+                "json_get_user_address_error_response.json"
+            ).execute()
+                .body()!!.code
+        )
+        //for getting request path and then checking the passcode
+        val recordedRequest: RecordedRequest? =
+            mockApiCaller!!.mockWebServer.takeRequest(10, TimeUnit.SECONDS)
+        TestCase.assertEquals("POST", recordedRequest!!.method)
+    }
+
+
     @After
     fun shutDown() {
         mockApiCaller!!.tearDownServer()

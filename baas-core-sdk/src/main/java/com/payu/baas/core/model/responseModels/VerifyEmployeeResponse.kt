@@ -6,6 +6,9 @@ class VerifyEmployeeResponse() : ApiResponse() {
     @SerializedName("userMessage")
     var userMessage: String? = null
 
+    @SerializedName("user")
+    var userName: String? = null
+
     @SerializedName("systemMessage")
     var systemMessage: String? = null
 

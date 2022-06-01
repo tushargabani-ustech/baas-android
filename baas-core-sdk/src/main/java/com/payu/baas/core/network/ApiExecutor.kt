@@ -15,9 +15,8 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import okio.IOException
 import java.io.File
-import javax.net.ssl.SSLException
-import okhttp3.RequestBody
 import java.util.concurrent.TimeUnit
+import javax.net.ssl.SSLException
 
 
 class ApiExecutor(val apiModel: ApiModel, val apiHandler: ApiHandler?) {

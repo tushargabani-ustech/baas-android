@@ -51,6 +51,7 @@ class UserBenificiaryUnitTests {
         val recordedRequest: RecordedRequest? =
             mockApiCaller!!.mockWebServer.takeRequest(1, TimeUnit.SECONDS)
         TestCase.assertEquals("POST", recordedRequest!!.method)
+        TestCase.assertEquals("GET", recordedRequest!!.method) // failure case
     }
     @Test
     @Throws(IOException::class)
@@ -63,6 +64,7 @@ class UserBenificiaryUnitTests {
         val recordedRequest: RecordedRequest? =
             mockApiCaller!!.mockWebServer.takeRequest(1, TimeUnit.SECONDS)
         TestCase.assertEquals("GET", recordedRequest!!.method)
+        TestCase.assertEquals("POST", recordedRequest!!.method) // failure case
     }
     @Test
     @Throws(IOException::class)
@@ -75,6 +77,8 @@ class UserBenificiaryUnitTests {
         val recordedRequest: RecordedRequest? =
             mockApiCaller!!.mockWebServer.takeRequest(1, TimeUnit.SECONDS)
         TestCase.assertEquals("PUT", recordedRequest!!.method)
+        TestCase.assertEquals("GET", recordedRequest!!.method) // failure case
+        TestCase.assertEquals("POST", recordedRequest!!.method) // failure case
     }
     @Test
     @Throws(IOException::class)
@@ -83,10 +87,18 @@ class UserBenificiaryUnitTests {
             mockApiCaller!!.callForUserBenificiaryBankTransferApi().execute()
                 .body()!!
         )
+        // test case for missing fields in request body (cuureny is missing here in request)
+        TestCase.assertNull(
+            mockApiCaller!!.callForUserBenificiaryBankTransferApi_FailureCase().execute()
+                .body()!!
+        )
         // test for correct request passed
         val recordedRequest: RecordedRequest? =
             mockApiCaller!!.mockWebServer.takeRequest(1, TimeUnit.SECONDS)
         TestCase.assertEquals("POST", recordedRequest!!.method)
+        TestCase.assertEquals("GET", recordedRequest!!.method) // failure case
+        TestCase.assertEquals("PUT", recordedRequest!!.method) // failure case
+
     }
     @Test
     @Throws(IOException::class)

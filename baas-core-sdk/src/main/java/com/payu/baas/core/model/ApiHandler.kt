@@ -5,8 +5,7 @@ import com.payu.baas.core.util.BaaSConstants
 
 class ApiHandler(val apiModel: ApiModel) {
 
-    fun handleResponse(responseCode: Int, response: String?) {
-        if (responseCode != BaaSConstants.NO_INTERNET_ERROR_CODE && responseCode < 400) {
+    fun handleResponse(responseCode: Int, response: String?) { if (responseCode != BaaSConstants.NO_INTERNET_ERROR_CODE && responseCode < 400) {
             response?.let { apiModel.getResponseHandler().onSuccess(response) }
         } else {
             //TODO send error response in onError callback method of Response Handler

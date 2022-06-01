@@ -1,13 +1,13 @@
 package com.payu.baas.core.util
 
 object BaaSConstants {
+    const val BS_URL_PREFIX = "https://baas.payu.in/baas/v1/"
+    const val BS_VALUE_BRAND_TOKEN = "wjxpbsldcxxwxvav"
 
-    // BASE URL
-    const val BS_URL_PREFIX = "https://baasdevtest.payu.in/baas/v1/"
     const val BS_URL_INITIAL_SERVER_CALL = "https://baasdevtest.payu.in/baas/"
     const val PREFS_FILE_NAME: String = "baasSdkFile"
     const val BS_SP_BRAND_TOKEN = "brand_token"
-    const val LOG_TAG = "LOG_TAG"
+    
     const val BS_SP_ACCESS_TOKEN = "access_token"
     const val BS_SP_DEVICE_BINDING_ID = "dbid"
     const val BS_SP_CARD_IMAGE = "card_image"
@@ -15,8 +15,10 @@ object BaaSConstants {
 
 
     // API values
-    const val BS_VALUE_BRAND_TOKEN = "uev77qu9d4ttw259"
     const val BS_VALUE_TYPE = "SignIn"
+    const val BS_SP_ZD_URL = "zdUrl"
+    const val BS_SP_ZD_APP_ID = "zdAppId"
+    const val BS_SP_ZD_CLIENT_ID = "zdClientId"
     const val BS_SP_KARZA_TOKEN = "karza_token"
     const val BS_SP_KARZA_USER_TOKEN = "karza_user_token"
     const val BS_SP_KARZA_USER_SELFIE = "karza_user_selfie"
@@ -26,7 +28,6 @@ object BaaSConstants {
     const val BS_SP_KARZA_TRANSACTION_ID = "karza_transaction_id"
     const val BS_SP_KARZA_KEY = "karza_key"
     const val BS_SP_APPLICATION_ID = "application_id"
-    const val BS_SP_MOCK_BASE_URL = "mockServerBaseUrl"
     const val BS_SP_USER_STATE = "user_state"
     const val BS_SP_USER_BENIFICIARY_ID = "user_benificiary_id"
     const val BS_SP_USER_BENIFICIARY_IFSC = "user_benificiary_ifsc"
@@ -48,8 +49,6 @@ object BaaSConstants {
     const val BS_KEY_MOBILE_NUMBER = "mobile"
     const val BS_KEY_MOBILE_NUMBER_FOR_USER_STATE = "mobileNumber"
     const val BS_KEY_PIN_STATUS = "pin_status"
-    const val BS_KEY_USER_PAN_DETAILS = "userPanDetails"
-    const val BS_KEY_CARD_DELIVERY_ADDRESS = "cardDeliveryAddress"
     const val BS_KEY_OLD_PASSWORD = "oldPasscode"
     const val BS_KEY_NEW_PASSWORD = "newPasscode"
     const val BS_KEY_PAN = "pan"
@@ -67,8 +66,8 @@ object BaaSConstants {
     const val BS_KEY_EMAIL = "email"
     const val BS_KEY_COUNTRY = "country"
     const val BS_KEY_COUNTRY_CODE = "countryCode"
-    const val BS_KEY_ADDRESS_LINE_1 = "address1"
-    const val BS_KEY_ADDRESS_LINE_2 = "address2"
+    const val BS_KEY_ADDRESS_LINE_1 = "addressLine1"
+    const val BS_KEY_ADDRESS_LINE_2 = "addressLine2"
     const val BS_KEY_CITY = "city"
     const val BS_KEY_PIN_CODE = "pinCode"
     const val BS_KEY_STATE = "state"
@@ -77,34 +76,20 @@ object BaaSConstants {
     const val BS_KEY_BENEFICIARY_NAME = "beneficiaryName"
     const val BS_KEY_ACCOUNT_NUMBER = "accountNumber"
     const val BS_KEY_IFSC = "ifsc"
-    const val BS_KEY_VERIFIED = "verified"
-    const val BS_KEY_STATUS = "status"
     const val BS_KEY_BENEFICIARY_ID = "beneficiaryId"
     const val BS_KEY_USER_BENEFICIARY_IDS = "userBeneFiciaryIds"
     const val BS_KEY_EMAIL_ID = "emailId"
-    const val BS_KEY_ADDRESS = "address"
-    const val BS_KEY_ADDRESS_1 = "address1"
-    const val BS_KEY_ADDRESS_2 = "address2"
-    const val BS_KEY_CURRENCY = "currency"
-    const val BS_KEY_PAYMENT_TYPE = "payment_type"
     const val BS_KEY_REMARKS = "remarks"
-    const val BS_KEY_ACCOUNT_ID = "account_id"
     const val BS_KEY_USER_BANK_TRANSFER_BENEFICIARY_ID = "beneficiary_id"
     const val BS_KEY_AMOUNT = "amount"
-    const val BS_KEY_CREDITOR_DETAILS = "creditor_details"
-    const val BS_KEY_NAME = "name"
     const val BS_KEY_REASON = "reason"
     const val BS_KEY_REDIRECT_LINK = "redirect_link"
-    const val BS_KEY_TRANSACTION_MODE = "txn_mode"
     const val BS_KEY_ALLOW = "allow"
     const val BS_KEY_CHANNEL = "channel"
     const val BS_KEY_LOCATION = "location"
-    const val BS_KEY_AMMOUNT_LIMIT = "amount_limit"
-    const val BS_KEY_TARGET_DURATION = "target_duration"
-    const val BS_KEY_USAGE_LIMIT = "usage_limit"
     const val BS_KEY_PER_TRANSACTION = "perTransaction"
     const val BS_KEY_DAILY = "daily"
-    const val BS_KEY_TRANSACTION_MODES = "transactionModes"
+    const val BS_KEY_TRANSACTION_MODES = "transactionMode"
     const val BS_KEY_LIVE_PHOTO = "live_photo"
     const val BS_KEY_KARZA_SELFIE_NAME = "karza_selfie_name"
     const val BS_KEY_XML = "xmlFileString"
@@ -133,7 +118,6 @@ object BaaSConstants {
     const val BS_KEY_KARZA_PAN_DATA = "panData"
 
     const val BS_KEY_TRANSACTION_LIMITS = "transactionLimits"
-    const val BS_KEY_THRESHOLDS = "thresholds"
     const val BS_KEY_TRANSACTION_AMOUNT = "txnAmount"
 
     const val BS_KEY_IS_CARD_RECEIVED = "isCardReceived"
@@ -147,7 +131,6 @@ object BaaSConstants {
     const val PASSWORD_EMPTY_ERROR_CODE = 1004
     const val PAN_NUMBER_EMPTY_ERROR_CODE = 1005
     const val EMPLOYEE_ID_EMPTY_ERROR_CODE = 1006
-    const val OLD_PASSWORD_EMPTY_ERROR_CODE = 1007
     const val NEW_PASSWORD_EMPTY_ERROR_CODE = 1008
     const val TITLE_EMPTY_ERROR_CODE = 1009
     const val FIRST_NAME_EMPTY_ERROR_CODE = 1010
@@ -166,31 +149,15 @@ object BaaSConstants {
     const val BENEFICIARY_ACCOUNT_NUMBER_EMPTY_ERROR_CODE = 1023
     const val BENEFICIARY_IFSC_EMPTY_ERROR_CODE = 1024
     const val BENEFICIARY_ID_EMPTY_ERROR_CODE = 1025
-    const val CURRENCY_EMPTY_ERROR_CODE = 1026
-    const val PAYMENT_TYPE_EMPTY_ERROR_CODE = 1027
-    const val REMARKS_EMPTY_ERROR_CODE = 1028
-    const val ACCOUNT_ID_EMPTY_ERROR_CODE = 1029
     const val AMOUNT_EMPTY_ERROR_CODE = 1030
-    const val CREDITOR_ACCOUNT_NUMBER_EMPTY_ERROR_CODE = 1031
-    const val CREDITOR_IFSC_EMPTY_ERROR_CODE = 1032
-    const val CREDITOR_NAME_EMPTY_ERROR_CODE = 1033
-    const val CREDITOR_DETAILS_EMPTY_ERROR_CODE = 1034
     const val ADDRESS_EMPTY_ERROR_CODE = 1035
-    const val NEW_ACCOUNT_TYPE_EMPTY_ERROR_CODE = 1036
-    const val NEW_DEBIT_INDICATOR_EMPTY_ERROR_CODE = 1037
     const val REDIRECT_LINK_EMPTY_ERROR_CODE = 2001
     const val REASON_EMPTY_ERROR_CODE = 2002
     const val TRANSACTION_MODE_EMPTY_ERROR_CODE = 2003
     const val TRANSACTION_AMOUNT_EMPTY_ERROR_CODE = 2004
-    const val CHANNEL_EMPTY_ERROR_CODE = 2005
-    const val LOCATION_EMPTY_ERROR_CODE = 2006
-    const val AMMOUNT_LIMIT_EMPTY_ERROR_CODE = 2007
-    const val TARGET_DURATION_EMPTY_ERROR_CODE = 2008
     const val TRANSACTION_LIMIT_EMPTY_ERROR_CODE = 2009
     const val PHOTO_EMPTY_ERROR_CODE = 2010
     const val AADHAR_EMPTY_ERROR_CODE = 2011
-    const val START_DATE_EMPTY_ERROR_CODE = 2012
-    const val END_DATE_EMPTY_ERROR_CODE = 2013
     const val APPLICATION_ID_EMPTY_ERROR_CODE = 2014
     const val TRANSACTION_ID_ERROR_CODE = 2015
 
@@ -203,10 +170,7 @@ object BaaSConstants {
     const val PASSWORD_EMPTY_ERROR_MESSAGE = "Password shouldn't be null or empty"
     const val PAN_NUMBER_EMPTY_ERROR_MESSAGE = "Pan number shouldn't be null or empty"
     const val EMPLOYEE_ID_EMPTY_ERROR_MESSAGE = "Employee id shouldn't be null or empty"
-    const val OLD_PASSWORD_EMPTY_ERROR_MESSAGE = "Current password shouldn't be null or empty"
     const val NEW_PASSWORD_EMPTY_ERROR_MESSAGE = "New password shouldn't be null or empty"
-    const val NEW_ACCOUNT_TYPE_EMPTY_ERROR_MESSAGE = "Account type shouldn't be null or empty"
-    const val NEW_DEBIT_INDICATOR_EMPTY_ERROR_MESSAGE = "Debit Indicator shouldn't be null or empty"
     const val TITLE_EMPTY_ERROR_MESSAGE = "Title shouldn't be null or empty"
     const val FIRST_NAME_EMPTY_ERROR_MESSAGE = "First name shouldn't be null or empty"
     const val LAST_NAME_EMPTY_ERROR_MESSAGE = "Last name shouldn't be null or empty"
@@ -225,27 +189,12 @@ object BaaSConstants {
         "Beneficiary account number shouldn't be null or empty"
     const val BENEFICIARY_IFSC_EMPTY_ERROR_MESSAGE = "Beneficiary IFSC shouldn't be null or empty"
     const val BENEFICIARY_ID_EMPTY_ERROR_MESSAGE = "Beneficiary Id shouldn't be null or empty"
-    const val CURRENCY_EMPTY_ERROR_MESSAGE = "Currency shouldn't be null or empty"
-    const val PAYMENT_TYPE_EMPTY_ERROR_MESSAGE = "Payment type shouldn't be null or empty"
-    const val REMARKS_EMPTY_ERROR_MESSAGE = "Remarks shouldn't be null or empty"
-    const val ACCOUNT_ID_EMPTY_ERROR_MESSAGE = "Account Id shouldn't be null or empty"
     const val AMOUNT_EMPTY_ERROR_MESSAGE = "Amount shouldn't zero"
-    const val CREDITOR_ACCOUNT_NUMBER_EMPTY_ERROR_MESSAGE =
-        "Creditor's account number shouldn't be null or empty"
     const val TRANSACTION_AMOUNT_EMPTY_ERROR_MESSAGE = "Transaction amount shouldn't be null or empty"
-    const val CREDITOR_IFSC_EMPTY_ERROR_MESSAGE = "Creditor's ifsc shouldn't be null or empty"
-    const val CREDITOR_NAME_EMPTY_ERROR_MESSAGE = "Creditor's name shouldn't be null or empty"
-    const val CREDITOR_DETAILS_EMPTY_ERROR_MESSAGE = "Creditor's details shouldn't be null or empty"
-    const val ADDRESS_EMPTY_ERROR_MESSAGE = "Address shouldn't be null or empty"
+    const val ADDRESS_EMPTY_ERROR_MESSAGE = "We are fetching your location. Kindly wait for a while."
     const val REDIRECT_LINK_EMPTY_ERROR_MESSAGE = "Redirect link shouldn't be null or empty"
     const val REASON_EMPTY_ERROR_MESSAGE = "Reason shouldn't be null or empty"
     const val TRANSACTION_MODE_EMPTY_ERROR_MESSAGE = "Transaction mode shouldn't be null or empty"
-    const val ALLOW_EMPTY_ERROR_MESSAGE = "Allow shouldn't be null or empty"
-    const val CHANNEL_EMPTY_ERROR_MESSAGE = "Channel shouldn't be null or empty"
-    const val LOCATION_EMPTY_ERROR_MESSAGE = "Location shouldn't be null or empty"
-    const val AMMOUNT_LIMIT_EMPTY_ERROR_MESSAGE = "Amount limit shouldn't be null or empty"
-    const val TARGET_DURATION_EMPTY_ERROR_MESSAGE = "Target duration shouldn't be null or empty"
-    const val USAGE_LIMIT_EMPTY_ERROR_MESSAGE = "Usage limit shouldn't be null or empty"
     const val PHOTO_EMPTY_ERROR_MESSAGE = "Photo shouldn't be null or empty"
     const val AADHAR_EMPTY_ERROR_MESSAGE = "Aadhar shouldn't be null or empty"
     const val AADHAR_FILE_CODE_EMPTY_ERROR_MESSAGE = "Aadhar file code is missing."
@@ -256,8 +205,6 @@ object BaaSConstants {
     const val REQUEST_ID_EMPTY_ERROR_MESSAGE = "Request id shouldn't be null or empty"
     const val USER_DATA_AADHAR_EMPTY_ERROR_MESSAGE = "User data shouldn't be null or empty"
     const val FACE_AADHAR_EMPTY_ERROR_MESSAGE = "Face data shouldn't be null or empty"
-    const val START_DATE_EMPTY_ERROR_MESSAGE = "Start date shouldn't be null or empty"
-    const val END_DATE_EMPTY_ERROR_MESSAGE = "End date shouldn't be null or empty"
     const val APPLICATION_ID_EMPTY_ERROR_MESSAGE = "Application id is null. Kindly generate it first."
     const val SOMETHING_WENT_WRONG_ERROR_MESSAGE = "Something went wrong, could not complete the request now. Please try again later!"
     const val TRANSACTION_ID_EMPTY_ERROR_MESSAGE = "Transaction id shouldn't be null or empty"

@@ -1,7 +1,7 @@
 {
   "error": "DEVICE_BINDING_FAILED",
   "msg": "Employee verified and user onBoarded",
-  "userMessage": "Employee verified and user onBoarded",
+  "userMessage": "EMPLOYEMENT_VERIFIED",
   "code": "200",
   "pan": "AQLTT2020F",
   "title": "Ms.",

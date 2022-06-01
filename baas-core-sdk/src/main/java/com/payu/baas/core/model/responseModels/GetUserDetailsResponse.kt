@@ -18,9 +18,6 @@ class GetUserDetailsResponse : ApiResponse() {
     @SerializedName("mobileNumber")
     var mobileNumber: String? = null
 
-    @SerializedName("emailId")
-    var emailId: String? = null
-
     @SerializedName("address")
     var address: String? = null
 

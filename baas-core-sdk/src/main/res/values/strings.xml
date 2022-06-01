@@ -4,11 +4,4 @@
     <string name="baas_invalid_employee_id">Invalid Employee Id</string>
     <string name="baas_invalid_pan_number">Invalid Pan Card Number</string>
     <string name="baas_something_went_wrong">Something went wrong, please try again later..</string>
-
-    <string name="clevertap_account_id">CLEVERTAP_ACCOUNT_ID</string>
-    <string name="clevertap_account_id_value">TEST-KK8-W46-7K6Z</string>
-    <string name="clevertap_account_token">CLEVERTAP_TOKEN</string>
-    <string name="clevertap_account_token_value">TEST-640-b33</string>
-    <string name="clevertap_google_ad_id">CLEVERTAP_USE_GOOGLE_AD_ID</string>
-    <string name="clevertap_google_ad_id_value">1</string>
 </resources>
